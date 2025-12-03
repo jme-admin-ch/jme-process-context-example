@@ -1,0 +1,91 @@
+{
+  "name": "documentReviewProcess",
+  "tasks": [
+    {
+      "name": "finishReview",
+      "lifecycle": "static",
+      "completedBy": {
+        "message": "JmeDocumentReviewedEvent"
+      }
+    },
+    {
+      "name": "finishVersionReview",
+      "lifecycle": "dynamic",
+      "plannedBy": {
+        "domainEvent": "JmeDocumentVersionCreatedEvent"
+      },
+      "completedBy": {
+        "message": "JmeDocumentVersionReviewedEvent"
+      }
+    }
+  ],
+  "processData": [
+    {
+      "key": "documentId",
+      "source": {
+        "message": "JmeDocumentCreatedEvent",
+        "messageDataKey": "documentId"
+      }
+    },
+    {
+      "key": "versionId",
+      "source": {
+        "message": "JmeDocumentVersionCreatedEvent",
+        "messageDataKey": "versionId"
+      }
+    },
+    {
+      "key": "reviewId",
+      "source": {
+        "message": "JmeDocumentVersionReviewedEvent",
+        "messageDataKey": "reviewId"
+      }
+    }
+  ],
+  "messages": [
+    {
+      "messageName": "JmeDocumentCreatedEvent",
+      "topicName": "jme-document-created",
+      "referenceExtractor": "ch.admin.bit.jeap.jme.processcontext.event.JmeDocumentCreatedReferenceExtractor",
+      "payloadExtractor": "ch.admin.bit.jeap.jme.processcontext.event.JmeDocumentCreatedPayloadExtractor",
+      "triggersProcessInstantiation": true
+    },
+    {
+      "messageName": "JmeDocumentReviewedEvent",
+      "topicName": "jme-document-reviewed",
+      "payloadExtractor": "ch.admin.bit.jeap.jme.processcontext.event.JmeDocumentReviewedPayloadExtractor"
+    },
+    {
+      "messageName": "JmeDocumentVersionCreatedEvent",
+      "topicName": "jme-document-version-created",
+      "referenceExtractor": "ch.admin.bit.jeap.jme.processcontext.event.JmeDocumentVersionCreatedReferenceExtractor",
+      "payloadExtractor": "ch.admin.bit.jeap.jme.processcontext.event.JmeDocumentVersionCreatedPayloadExtractor",
+      "correlationProvider": "ch.admin.bit.jeap.jme.processcontext.event.JmeDocumentVersionCreatedEventCorrelationProvider"
+    },
+    {
+      "messageName": "JmeDocumentVersionReviewedEvent",
+      "topicName": "jme-document-version-reviewed",
+      "correlationProvider": "ch.admin.bit.jeap.jme.processcontext.event.JmeDocumentVersionReviewedEventCorrelationProvider",
+      "referenceExtractor": "ch.admin.bit.jeap.jme.processcontext.event.JmeDocumentVersionReviewedReferenceExtractor"
+    }
+  ],
+  "relationSystemId": "ch.test.System",
+  "relationPatterns": [
+    {
+      "object": {
+        "type": "ch.test.Version",
+        "selector": {
+          "processDataKey": "versionId"
+        }
+      },
+      "subject": {
+        "type": "ch.test.Review",
+        "selector": {
+          "processDataKey": "reviewId"
+        }
+      },
+      "predicateType": "ch.test.predicate.IsReviewOf",
+      "joinType": "byRole"
+    }
+  ]
+}

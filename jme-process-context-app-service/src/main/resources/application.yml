@@ -1,0 +1,59 @@
+spring:
+  application:
+    name: jme-process-context-app-service
+  security:
+    oauth2:
+      client:
+        registration:
+          jme-process-context-app-service:
+            client-id: "jme-process-context-app-service"
+            client-secret: "secret"
+            authorization-grant-type: "client_credentials"
+            provider: "default-provider"
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+    properties:
+      hibernate.default_schema: data
+  datasource:
+    hikari:
+      schema: ${spring.jpa.properties.hibernate.default_schema}
+      maximum-pool-size: 5
+      pool-name: "hikari-cp-${spring.application.name}"
+server:
+  servlet:
+    context-path: /${spring.application.name}
+jeap:
+  messaging:
+    kafka:
+      error-topic-name: jme-messageprocessing-failed
+      system-name: JME
+      service-name: ${spring.application.name}
+example:
+  topic:
+    # Process Context Service
+    process-completed: "jme-process-instance-completed"
+    process-milestone-reached: "jme-process-milestone-reached"
+    create-process-instance: "jme-process-createprocessinstance"
+    # Race process
+    race-started: "jme-race-started"
+    race-validated: "jme-race-validated"
+    race-controlpoint-passed: "jme-race-controlpoint-passed"
+    race-controlpoint-planned: "jme-race-controlpoint-planned"
+    race-destination-reached: "jme-race-destination-reached"
+    race-mobile-checkpoint-passed: "jme-race-mobilecheckpoint-passed"
+    race-mobile-checkpoint-planned: "jme-race-mobilecheckpoint-planned"
+    race-car-post-checks-completed: "jme-race-carpostchecks-completed"
+    race-car-post-checks-planned: "jme-race-carpostchecks-planned"
+    race-car-maintenance-required: "jme-race-maintenance-required"
+    race-car-refuelling-completed: "jme-race-refuelling-completed"
+    race-car-tire-pressure-checked: "jme-race-tire-pressure-checked"
+    weather-alert-activated: "jme-race-weather-alert-activated"
+    objects-on-road-spotted: "jme-race-objects-spotted"
+    race-prepared: "jme-race-prepared"
+    cancel-race: "jme-race-cancelrace"
+    # Document review process
+    document-created: "jme-document-created"
+    document-version-created: "jme-document-version-created"
+    document-reviewed: "jme-document-reviewed"
+    document-version-reviewed: "jme-document-version-reviewed"

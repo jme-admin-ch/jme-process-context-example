@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: jme-process-context-auth-scs
+server:
+  servlet:
+    context-path: /${spring.application.name}
+oauth-mock-data:
+  users:
+    - id: "user"
+      given-name: "Henriette"
+      family-name: "Muster"
+      locale: "DE"
+      preferred-username: "12345"
+      userroles:
+        - "jme_@processinstance_#view"

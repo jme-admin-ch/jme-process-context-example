@@ -1,0 +1,337 @@
+{
+  "name": "raceProcess",
+  "tasks": [
+    {
+      "name": "racePrepared",
+      "observes": {
+        "message": "JmeRacePreparedEvent"
+      }
+    },
+    {
+      "name": "raceStart",
+      "completedBy": {
+        "message": "JmeRaceStartedEvent"
+      }
+    },
+    {
+      "name": "passRaceControlpoint",
+      "lifecycle": "dynamic",
+      "plannedBy": {
+        "message": "JmeRaceControlpointPlannedEvent"
+      },
+      "completedBy": {
+        "message": "JmeRaceControlpointPassedEvent"
+      }
+    },
+    {
+      "name": "passRaceDestination",
+      "completedBy": {
+        "message": "JmeRaceDestinationReachedEvent"
+      }
+    },
+    {
+      "name": "validateRace",
+      "lifecycle": "static",
+      "completedBy": {
+        "message": "JmeRaceValidatedEvent"
+      }
+    },
+    {
+      "name": "raceCarPostChecks",
+      "lifecycle": "dynamic",
+      "plannedBy": {
+        "message": "JmeRaceCarPostChecksPlannedEvent"
+      },
+      "completedBy": {
+        "message": "JmeRaceCarPostChecksCompletedEvent"
+      }
+    },
+    {
+      "name": "raceCarRefuel",
+      "lifecycle": "dynamic",
+      "cardinality": "single-instance",
+      "plannedBy": {
+        "message": "JmeRaceDestinationReachedEvent"
+      },
+      "completedBy": {
+        "message": "JmeRaceCarRefuellingCompletedEvent"
+      },
+      "taskData": [
+        {
+          "sourceMessage": "JmeRaceDestinationReachedEvent",
+          "messageDataKeys": ["parkingSpotNumber"]
+        },
+        {
+          "sourceMessage": "JmeRaceCarRefuellingCompletedEvent",
+          "messageDataKeys": ["fuelType", "fuelAmount"]
+        }
+      ]
+    },
+    {
+      "name": "raceCarTirePressureCheck",
+      "lifecycle": "dynamic",
+      "plannedBy": {
+        "message": "JmeRaceCarMaintenanceRequiredEvent"
+      },
+      "completedBy": {
+        "message": "JmeRaceCarTirePressureCheckedEvent"
+      }
+    },
+    {
+      "name": "objectsOnRoadSpotted",
+      "observes": {
+        "message": "JmeRaceObjectsOnRoadSpottedEvent"
+      }
+    },
+    {
+      "name": "cancelRace",
+      "observes": {
+        "message": "JmeCancelRaceCommand"
+      }
+    },
+    {
+      "name": "triggerSafetyCar",
+      "observes": {
+        "message": "JmeRaceObjectsOnRoadSpottedEvent",
+        "condition": "ch.admin.bit.jeap.jme.processcontext.condition.TriggerSafetyCarTaskInstantiationCondition"
+      }
+    }
+  ],
+  "messages": [
+    {
+      "messageName": "JmeRacePreparedEvent",
+      "topicName": "jme-race-prepared",
+      "payloadExtractor": "ch.admin.bit.jeap.jme.processcontext.event.JmeRacePreparedEventPayloadExtractor",
+      "triggersProcessInstantiation": true,
+      "processInstantiationCondition": "ch.admin.bit.jeap.jme.processcontext.condition.RacePreparedProcessInstantiationCondition"
+    },
+    {
+      "messageName": "JmeRaceStartedEvent",
+      "topicName": "jme-race-started",
+      "referenceExtractor": "ch.admin.bit.jeap.jme.processcontext.event.JmeRaceStartedEventReferenceExtractor"
+    },
+    {
+      "messageName": "JmeRaceControlpointPassedEvent",
+      "topicName": "jme-race-controlpoint-passed",
+      "correlationProvider": "ch.admin.bit.jeap.jme.processcontext.event.JmeRaceControlpointPassedEventCorrelationProvider",
+      "referenceExtractor": "ch.admin.bit.jeap.jme.processcontext.event.JmeRaceControlpointPassedEventReferenceExtractor"
+    },
+    {
+      "messageName": "JmeRaceControlpointPlannedEvent",
+      "topicName": "jme-race-controlpoint-planned",
+      "clusterName": "other",
+      "correlationProvider": "ch.admin.bit.jeap.jme.processcontext.event.JmeRaceControlpointPlannedEventCorrelationProvider"
+    },
+    {
+      "messageName": "JmeRaceDestinationReachedEvent",
+      "topicName": "jme-race-destination-reached",
+      "correlationProvider": "ch.admin.bit.jeap.jme.processcontext.event.JmeSingleInstanceTaskCorrelationProvider",
+      "referenceExtractor": "ch.admin.bit.jeap.jme.processcontext.event.JmeRaceDestinationReachedEventReferenceExtractor"
+    },
+    {
+      "messageName": "JmeRaceMobileCheckpointPassedEvent",
+      "topicName": "jme-race-mobilecheckpoint-passed",
+      "payloadExtractor": "ch.admin.bit.jeap.jme.processcontext.event.JmeRaceMobileCheckpointPassedEventPayloadExtractor",
+      "referenceExtractor": "ch.admin.bit.jeap.jme.processcontext.event.JmeRaceMobileCheckpointPassedEventReferenceExtractor"
+    },
+    {
+      "messageName": "JmeRaceMobileCheckpointPlannedEvent",
+      "topicName": "jme-race-mobilecheckpoint-planned",
+      "correlationProvider": "ch.admin.bit.jeap.jme.processcontext.event.JmeRaceMobileCheckpointPlannedEventCorrelationProvider"
+    },
+    {
+      "messageName": "JmeRaceCarPostChecksPlannedEvent",
+      "topicName": "jme-race-carpostchecks-planned",
+      "correlationProvider": "ch.admin.bit.jeap.jme.processcontext.event.JmeRaceCarPostChecksPlannedEventCorrelationProvider"
+    },
+    {
+      "messageName": "JmeRaceCarPostChecksCompletedEvent",
+      "topicName": "jme-race-carpostchecks-completed",
+      "correlationProvider": "ch.admin.bit.jeap.jme.processcontext.event.JmeRaceCarPostChecksCompletedEventCorrelationProvider",
+      "payloadExtractor": "ch.admin.bit.jeap.jme.processcontext.event.JmeRaceCarPostChecksCompletedEventPayloadExtractor",
+      "correlatedBy": {
+        "messageDataKey": "race-car-number",
+        "processDataKey": "race-car-number"
+      }
+    },
+    {
+      "messageName": "JmeRaceWeatherAlertActivatedEvent",
+      "topicName": "jme-race-weather-alert-activated",
+      "referenceExtractor": "ch.admin.bit.jeap.jme.processcontext.event.JmeRaceWeatherAlertActivatedReferenceExtractor",
+      "correlatedBy": {
+        "messageDataKey": "weatherAlertSubject",
+        "processDataKey": "weatherAlertSubject"
+      }
+    },
+    {
+      "messageName": "JmeRaceCarMaintenanceRequiredEvent",
+      "topicName": "jme-race-maintenance-required",
+      "correlationProvider": "ch.admin.bit.jeap.jme.processcontext.event.JmeRaceCarMaintenanceRequiredEventCorrelationProvider"
+    },
+    {
+      "messageName": "JmeRaceCarRefuellingCompletedEvent",
+      "topicName": "jme-race-refuelling-completed",
+      "correlationProvider": "ch.admin.bit.jeap.jme.processcontext.event.JmeSingleInstanceTaskCorrelationProvider",
+      "payloadExtractor": "ch.admin.bit.jeap.jme.processcontext.event.JmeRaceCarRefuellingCompletedEventPayloadExtractor"
+    },
+    {
+      "messageName": "JmeRaceCarTirePressureCheckedEvent",
+      "topicName": "jme-race-tire-pressure-checked",
+      "correlationProvider": "ch.admin.bit.jeap.jme.processcontext.event.JmeRaceCarTirePressureCheckedEventCorrelationProvider"
+    },
+    {
+      "messageName": "JmeRaceObjectsOnRoadSpottedEvent",
+      "topicName": "jme-race-objects-spotted",
+      "payloadExtractor": "ch.admin.bit.jeap.jme.processcontext.event.JmeRaceObjectsOnRoadSpottedEventPayloadExtractor"
+    },
+    {
+      "messageName": "JmeRaceValidatedEvent",
+      "topicName": "jme-race-validated"
+    },
+    {
+      "messageName": "JmeCancelRaceCommand",
+      "topicName": "jme-race-cancelrace",
+      "referenceExtractor": "ch.admin.bit.jeap.jme.processcontext.command.JmeCancelRaceCommandReferenceExtractor"
+    }
+  ],
+  "milestones": [
+    {
+      "name": "AllControlPointsPassed",
+      "reachedWhen": {
+        "condition": "ch.admin.bit.jeap.jme.processcontext.condition.AllControlPointsPassedMilestoneCondition"
+      }
+    }
+  ],
+  "processData": [
+    {
+      "key": "race-id",
+      "source": {
+        "message": "JmeRacePreparedEvent",
+        "messageDataKey": "race-id"
+      }
+    },
+    {
+      "key": "race-car-number",
+      "source": {
+        "message": "JmeRacePreparedEvent",
+        "messageDataKey": "race-car-number"
+      }
+    },
+    {
+      "key": "mobileCheckpoint",
+      "source": {
+        "message": "JmeRaceMobileCheckpointPassedEvent",
+        "messageDataKey": "mobileCheckpoint"
+      }
+    },
+    {
+      "key": "passedControlpoint",
+      "source": {
+        "message": "JmeRaceControlpointPassedEvent",
+        "messageDataKey": "controlpoint"
+      }
+    },
+    {
+      "key": "raceCarId",
+      "source": {
+        "message": "JmeRaceStartedEvent",
+        "messageDataKey": "raceCarId"
+      }
+    },
+    {
+      "key": "weatherAlertSubject",
+      "source": {
+        "message": "JmeRaceStartedEvent",
+        "messageDataKey": "weatherAlertSubject"
+      }
+    },
+    {
+      "key": "postChecksCompletedRaceCarNumber",
+      "source": {
+        "message": "JmeRaceCarPostChecksCompletedEvent",
+        "messageDataKey": "race-car-number"
+      }
+    },
+    {
+      "key": "cancelled-race-id",
+      "source": {
+        "message": "JmeCancelRaceCommand",
+        "messageDataKey": "race-id"
+      }
+    }
+  ],
+  "relationSystemId": "ch.admin.jme.Race",
+  "relationPatterns": [
+    {
+      "predicateType": "ch.admin.race.PassedControlpoint",
+      "subject": {
+        "type": "ch.admin.race.RaceCarId",
+        "selector": {
+          "processDataKey": "raceCarId",
+          "role": "RaceParticipant"
+        }
+      },
+      "object": {
+        "type": "ch.admin.jeap.race.Controlpoint",
+        "selector": {
+          "processDataKey": "passedControlpoint"
+        }
+      },
+      "featureFlag": "FEATURE_CONTROL_POINT"
+    },
+    {
+      "predicateType": "ch.admin.race.PostChecksResultProcessed",
+      "subject": {
+        "type": "ch.admin.race.RaceId",
+        "selector": {
+          "processDataKey": "race-id"
+        }
+      },
+      "object": {
+        "type": "ch.admin.jeap.race.RaceCarNumber",
+        "selector": {
+          "processDataKey": "postChecksCompletedRaceCarNumber"
+        }
+      },
+      "featureFlag": "FEATURE_POST_CHECK_RESULT"
+    }
+  ],
+  "completions": [
+    {
+      "completedBy": {
+        "message": "JmeRaceWeatherAlertActivatedEvent",
+        "conclusion": "aborted",
+        "name": "raceWeatherAlertAborted"
+      }
+    },
+    {
+      "completedBy": {
+        "message": "JmeCancelRaceCommand",
+        "conclusion": "aborted",
+        "name": "raceCancelled"
+      }
+    },
+    {
+      "completedBy": {
+        "condition": "ch.admin.bit.jeap.jme.processcontext.condition.TooManyMaintenanceStopsProcessCompletionCondition"
+      }
+    },
+    {
+      "completedBy": {
+        "condition": "ch.admin.bit.jeap.processcontext.plugin.api.condition.AllTasksInFinalStateProcessCompletionCondition"
+      }
+    }
+  ],
+  "snapshots": [
+    {
+      "createdOn" : {
+        "condition" : "ch.admin.bit.jeap.jme.processcontext.condition.DestinationReachedSnapshotCondition"
+      }
+    },
+    {
+      "createdOn" : {
+        "completion": "any"
+      }
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+jeap:
+  processcontext:
+    frontend:
+      application-url: http://localhost:4200/
+      token-aware-pattern: "^http://localhost:8080/process-context/api/.*"

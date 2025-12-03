@@ -1,0 +1,71 @@
+server:
+  port: 8080
+jeap:
+  messaging:
+    kafka:
+      cluster:
+        main:
+          defaultCluster: true
+          bootstrapServers: "http://localhost:10000"
+          schemaRegistryUrl: "http://localhost:11000"
+          username: user
+          password: user-secret
+          securityProtocol: SASL_PLAINTEXT
+        other:
+          bootstrapServers: "http://localhost:12000"
+          schemaRegistryUrl: "http://localhost:13000"
+          username: cluster2-user
+          password: cluster2-secret
+          securityProtocol: SASL_PLAINTEXT
+  processcontext:
+    frontend:
+      application-url: http://localhost:8080/process-context/
+      mockPams: true
+      pamsEnvironment: REF
+      token-aware-pattern: "^/process-context/api/.*"
+    objectstorage:
+      snapshot-bucket: jme-processcontext-obs
+      connection:
+        accessUrl: http://localhost:9000
+        accessKey: local
+        secretKey: localsecret
+# Activate the housekeeping to test snapshots of completed process instances
+# housekeeping:
+#   cron-expression: "0 30 12 * * *"
+#   completed-process-instances-max-age: PT60S
+  security:
+    oauth2:
+      resourceserver:
+        authorization-server:
+          issuer: "http://localhost:8081/jme-process-context-auth-scs"
+          jwk-set-uri: "${jeap.security.oauth2.resourceserver.authorization-server.issuer}/.well-known/jwks.json"
+  swagger:
+    status: open
+  monitor:
+    prometheus:
+      user: prometheus
+      password: "{noop}test"
+    actuator:
+      user: actuator
+      password: "{noop}test"
+      enable-admin-endpoints: true
+      additional-permitted-endpoints: org.springframework.boot.actuate.autoconfigure.condition.ConditionsReportEndpoint
+management:
+  endpoint:
+    conditions:
+      enabled: true
+spring:
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/jme-process-context-service-db-local"
+    username: "postgres"
+    password: "secret"
+  # Do not perform after migrate locally
+  flyway:
+    locations: "classpath:db/migration/common, classpath:db/migration/postgres"
+
+togglz:
+  features:
+    FEATURE_CONTROL_POINT:
+      enabled: true
+    FEATURE_POST_CHECK_RESULT:
+      enabled: true

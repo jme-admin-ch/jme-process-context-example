@@ -1,0 +1,65 @@
+server:
+  servlet:
+    context-path: /process-context
+
+spring:
+  application:
+    name: jme-process-context-scs
+  jpa:
+    properties:
+      hibernate:
+        default_schema: data
+  datasource:
+    hikari:
+      schema: ${spring.jpa.properties.hibernate.default_schema}
+  flyway:
+    # Flyway creates automatically the default schema if it doesn't exist
+    default-schema: ${spring.jpa.properties.hibernate.default_schema}
+jeap:
+  messaging:
+    kafka:
+      error-topic-name: jme-messageprocessing-failed
+      system-name: JME
+      service-name: ${spring.application.name}
+  processcontext:
+    kafka:
+      filters:
+        JmeRaceStartedEvent: ch.admin.bit.jeap.jme.processcontext.event.JmeRaceStartedEventMessageFilter
+      topic:
+        process-instance-created: "jme-process-instance-created"
+        process-instance-completed: "jme-process-instance-completed"
+        process-milestone-reached: "jme-process-milestone-reached"
+        process-outdated-internal: "jme-process-event-received"
+        process-changed-internal: "jme-process-state-changed"
+        create-process-instance: "jme-process-createprocessinstance"
+        process-snapshot-created: "jme-process-snapshotcreated"
+    frontend:
+      clientId: "process-context"
+      silentRenew: true
+      systemName: "jme"
+      autoLogin: true
+      renewUserInfoAfterTokenRenew: true
+      logoutRedirectUri: "https://localhost:8080/logout"
+    objectstorage:
+      snapshot-retention-days: 3
+  security:
+    oauth2:
+      resourceserver:
+        system-name: "jme"
+logging:
+  level:
+    org:
+      apache:
+        kafka: WARN
+      springframework:
+        kafka: WARN
+    io:
+      confluent:
+        kafka: WARN
+    ch:
+      admin:
+        bit:
+          jeap:
+            processcontext:
+              domain:
+                processevent: DEBUG

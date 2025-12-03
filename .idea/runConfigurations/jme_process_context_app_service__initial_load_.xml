@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="jme-process-context-app-service (initial load)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <option name="ACTIVE_PROFILES" value="local,loadtest" />
+    <module name="jme-process-context-app-service" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="ch.admin.bit.jeap.jme.processcontext.Application" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

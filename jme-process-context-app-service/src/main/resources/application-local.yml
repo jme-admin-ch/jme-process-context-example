@@ -1,0 +1,41 @@
+server:
+  port: 8082
+
+jeap:
+  swagger:
+    status: open
+  messaging:
+    kafka:
+      cluster:
+        main:
+          defaultCluster: true
+          bootstrapServers: "http://localhost:10000"
+          schemaRegistryUrl: "http://localhost:11000"
+          username: user
+          password: user-secret
+          securityProtocol: SASL_PLAINTEXT
+        other:
+          bootstrapServers: "http://localhost:12000"
+          schemaRegistryUrl: "http://localhost:13000"
+          username: cluster2-user
+          password: cluster2-secret
+          securityProtocol: SASL_PLAINTEXT
+  monitor:
+    prometheus:
+      user: prometheus
+      password: "{noop}secret"
+
+spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          default-provider:
+            issuer-uri: "http://localhost:8081/jme-process-context-auth-scs"
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/jme-process-context-service-db-local"
+    username: "postgres"
+    password: "secret"
+
+example:
+  processContextUrl: "http://localhost:8080/process-context"

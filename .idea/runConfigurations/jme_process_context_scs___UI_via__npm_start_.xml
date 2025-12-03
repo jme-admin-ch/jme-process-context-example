@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="jme-process-context-scs / UI via 'npm start'" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="jme-process-context-scs" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="ch.admin.bit.jeap.processcontext.Application" />
+    <option name="ACTIVE_PROFILES" value="local,local-npm-ui" />
+    <option name="ALTERNATIVE_JRE_PATH" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

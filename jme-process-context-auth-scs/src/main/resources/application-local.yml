@@ -1,0 +1,24 @@
+server:
+  port: 8081
+mockserver:
+  base-url: "http://localhost:${server.port}/${spring.application.name}"
+
+oauth-mock-data:
+  clients:
+    - client-id: "process-context"
+      context: "USER"
+      registered-redirect-uri: [ "http://localhost:8080/process-context/",
+                                 "http://localhost:8080/process-context/assets/auth/silent-renew.html",
+                                 "http://localhost:4200/",
+                                 "http://localhost:4200/assets/auth/silent-renew.html" ]
+      userroles: ["jme_@processinstance_#view", "jme_@processinstance_#create", "jme_@processsnapshot_#view"]
+
+    - client-id: "jme-process-context-app-service"
+      client-secret: "{noop}secret"
+      context: "SYS"
+      userroles: ["jme_@processinstance_#create", "jme_@processsnapshot_#view"]
+
+    - client-id: "jme-process-context-it-client"
+      client-secret: "{noop}secret"
+      context: "SYS"
+      userroles: ["jme_@processinstance_#view", "jme_@processsnapshot_#view"]

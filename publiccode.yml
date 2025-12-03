@@ -1,0 +1,50 @@
+publiccodeYmlVersion: 0.4.0
+name: jme-process-context-example
+applicationSuite: JME
+softwareVersion: 1.0.0
+releaseDate: 2025-04-12
+url: "https://github.com/jme-admin-ch/jme-process-context-example.git"
+landingURL: "https://github.com/jme-admin-ch/jme"
+platforms:
+  - web
+categories:
+  - application-development
+developmentStatus: stable
+softwareType: standalone/backend
+organisation:
+  uri: https://ld.admin.ch/office/V.1.7
+  name: Federal Office of Information Technology, Systems and Telecommunication
+description:
+  en:
+    localisedName: jme-process-context-example
+    shortDescription: Example project demonstrating how to use the jEAP Process Context Service.
+    longDescription: >
+      The Process Context Service addresses the challenge of providing process context for
+      cross-service processes in an event-driven architecture without relying on a central
+      process engine to control execution (favoring choreography over orchestration).
+      It enables tracking and analyzing process progress and triggering events when specific
+      milestones or state changes occur (e.g., completion of certain tasks). Delivered as a
+      jEAP library, it is instantiated per business application by development teams, with
+      application-specific process definitions in json files configured within it.
+      This repository provides an example of how to use the Process Context Service.
+      It contains the following modules:
+      * jme-process-context-scs: An instance of the Process Context Service
+      * jme-process-context-auth-scs: An instance of the OAuth mock server to access the Process Context Service
+      * jme-process-context-app-service: A mock application using the Process Context Service.
+        This app generates messages and calls the REST endpoints of the Process Context Service
+        to simulate a real application.
+    features:
+      - Demonstrates instantiation and configuration of the Process Context Service and its features
+      - Includes OAuth mock server for authentication
+      - Provides a mock application simulating real-world usage
+legal:
+  license: Apache-2.0
+maintenance:
+  type: internal
+  contacts:
+    - name: Federal Office of Information Technology, Systems and Telecommunication FOITT
+      email: jeap-community@bit.admin.ch
+localisation:
+  localisationReady: false
+  availableLanguages:
+    - en

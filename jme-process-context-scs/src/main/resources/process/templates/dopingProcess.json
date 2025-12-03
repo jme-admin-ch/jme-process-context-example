@@ -1,0 +1,48 @@
+{
+  "name": "dopingProcess",
+  "processRelationPatterns": [
+    {
+      "name": "processRelationToRaceProcess",
+      "roleType": "target",
+      "originRole": "preliminary proceedings",
+      "targetRole": "follow-up proceedings",
+      "visibility": "both",
+      "source": {
+        "messageName": "JmeRaceDestinationReachedEvent",
+        "messageDataKey": "relatedProcessId"
+      }
+    }
+  ],
+  "messages": [
+    {
+      "messageName": "JmeRaceDestinationReachedEvent",
+      "topicName": "jme-race-destination-reached",
+      "correlationProvider": "ch.admin.bit.jeap.jme.processcontext.event.JmeRaceDestinationReachedEventCorrelationProvider",
+      "referenceExtractor": "ch.admin.bit.jeap.jme.processcontext.event.JmeRaceDestinationReachedEventReferenceExtractor",
+      "triggersProcessInstantiation": true
+    }
+  ],
+  "tasks": [
+    {
+      "name": "dopingProcessStart",
+      "completedBy": {
+        "message": "JmeRaceDestinationReachedEvent"
+      }
+    }
+  ],
+
+
+  "milestones": [
+
+  ],
+  "processData": [
+
+  ],
+
+  "relationPatterns": [
+
+  ],
+  "completions": [
+
+  ]
+}
