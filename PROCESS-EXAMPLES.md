@@ -2,6 +2,14 @@
 
 This document provides an overview of the main process templates and how to trigger and control them via REST API.
 
+> **Note:** Make sure all required services are started before trying out the process examples. This ensures the API calls work as expected.
+
+For all endpoints, see the Swagger UI:
+`http://localhost:8082/jme-process-context-app-service/swagger-ui.html`
+
+The PCS UI can be accessed at:
+`http://localhost:8080/process-context/startpage`
+
 ---
 
 ## Race Process Example
@@ -203,8 +211,3 @@ joinType clause? Let's see it in next step.
 Create a **new** process and perform the same REST requests as in previous steps. Once done, you will 
 notice two created relations in PCS UI. Since we removed the `joinType` configuration, PCS created the Relations with 
 the default behaviour (cartesian product), generating an additional entry that shouldn't be there as part of the use case.
-
---- 
-
-For more details and all endpoints, see the Swagger UI:
-`http://localhost:8082/jme-process-context-app-service/swagger-ui.html`
