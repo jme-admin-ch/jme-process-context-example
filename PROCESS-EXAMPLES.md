@@ -4,7 +4,7 @@ This document provides an overview of the main process templates and how to trig
 
 > **Note:** Make sure all required services are started before trying out the process examples. This ensures the API calls work as expected.
 
-For all endpoints, see the Swagger UI:
+For the shown example endpoints, see the Swagger UI:
 `http://localhost:8082/jme-process-context-app-service/swagger-ui.html`
 
 The PCS UI can be accessed at:
