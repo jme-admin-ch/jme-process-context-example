@@ -47,7 +47,7 @@
         <jeap-oauth-mock-server.version>3.26.0</jeap-oauth-mock-server.version>
         <java.version>25</java.version>
         <maven.compiler.release>25</maven.compiler.release>
-        <maven.javadoc.skip>true</maven.javadoc.skip>
+        <maven.javadoc.skip>false</maven.javadoc.skip>
     </properties>
 
     <dependencyManagement>
