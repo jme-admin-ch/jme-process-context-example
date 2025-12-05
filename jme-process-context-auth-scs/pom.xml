@@ -16,7 +16,6 @@
 
     <properties>
         <main-class>ch.admin.bit.jeap.oauth.mock.server.ServerApplication</main-class>
-        <maven.javadoc.skip>true</maven.javadoc.skip>
     </properties>
 
     <dependencies>
@@ -38,6 +37,14 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <mainClass>${main-class}</mainClass>
+                </configuration>
+            </plugin>
+            <!-- Disable Javadoc generation because module has no Java Code -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
                 </configuration>
             </plugin>
         </plugins>
