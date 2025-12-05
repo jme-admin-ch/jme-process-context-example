@@ -39,14 +39,6 @@
                     <mainClass>${main-class}</mainClass>
                 </configuration>
             </plugin>
-            <!-- Disable Javadoc generation because module has no Java Code -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 </project>
