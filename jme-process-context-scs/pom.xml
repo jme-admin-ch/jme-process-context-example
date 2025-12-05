@@ -16,6 +16,7 @@
 
     <properties>
         <main-class>ch.admin.bit.jeap.processcontext.Application</main-class>
+        <maven.javadoc.skip>false</maven.javadoc.skip>
     </properties>
 
     <dependencies>

@@ -16,6 +16,7 @@
 
     <properties>
         <main-class>ch.admin.bit.jeap.oauth.mock.server.ServerApplication</main-class>
+        <maven.javadoc.skip>false</maven.javadoc.skip>
     </properties>
 
     <dependencies>
