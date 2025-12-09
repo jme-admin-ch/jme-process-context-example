@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "example.topic")
 @Data
 @Slf4j
-class TopicConfiguration {
+public class TopicConfiguration {
     public static final String PROCESS_COMPLETED_TOPIC_NAME = "${example.topic.process-completed}";
     public static final String PROCESS_MILESTONE_REACHED_TOPIC_NAME = "${example.topic.process-milestone-reached}";
 
