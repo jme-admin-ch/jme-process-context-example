@@ -1,18 +1,9 @@
 package ch.admin.bit.jeap.jme.processcontext.kafka;
 
-import jakarta.annotation.PostConstruct;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.kafka.clients.admin.AdminClient;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
-import org.springframework.kafka.core.KafkaAdmin;
-
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.ExecutionException;
 
 @Configuration
 @ConfigurationProperties(prefix = "example.topic")
