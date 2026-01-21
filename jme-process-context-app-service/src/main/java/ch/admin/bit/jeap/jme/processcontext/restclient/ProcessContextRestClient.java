@@ -11,7 +11,6 @@ import org.apache.avro.io.DecoderFactory;
 import org.apache.avro.specific.SpecificDatumReader;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Component;
@@ -20,8 +19,6 @@ import org.springframework.web.client.RestClient;
 
 import java.io.ByteArrayInputStream;
 import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Component
 class ProcessContextRestClient implements ProcessContextClient {
@@ -34,21 +31,6 @@ class ProcessContextRestClient implements ProcessContextClient {
         this.restClient = jeapOAuth2RestClientBuilderFactory
                 .createForClientRegistryId("jme-process-context-app-service")
                 .build();
-    }
-
-    @Override
-    public void createProcess(String id, String templateName, Set<ch.admin.bit.jeap.jme.processcontext.domain.ExternalReferenceDTO> externalReferences) {
-        restClient.put()
-                .uri(processContextUrl + "/api/processes/" + id)
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(new NewProcessInstanceDTO(templateName, externalReferences.stream()
-                        .map(extRef -> new ExternalReferenceDTO(extRef.getName(), extRef.getValue()))
-                        .collect(Collectors.toSet())))
-                .retrieve()
-                .onStatus(statusCode -> statusCode.isSameCodeAs(HttpStatus.FORBIDDEN), (request, response) -> {
-                    throw new AccessDeniedException("Insufficient authentication to access ProcessContext API.");
-                })
-                .toBodilessEntity();
     }
 
     @Override
@@ -82,5 +64,4 @@ class ProcessContextRestClient implements ProcessContextClient {
         Decoder decoder = DecoderFactory.get().binaryDecoder(new ByteArrayInputStream(serializedSnapshot), null);
         return datumReader.read(null, decoder);
     }
-
 }

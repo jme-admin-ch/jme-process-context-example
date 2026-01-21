@@ -18,11 +18,10 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class TestProcessService {
     private final TestProcessRepository testProcessRepository;
-    private final ProcessContextClient processContextClient;
     private final MessagePublisher messagePublisher;
 
     public void create(String processId, ProcessCreationType processCreationType, NewProcessDTO newProcessDTO) {
-        TestProcess testProcess = TestProcess.create(messagePublisher, processContextClient, processId, newProcessDTO.getRaceCarNumber(), processCreationType);
+        TestProcess testProcess = TestProcess.create(messagePublisher, processId, newProcessDTO.getRaceCarNumber(), processCreationType);
         testProcessRepository.save(testProcess);
     }
 

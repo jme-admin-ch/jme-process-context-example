@@ -12,24 +12,17 @@ import static java.util.Collections.emptyList;
 
 @Getter
 public class TestProcess implements Process {
-    private static final String CONTROL_POINT_TASK = "passRaceControlpoint";
     private static final String RACE_ID = "New Race Across Switzerland";
-    private static final String VALIDATE_RACE_TASK = "validateRace";
 
     private final MessagePublisher messagePublisher;
     private final String id;
     private final Set<String> reachedMilestones = new HashSet<>();
     private boolean processCompleted = false;
 
-    public static TestProcess create(MessagePublisher messagePublisher, ProcessContextClient processContextClient, String id, String raceCarNumber, ProcessCreationType processCreationType) {
+    public static TestProcess create(MessagePublisher messagePublisher, String id, String raceCarNumber, ProcessCreationType processCreationType) {
         TestProcess testProcess = new TestProcess(messagePublisher, id);
 
-        if (ProcessCreationType.REST.equals(processCreationType)) {
-            processContextClient.createProcess(id, "raceProcess", Set.of(
-                    new ExternalReferenceDTO("race-id", RACE_ID),
-                    new ExternalReferenceDTO("race-car-number", raceCarNumber))
-            );
-        } else if (ProcessCreationType.COMMAND.equals(processCreationType)) {
+        if (ProcessCreationType.COMMAND.equals(processCreationType)) {
             messagePublisher.createProcessInstance(id, "raceProcess",
                     List.of(
                             new ProcessData("race-id", RACE_ID, null),
