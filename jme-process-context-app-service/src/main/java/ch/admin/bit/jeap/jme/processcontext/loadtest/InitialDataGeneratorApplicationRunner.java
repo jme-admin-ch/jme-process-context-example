@@ -40,7 +40,7 @@ public class InitialDataGeneratorApplicationRunner implements ApplicationRunner 
 
             for (int i = 0; i < targetProcessInstances - currentProcessInstances; i++) {
                 String processId = UUID.randomUUID().toString();
-                testProcessService.create(processId, ProcessCreationType.REST, newProcessDTO);
+                testProcessService.create(processId, ProcessCreationType.COMMAND, newProcessDTO);
                 testProcessService.raceStarted(processId, "sunny");
 
                 if (Math.random() < 0.2) {
