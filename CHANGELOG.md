@@ -9,7 +9,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Changed
 
-- PCS 16.0.0
+- PCS 16.0.0 (removed milestones)
 
 ## [1.1.0] - 21.01.2026
 
