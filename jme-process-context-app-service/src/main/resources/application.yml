@@ -33,7 +33,6 @@ example:
   topic:
     # Process Context Service
     process-completed: "jme-process-instance-completed"
-    process-milestone-reached: "jme-process-milestone-reached"
     create-process-instance: "jme-process-createprocessinstance"
     # Race process
     race-started: "jme-race-started"

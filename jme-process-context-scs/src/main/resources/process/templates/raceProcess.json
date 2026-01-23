@@ -194,14 +194,6 @@
       "referenceExtractor": "ch.admin.bit.jeap.jme.processcontext.command.JmeCancelRaceCommandReferenceExtractor"
     }
   ],
-  "milestones": [
-    {
-      "name": "AllControlPointsPassed",
-      "reachedWhen": {
-        "condition": "ch.admin.bit.jeap.jme.processcontext.condition.AllControlPointsPassedMilestoneCondition"
-      }
-    }
-  ],
   "processData": [
     {
       "key": "race-id",

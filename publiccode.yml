@@ -23,7 +23,7 @@ description:
       cross-service processes in an event-driven architecture without relying on a central
       process engine to control execution (favoring choreography over orchestration).
       It enables tracking and analyzing process progress and triggering events when specific
-      milestones or state changes occur (e.g., completion of certain tasks). Delivered as a
+      state changes occur (e.g., completion of certain tasks). Delivered as a
       jEAP library, it is instantiated per business application by development teams, with
       application-specific process definitions in json files configured within it.
       This repository provides an example of how to use the Process Context Service.

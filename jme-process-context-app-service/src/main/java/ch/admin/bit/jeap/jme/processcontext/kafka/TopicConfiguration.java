@@ -11,10 +11,8 @@ import org.springframework.context.annotation.Configuration;
 @Slf4j
 public class TopicConfiguration {
     public static final String PROCESS_COMPLETED_TOPIC_NAME = "${example.topic.process-completed}";
-    public static final String PROCESS_MILESTONE_REACHED_TOPIC_NAME = "${example.topic.process-milestone-reached}";
 
     private String processCompleted;
-    private String processMilestoneReached;
     private String raceStarted;
     private String raceControlpointPassed;
     private String raceControlpointPlanned;

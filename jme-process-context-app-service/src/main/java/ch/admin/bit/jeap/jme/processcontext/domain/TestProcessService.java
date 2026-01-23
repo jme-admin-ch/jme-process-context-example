@@ -46,12 +46,6 @@ public class TestProcessService {
         return testProcessRepository.findById(processId, Process.class);
     }
 
-    public void milestoneReached(String processId, String milestoneName) {
-        TestProcess testProcess = testProcessRepository.findById(processId, TestProcess.class)
-                .orElseThrow(() -> new IllegalStateException("Reached milestone for unknown process with ID " + processId));
-        testProcess.milestoneReached(milestoneName);
-    }
-
     public void processCompleted(String processId) {
         TestProcess testProcess = testProcessRepository.findById(processId, TestProcess.class).orElseThrow();
         testProcess.completed();

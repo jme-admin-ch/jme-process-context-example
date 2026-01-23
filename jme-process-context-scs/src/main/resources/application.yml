@@ -28,7 +28,6 @@ jeap:
       topic:
         process-instance-created: "jme-process-instance-created"
         process-instance-completed: "jme-process-instance-completed"
-        process-milestone-reached: "jme-process-milestone-reached"
         process-outdated-internal: "jme-process-event-received"
         process-changed-internal: "jme-process-state-changed"
         create-process-instance: "jme-process-createprocessinstance"

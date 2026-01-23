@@ -52,7 +52,8 @@ Completes the 'Validate Race' task.
 ```http
 POST /jme-process-context-app-service/api/raceprocess/{processId}/raceDestinationReached
 ```
-Completes the 'Reach Destination' milestone and triggers a process snapshot.
+
+Triggers a process snapshot.
 
 6) **Complete refuelling**
 ```http
@@ -61,7 +62,8 @@ POST /jme-process-context-app-service/api/raceprocess/{processId}/carRefuellingC
 Completes the 'Car Refuelling' task.
 
 7) **Process completion**
-   The process will automatically complete when all required tasks and milestones are finished. Another snapshot is created at completion. You can view the process state and snapshots in the UI.
+   The process will automatically complete when all required tasks are finished. Another snapshot is created at
+   completion. You can view the process state and snapshots in the UI.
 
 **Relations:**
 - Each control point passed creates a relation between the race car and the control point.

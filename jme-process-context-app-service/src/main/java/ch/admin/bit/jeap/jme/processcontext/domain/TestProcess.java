@@ -3,9 +3,7 @@ package ch.admin.bit.jeap.jme.processcontext.domain;
 import ch.admin.bit.jeap.processcontext.command.process.instance.create.ProcessData;
 import lombok.Getter;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 import static java.util.Collections.emptyList;
@@ -16,7 +14,6 @@ public class TestProcess implements Process {
 
     private final MessagePublisher messagePublisher;
     private final String id;
-    private final Set<String> reachedMilestones = new HashSet<>();
     private boolean processCompleted = false;
 
     public static TestProcess create(MessagePublisher messagePublisher, String id, String raceCarNumber, ProcessCreationType processCreationType) {
@@ -82,10 +79,6 @@ public class TestProcess implements Process {
 
     public void raceDestinationReached() {
         messagePublisher.raceDestinationReached(id);
-    }
-
-    public void milestoneReached(String milestoneName) {
-        reachedMilestones.add(milestoneName);
     }
 
     public void completed() {
