@@ -28,7 +28,6 @@
             <groupId>ch.admin.bit.jeap</groupId>
             <artifactId>jeap-process-context-scs</artifactId>
             <version>${jeap-process-context-service.version}</version>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>ch.admin.bit.jeap</groupId>

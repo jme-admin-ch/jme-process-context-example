@@ -16,9 +16,11 @@ import ch.admin.bit.jeap.jme.processcontext.event.race.prepared.JmeRacePreparedE
 import ch.admin.bit.jeap.jme.processcontext.event.race.started.JmeRaceStartedEvent;
 import ch.admin.bit.jeap.jme.processcontext.event.race.validated.JmeRaceValidatedEvent;
 import ch.admin.bit.jeap.jme.processcontext.event.race.wather.alert.activated.JmeRaceWeatherAlertActivatedEvent;
+import ch.admin.bit.jeap.messaging.annotations.JeapMessageConsumerContract;
 import ch.admin.bit.jeap.messaging.annotations.JeapMessageProducerContract;
 import ch.admin.bit.jeap.messaging.annotations.JeapMessageProducerContracts;
 import ch.admin.bit.jeap.processcontext.command.process.instance.create.CreateProcessInstanceCommand;
+import ch.admin.bit.jeap.processcontext.event.process.instance.completed.ProcessInstanceCompletedEvent;
 import ch.admin.bit.jme.document.JmeDocumentCreatedEvent;
 import ch.admin.bit.jme.document.JmeDocumentReviewedEvent;
 import ch.admin.bit.jme.document.JmeDocumentVersionCreatedEvent;
@@ -29,6 +31,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @Slf4j
+@JeapMessageConsumerContract(value = ProcessInstanceCompletedEvent.TypeRef.class, topic = "jme-process-instance-completed")
 @JeapMessageProducerContract(value = CreateProcessInstanceCommand.TypeRef.class, topic = "jme-process-createprocessinstance")
 @JeapMessageProducerContracts({
         JmeRaceStartedEvent.TypeRef.class,
