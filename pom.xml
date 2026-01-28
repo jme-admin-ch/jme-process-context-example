@@ -25,7 +25,7 @@
     </licenses>
 
     <artifactId>jme-process-context-example</artifactId>
-    <version>1.2.0-SNAPSHOT</version>
+    <version>1.3.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <parent>
@@ -44,7 +44,7 @@
 
     <properties>
         <jeap-process-context-service.version>16.2.0</jeap-process-context-service.version>
-        <jeap-oauth-mock-server.version>3.33.0</jeap-oauth-mock-server.version>
+        <jeap-oauth-mock-server.version>3.35.0</jeap-oauth-mock-server.version>
         <java.version>25</java.version>
         <maven.compiler.release>25</maven.compiler.release>
         <maven.javadoc.skip>false</maven.javadoc.skip>
