@@ -25,23 +25,18 @@ import ch.admin.bit.jeap.jme.processcontext.event.race.validated.JmeRaceValidate
 import ch.admin.bit.jeap.jme.processcontext.event.race.wather.alert.activated.JmeRaceWeatherAlertActivatedEvent;
 import ch.admin.bit.jeap.messaging.avro.AvroMessage;
 import ch.admin.bit.jeap.messaging.avro.AvroMessageKey;
-import ch.admin.bit.jeap.processcontext.command.CreateProcessInstanceCommandBuilder;
-import ch.admin.bit.jeap.processcontext.command.process.instance.create.CreateProcessInstanceCommand;
-import ch.admin.bit.jeap.processcontext.command.process.instance.create.ProcessData;
 import ch.admin.bit.jme.document.JmeDocumentCreatedEvent;
 import ch.admin.bit.jme.document.JmeDocumentReviewedEvent;
 import ch.admin.bit.jme.document.JmeDocumentVersionCreatedEvent;
 import ch.admin.bit.jme.document.JmeDocumentVersionReviewedEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
@@ -57,21 +52,13 @@ class KafkaMessagePublisher implements MessagePublisher {
     private final KafkaTemplate<AvroMessageKey, AvroMessage> otherClusterTemplate;
 
     private final TopicConfiguration topicConfiguration;
-    private final String serviceName;
-    private final String systemName;
-
-    private final Random random = new Random();
 
     KafkaMessagePublisher(KafkaTemplate<AvroMessageKey, AvroMessage> bitClusterTemplate,
                           @Qualifier("other") KafkaTemplate<AvroMessageKey, AvroMessage> otherClusterTemplate,
-                          TopicConfiguration topicConfiguration,
-                          @Value("${jeap.messaging.kafka.service-name}") String serviceName,
-                          @Value("${jeap.messaging.kafka.system-name}") String systemName) {
+                          TopicConfiguration topicConfiguration) {
         this.bitClusterTemplate = bitClusterTemplate;
         this.otherClusterTemplate = otherClusterTemplate;
         this.topicConfiguration = topicConfiguration;
-        this.serviceName = serviceName;
-        this.systemName = systemName;
     }
 
     private void send(final AvroDomainEvent event, String topic) {
@@ -98,19 +85,6 @@ class KafkaMessagePublisher implements MessagePublisher {
         } catch (ExecutionException e) {
             throw ProcessContextAppException.cannotSendEvent(e);
         }
-    }
-
-    @Override
-    public void createProcessInstance(String processId, String processTemplateName, List<ProcessData> processData) {
-        CreateProcessInstanceCommand command = CreateProcessInstanceCommandBuilder.create()
-                .processId(processId)
-                .serviceName(serviceName)
-                .systemName(systemName)
-                .processTemplateName(processTemplateName)
-                .idempotenceId(processId + "-" + processTemplateName)
-                .processData(processData)
-                .build();
-        send(command, topicConfiguration.getCreateProcessInstance());
     }
 
     @Override

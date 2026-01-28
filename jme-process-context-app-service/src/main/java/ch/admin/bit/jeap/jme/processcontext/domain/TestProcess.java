@@ -1,6 +1,5 @@
 package ch.admin.bit.jeap.jme.processcontext.domain;
 
-import ch.admin.bit.jeap.processcontext.command.process.instance.create.ProcessData;
 import lombok.Getter;
 
 import java.util.List;
@@ -16,20 +15,9 @@ public class TestProcess implements Process {
     private final String id;
     private boolean processCompleted = false;
 
-    public static TestProcess create(MessagePublisher messagePublisher, String id, String raceCarNumber, ProcessCreationType processCreationType) {
+    public static TestProcess create(MessagePublisher messagePublisher, String id, String raceCarNumber) {
         TestProcess testProcess = new TestProcess(messagePublisher, id);
-
-        if (ProcessCreationType.COMMAND.equals(processCreationType)) {
-            messagePublisher.createProcessInstance(id, "raceProcess",
-                    List.of(
-                            new ProcessData("race-id", RACE_ID, null),
-                            new ProcessData("race-car-number", raceCarNumber, null)
-                    )
-            );
-        } else if (ProcessCreationType.EVENT.equals(processCreationType)) {
-            messagePublisher.racePrepared(id, RACE_ID, raceCarNumber);
-        }
-
+        messagePublisher.racePrepared(id, RACE_ID, raceCarNumber);
         return testProcess;
     }
 

@@ -20,8 +20,8 @@ public class TestProcessService {
     private final TestProcessRepository testProcessRepository;
     private final MessagePublisher messagePublisher;
 
-    public void create(String processId, ProcessCreationType processCreationType, NewProcessDTO newProcessDTO) {
-        TestProcess testProcess = TestProcess.create(messagePublisher, processId, newProcessDTO.getRaceCarNumber(), processCreationType);
+    public void create(String processId, NewProcessDTO newProcessDTO) {
+        TestProcess testProcess = TestProcess.create(messagePublisher, processId, newProcessDTO.getRaceCarNumber());
         testProcessRepository.save(testProcess);
     }
 

@@ -1,7 +1,6 @@
 package ch.admin.bit.jeap.jme.processcontext.web;
 
 import ch.admin.bit.jeap.jme.processcontext.db.StatisticService;
-import ch.admin.bit.jeap.jme.processcontext.domain.ProcessCreationType;
 import ch.admin.bit.jeap.jme.processcontext.domain.TestProcess;
 import ch.admin.bit.jeap.jme.processcontext.domain.TestProcessService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -35,13 +34,13 @@ class RaceProcessController {
             @ApiResponse(responseCode = "201", description = "Created"),
             @ApiResponse(responseCode = "200", description = "Process already exists")
     })
-    public ResponseEntity<Void> create(@PathVariable("processId") String id, @RequestParam(name = "processCreationType", defaultValue = "REST") ProcessCreationType processCreationType, @RequestBody @Valid NewProcessDTO newProcessDTO) {
+    public ResponseEntity<Void> create(@PathVariable("processId") String id, @RequestBody @Valid NewProcessDTO newProcessDTO) {
         if (testProcessService.findById(id).isPresent()) {
             log.info("TestProcess with processId {} already exists", id);
             return ResponseEntity.status(HttpStatus.OK).build();
         }
 
-        testProcessService.create(id, processCreationType, newProcessDTO);
+        testProcessService.create(id, newProcessDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

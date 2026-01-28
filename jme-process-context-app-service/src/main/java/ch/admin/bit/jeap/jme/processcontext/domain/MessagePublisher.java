@@ -1,7 +1,5 @@
 package ch.admin.bit.jeap.jme.processcontext.domain;
 
-import ch.admin.bit.jeap.processcontext.command.process.instance.create.ProcessData;
-
 import java.util.List;
 
 public interface MessagePublisher {
@@ -19,8 +17,6 @@ public interface MessagePublisher {
     void raceCarPostChecksCompleted(String raceId, List<String> raceCarNumbers);
 
     void weatherAlertActivated(String weatherAlertSubject, String weatherAlertId);
-
-    void createProcessInstance(String processId, String processTemplateName, List<ProcessData> processData);
 
     void carMaintenanceRequired(String processId, String maintenanceId);
 

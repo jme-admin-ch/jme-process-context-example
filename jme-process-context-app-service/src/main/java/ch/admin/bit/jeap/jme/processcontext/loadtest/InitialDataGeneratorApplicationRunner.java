@@ -1,7 +1,6 @@
 package ch.admin.bit.jeap.jme.processcontext.loadtest;
 
 import ch.admin.bit.jeap.jme.processcontext.db.StatisticService;
-import ch.admin.bit.jeap.jme.processcontext.domain.ProcessCreationType;
 import ch.admin.bit.jeap.jme.processcontext.domain.TestProcessService;
 import ch.admin.bit.jeap.jme.processcontext.web.NewProcessDTO;
 import lombok.RequiredArgsConstructor;
@@ -40,7 +39,7 @@ public class InitialDataGeneratorApplicationRunner implements ApplicationRunner 
 
             for (int i = 0; i < targetProcessInstances - currentProcessInstances; i++) {
                 String processId = UUID.randomUUID().toString();
-                testProcessService.create(processId, ProcessCreationType.COMMAND, newProcessDTO);
+                testProcessService.create(processId, newProcessDTO);
                 testProcessService.raceStarted(processId, "sunny");
 
                 if (Math.random() < 0.2) {

@@ -25,7 +25,6 @@ public class TopicConfiguration {
     private String raceCarRefuellingCompleted;
     private String raceCarTirePressureChecked;
     private String weatherAlertActivated;
-    private String createProcessInstance;
     private String objectsOnRoadSpotted;
     private String raceValidated;
     private String racePrepared;
