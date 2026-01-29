@@ -1,12 +1,12 @@
 package ch.admin.bit.jeap.jme.processcontext.event;
 
 import ch.admin.bit.jeap.jme.processcontext.event.race.carmaintenance.required.JmeRaceCarMaintenanceRequiredEvent;
-import ch.admin.bit.jeap.processcontext.plugin.api.event.DomainEventCorrelationProvider;
+import ch.admin.bit.jeap.processcontext.plugin.api.message.MessageCorrelationProvider;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class JmeRaceCarMaintenanceRequiredEventCorrelationProvider implements DomainEventCorrelationProvider<JmeRaceCarMaintenanceRequiredEvent> {
+public class JmeRaceCarMaintenanceRequiredEventCorrelationProvider implements MessageCorrelationProvider<JmeRaceCarMaintenanceRequiredEvent> {
 
     @Override
     public Set<String> getRelatedOriginTaskIds(JmeRaceCarMaintenanceRequiredEvent event) {

@@ -1,6 +1,6 @@
 package ch.admin.bit.jeap.jme.processcontext.event;
 
-import ch.admin.bit.jeap.processcontext.plugin.api.event.MessageCorrelationProvider;
+import ch.admin.bit.jeap.processcontext.plugin.api.message.MessageCorrelationProvider;
 import ch.admin.bit.jme.document.JmeDocumentVersionCreatedEvent;
 
 import java.util.Set;

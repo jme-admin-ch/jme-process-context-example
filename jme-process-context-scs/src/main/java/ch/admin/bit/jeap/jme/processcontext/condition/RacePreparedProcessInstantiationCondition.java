@@ -1,7 +1,7 @@
 package ch.admin.bit.jeap.jme.processcontext.condition;
 
 import ch.admin.bit.jeap.jme.processcontext.event.race.prepared.JmeRacePreparedEvent;
-import ch.admin.bit.jeap.processcontext.plugin.api.event.ProcessInstantiationCondition;
+import ch.admin.bit.jeap.processcontext.plugin.api.message.ProcessInstantiationCondition;
 
 @SuppressWarnings("unused")
 public class RacePreparedProcessInstantiationCondition implements ProcessInstantiationCondition<JmeRacePreparedEvent> {

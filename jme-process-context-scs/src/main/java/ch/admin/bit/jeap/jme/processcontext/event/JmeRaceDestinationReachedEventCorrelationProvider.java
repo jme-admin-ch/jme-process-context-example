@@ -1,7 +1,7 @@
 package ch.admin.bit.jeap.jme.processcontext.event;
 
 import ch.admin.bit.jeap.jme.processcontext.event.race.destination.reached.JmeRaceDestinationReachedEvent;
-import ch.admin.bit.jeap.processcontext.plugin.api.event.MessageCorrelationProvider;
+import ch.admin.bit.jeap.processcontext.plugin.api.message.MessageCorrelationProvider;
 
 import java.util.Set;
 

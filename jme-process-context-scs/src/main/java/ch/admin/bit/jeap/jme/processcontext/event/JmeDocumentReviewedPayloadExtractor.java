@@ -1,7 +1,7 @@
 package ch.admin.bit.jeap.jme.processcontext.event;
 
-import ch.admin.bit.jeap.processcontext.plugin.api.event.MessageData;
-import ch.admin.bit.jeap.processcontext.plugin.api.event.PayloadExtractor;
+import ch.admin.bit.jeap.processcontext.plugin.api.message.MessageData;
+import ch.admin.bit.jeap.processcontext.plugin.api.message.PayloadExtractor;
 import ch.admin.bit.jme.document.JmeDocumentReviewedEventPayload;
 
 import java.util.Set;

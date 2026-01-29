@@ -9,10 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * If the repository would be a real JPA repository, it would be important to commit the transaction before
- * acknowledging the event (see {@link ch.admin.bit.jeap.jme.processcontext.kafka.EventConsumer})
- */
 @Component
 @Transactional
 @RequiredArgsConstructor
@@ -44,11 +40,6 @@ public class TestProcessService {
 
     public Optional<Process> findById(String processId) {
         return testProcessRepository.findById(processId, Process.class);
-    }
-
-    public void processCompleted(String processId) {
-        TestProcess testProcess = testProcessRepository.findById(processId, TestProcess.class).orElseThrow();
-        testProcess.completed();
     }
 
     public void raceControlpointPassed(String processId, String controlPoint) {

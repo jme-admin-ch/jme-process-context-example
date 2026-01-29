@@ -8,7 +8,7 @@ import ch.admin.bit.jeap.processcontext.plugin.api.context.ProcessContext;
 public class TooManyMaintenanceStopsProcessCompletionCondition implements ProcessCompletionCondition {
     @Override
     public ProcessCompletionConditionResult isProcessCompleted(ProcessContext processContext) {
-        if (processContext.getEventsByName("JmeRaceCarMaintenanceRequiredEvent").size() > 2) {
+        if (processContext.countMessagesByType("JmeRaceCarMaintenanceRequiredEvent") > 2) {
             return ProcessCompletionConditionResult.completedBuilder()
                     .conclusion(ProcessCompletionConclusion.CANCELLED)
                     .name("tooManyMaintenanceStopsProcessCompletionCondition")

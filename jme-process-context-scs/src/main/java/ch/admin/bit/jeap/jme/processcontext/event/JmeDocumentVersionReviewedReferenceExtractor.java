@@ -1,7 +1,7 @@
 package ch.admin.bit.jeap.jme.processcontext.event;
 
-import ch.admin.bit.jeap.processcontext.plugin.api.event.MessageData;
-import ch.admin.bit.jeap.processcontext.plugin.api.event.ReferenceExtractor;
+import ch.admin.bit.jeap.processcontext.plugin.api.message.MessageData;
+import ch.admin.bit.jeap.processcontext.plugin.api.message.ReferenceExtractor;
 import ch.admin.bit.jme.document.JmeDocumentVersionReviewedEventReferences;
 
 import java.util.Collections;

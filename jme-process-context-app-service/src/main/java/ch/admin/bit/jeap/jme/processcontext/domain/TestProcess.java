@@ -13,7 +13,6 @@ public class TestProcess implements Process {
 
     private final MessagePublisher messagePublisher;
     private final String id;
-    private boolean processCompleted = false;
 
     public static TestProcess create(MessagePublisher messagePublisher, String id, String raceCarNumber) {
         TestProcess testProcess = new TestProcess(messagePublisher, id);
@@ -67,10 +66,6 @@ public class TestProcess implements Process {
 
     public void raceDestinationReached() {
         messagePublisher.raceDestinationReached(id);
-    }
-
-    public void completed() {
-        processCompleted = true;
     }
 
     public void raceValidated() {

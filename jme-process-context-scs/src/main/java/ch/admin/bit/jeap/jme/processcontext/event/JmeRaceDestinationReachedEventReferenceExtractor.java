@@ -1,8 +1,8 @@
 package ch.admin.bit.jeap.jme.processcontext.event;
 
 import ch.admin.bit.jeap.jme.processcontext.event.race.destination.reached.JmeRaceDestinationReachedEventReferences;
-import ch.admin.bit.jeap.processcontext.plugin.api.event.MessageData;
-import ch.admin.bit.jeap.processcontext.plugin.api.event.ReferenceExtractor;
+import ch.admin.bit.jeap.processcontext.plugin.api.message.MessageData;
+import ch.admin.bit.jeap.processcontext.plugin.api.message.ReferenceExtractor;
 
 import java.util.HashSet;
 import java.util.Set;

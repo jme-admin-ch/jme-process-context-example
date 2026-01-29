@@ -77,9 +77,6 @@ Apache License Version 2.0
  * ch.admin.bit.jeap.jme.messagetype.jme:jme-race-started-event - [ch.admin.bit.jeap.jme.messagetype.jme:jme-race-started-event](https://github.com/jme-admin-ch/jme-message-type-registry/tree/main)
  * ch.admin.bit.jeap.jme.messagetype.jme:jme-race-validated-event - [ch.admin.bit.jeap.jme.messagetype.jme:jme-race-validated-event](https://github.com/jme-admin-ch/jme-message-type-registry/tree/main)
  * ch.admin.bit.jeap.jme.messagetype.jme:jme-race-weather-alert-activated-event - [ch.admin.bit.jeap.jme.messagetype.jme:jme-race-weather-alert-activated-event](https://github.com/jme-admin-ch/jme-message-type-registry/tree/main)
- * create-process-instance-command - ch.admin.bit.jeap.messagetype.jeap:create-process-instance-command
- * process-instance-completed-event - ch.admin.bit.jeap.messagetype.jeap:process-instance-completed-event
- * process-instance-created-event - ch.admin.bit.jeap.messagetype.jeap:process-instance-created-event
  * process-snapshot-created-event - ch.admin.bit.jeap.messagetype.jeap:process-snapshot-created-event
  * AWS SDK for Java - Core - [com.amazonaws:aws-java-sdk-core](https://aws.amazon.com/sdkforjava)
  * AWS Java SDK for AWS STS - [com.amazonaws:aws-java-sdk-sts](https://aws.amazon.com/sdkforjava)

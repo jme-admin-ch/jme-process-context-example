@@ -317,11 +317,6 @@
   "snapshots": [
     {
       "createdOn" : {
-        "condition" : "ch.admin.bit.jeap.jme.processcontext.condition.DestinationReachedSnapshotCondition"
-      }
-    },
-    {
-      "createdOn" : {
         "completion": "any"
       }
     }
