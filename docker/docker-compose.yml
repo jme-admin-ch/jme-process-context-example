@@ -138,8 +138,8 @@ services:
     container_name: 'jme-process-context-mc'
     entrypoint: >
       /bin/sh -c "
-      /usr/bin/mc config host add --api s3v4 minio http://minio:9000 local localsecret;
-      /usr/bin/mc mb --ignore-existing minio/jme-processcontext-obs/;
+      mc alias set minio http://minio:9000 local localsecret;
+      mc mb --ignore-existing minio/jme-processcontext-obs/;
       "
     depends_on:
       minio:
