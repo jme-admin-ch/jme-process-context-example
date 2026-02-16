@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres
 to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [${project.version}] - 2026-02-16
+
+### Dependencies
+- **ch.admin.bit.jeap:jme-process-context-example**: 1.4.4-SNAPSHOT → 1.4.4 (patch)
+- **ch.admin.bit.jeap:jme-process-context-example**: 1.4.4-SNAPSHOT → 1.4.4 (patch)
+- **ch.admin.bit.jeap:jme-process-context-example**: 1.4.4-SNAPSHOT → 1.4.4 (patch)
+- **ch.admin.bit.jeap:jme-process-context-example**: 1.4.4-SNAPSHOT → 1.4.4 (patch)
+- **ch.admin.bit.jeap:jeap-spring-boot-parent**: 30.15.0 → 30.16.0 (minor)
+
 ## [1.4.4] - 16.02.2026
 
 ### Changed
