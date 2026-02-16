@@ -9,7 +9,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Changed
 
-- Updated pcs version to 16.3.0.3-jeap-6415
+- Updated pcs version to 16.3.0.4-jeap-6415
 
 ## [1.4.3] - 12.02.2026
 
