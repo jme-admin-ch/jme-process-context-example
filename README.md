@@ -69,18 +69,15 @@ See the [jeap-process-context-service](https://github.com/jeap-admin-ch/jeap-pro
 
 To try out the application yourself and for detailed process examples with step-by-step instructions, see [PROCESS-EXAMPLES.md](./PROCESS-EXAMPLES.md).
 
-## Infrastructure for load tests
-The application `jme-process-context-app-service` can be started with an additional profile `loadtest` to generate initial
-data. This is useful for load and performance tests, as they would start with a non-empty database.
-
-When the profile is enabled, then the bean `ch.admin.bit.jeap.jme.processcontext.loadtest.InitialDataGeneratorApplicationRunner`
-would generate process instances until the target count in the database reaches the value set by property `loadtest.targetProcessInstances`. 
-Default value is 2000.
- 
 ## Profiles 
 
 * **application-local:** Contains all configurations for running the application locally.
 * **application-local-npm-ui:** Contains the configurations for connecting to the frontend.
+
+## Performance Tests
+
+See [README-PERFTESTS.md](./README-PERFTESTS.md) for information about the built-in load and performance tests for the
+process context service.
 
 ## Note
 

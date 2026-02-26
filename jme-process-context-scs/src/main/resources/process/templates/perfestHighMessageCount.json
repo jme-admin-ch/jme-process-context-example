@@ -1,0 +1,77 @@
+{
+  "name": "perfestHighMessageCount",
+  "tasks": [
+    {
+      "name": "raceStarted",
+      "observes": {
+        "message": "JmeRaceStartedEvent"
+      }
+    },
+    {
+      "name": "objectsOnRoadSpotted",
+      "observes": {
+        "message": "JmeRaceObjectsOnRoadSpottedEvent"
+      }
+    }
+  ],
+  "messages": [
+    {
+      "messageName": "JmeRaceStartedEvent",
+      "topicName": "jme-race-started",
+      "triggersProcessInstantiation": true,
+      "referenceExtractor": "ch.admin.bit.jeap.jme.processcontext.event.JmeRaceStartedEventPerfTestReferenceExtractor"
+    },
+    {
+      "messageName": "JmeRaceControlpointPassedEvent",
+      "topicName": "jme-race-controlpoint-passed",
+      "referenceExtractor": "ch.admin.bit.jeap.jme.processcontext.event.JmeRaceControlpointPassedEventPerfTestReferenceExtractor"
+    },
+    {
+      "messageName": "JmeRaceObjectsOnRoadSpottedEvent",
+      "topicName": "jme-race-objects-spotted"
+    }
+  ],
+  "processData": [
+    {
+      "key": "controlpoint",
+      "source": {
+        "message": "JmeRaceControlpointPassedEvent",
+        "messageDataKey": "controlpoint-0"
+      }
+    },
+    {
+      "key": "raceCarId",
+      "source": {
+        "message": "JmeRaceStartedEvent",
+        "messageDataKey": "raceCarId"
+      }
+    }
+  ],
+  "relationSystemId": "ch.admin.jme.Race",
+  "relationPatterns": [
+    {
+      "predicateType": "ch.admin.race.PassedControlpoint",
+      "subject": {
+        "type": "ch.admin.race.RaceCarId",
+        "selector": {
+          "processDataKey": "raceCarId",
+          "role": "RaceParticipant"
+        }
+      },
+      "object": {
+        "type": "ch.admin.jeap.race.Controlpoint",
+        "selector": {
+          "processDataKey": "controlpoint"
+        }
+      },
+      "featureFlag": "FEATURE_CONTROL_POINT"
+    }
+  ],
+  "completions": [
+    {
+      "completedBy": {
+        "condition": "ch.admin.bit.jeap.jme.processcontext.condition.AllControlPointsPassedCompletionCondition"
+      }
+    }
+  ]
+}

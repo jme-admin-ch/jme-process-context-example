@@ -15,6 +15,8 @@ spring:
   flyway:
     # Flyway creates automatically the default schema if it doesn't exist
     default-schema: ${spring.jpa.properties.hibernate.default_schema}
+  main:
+    banner-mode: off
 jeap:
   messaging:
     kafka:

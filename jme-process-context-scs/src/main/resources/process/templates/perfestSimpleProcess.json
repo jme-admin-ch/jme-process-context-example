@@ -1,0 +1,35 @@
+{
+  "name": "perfestSimpleProcess",
+  "tasks": [
+    {
+      "name": "processCreated",
+      "observes": {
+        "message": "JmeRaceValidatedEvent"
+      }
+    },
+    {
+      "name": "controlpointPassed",
+      "observes": {
+        "message": "JmeRaceControlpointPassedEvent"
+      }
+    }
+  ],
+  "messages": [
+    {
+      "messageName": "JmeRaceValidatedEvent",
+      "topicName": "jme-race-validated",
+      "triggersProcessInstantiation": true
+    },
+    {
+      "messageName": "JmeRaceControlpointPassedEvent",
+      "topicName": "jme-race-controlpoint-passed"
+    }
+  ],
+  "completions": [
+    {
+      "completedBy": {
+        "condition": "ch.admin.bit.jeap.jme.processcontext.condition.TenControlPointsPassedCompletionCondition"
+      }
+    }
+  ]
+}

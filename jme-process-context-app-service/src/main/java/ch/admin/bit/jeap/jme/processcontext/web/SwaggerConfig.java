@@ -30,7 +30,7 @@ public class SwaggerConfig {
         return GroupedOpenApi.builder()
                 .group("Race Process API")
                 .pathsToMatch("/api/raceprocess/**")
-                .packagesToScan(this.getClass().getPackageName())
+                .packagesToScan(getClass().getPackageName())
                 .build();
     }
 
@@ -39,7 +39,7 @@ public class SwaggerConfig {
         return GroupedOpenApi.builder()
                 .group("Document Process API")
                 .pathsToMatch("/api/documentprocess/**")
-                .packagesToScan(this.getClass().getPackageName())
+                .packagesToScan(getClass().getPackageName())
                 .build();
     }
 
@@ -48,8 +48,16 @@ public class SwaggerConfig {
         return GroupedOpenApi.builder()
                 .group("Process Snapshot API")
                 .pathsToMatch("/api/snapshot/**")
-                .packagesToScan(this.getClass().getPackageName())
+                .packagesToScan(getClass().getPackageName())
                 .build();
     }
 
+    @Bean
+    GroupedOpenApi perfTestApi() {
+        return GroupedOpenApi.builder()
+                .group("Performance Test API")
+                .pathsToMatch("/api/perftests/**")
+                .packagesToScan(getClass().getPackageName() + ".perftest")
+                .build();
+    }
 }

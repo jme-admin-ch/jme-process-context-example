@@ -2,7 +2,7 @@
 services:
 
   jeap-process-context-service-db-local:
-    image: postgres:18.2
+    image: postgres:18.2-alpine
     ports:
       - "5432:5432"
     environment:
@@ -15,7 +15,7 @@ services:
   ############################################
 
   cluster1-broker:
-    image: confluentinc/cp-kafka:7.7.7
+    image: confluentinc/cp-kafka:8.1.1
     hostname: cluster1-broker
     container_name: cluster1-broker
     ports:
@@ -43,13 +43,13 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
   cluster1-broker_init:
-    image: confluentinc/cp-kafka:7.7.7
+    image: confluentinc/cp-kafka:8.1.1
     command: "kafka-configs --bootstrap-server cluster1-broker:29092 --alter --add-config 'SCRAM-SHA-512=[password=user-secret]' --entity-type users --entity-name user"
     depends_on:
       - cluster1-broker
 
   cluster1-schema-registry:
-    image: confluentinc/cp-schema-registry:7.7.7
+    image: confluentinc/cp-schema-registry:8.1.1
     hostname: cluster1-schema-registry
     container_name: cluster1-schema-registry
     depends_on:
@@ -66,7 +66,7 @@ services:
   ############################################
 
   cluster2-broker:
-    image: confluentinc/cp-kafka:7.7.7
+    image: confluentinc/cp-kafka:8.1.1
     hostname: cluster2-broker
     container_name: cluster2-broker
     ports:
@@ -94,13 +94,13 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
   cluster2-broker_init:
-    image: confluentinc/cp-kafka:7.7.7
+    image: confluentinc/cp-kafka:8.1.1
     command: "kafka-configs --bootstrap-server cluster2-broker:29092 --alter --add-config 'SCRAM-SHA-512=[password=cluster2-secret]' --entity-type users --entity-name cluster2-user"
     depends_on:
       - cluster2-broker
 
   cluster2-schema-registry:
-    image: confluentinc/cp-schema-registry:7.7.7
+    image: confluentinc/cp-schema-registry:8.1.1
     hostname: cluster2-schema-registry
     container_name: cluster2-schema-registry
     depends_on:

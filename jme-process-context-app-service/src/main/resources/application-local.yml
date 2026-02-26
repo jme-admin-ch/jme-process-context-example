@@ -36,6 +36,15 @@ spring:
     url: "jdbc:postgresql://localhost:5432/jme-process-context-service-db-local"
     username: "postgres"
     password: "secret"
+    hikari:
+      schema: data
+  jpa:
+    properties:
+      hibernate:
+        default_schema: data
 
 example:
   processContextUrl: "http://localhost:8080/process-context"
+
+logging.level:
+  ch.admin.bit.jeap.messaging.kafka.log: WARN

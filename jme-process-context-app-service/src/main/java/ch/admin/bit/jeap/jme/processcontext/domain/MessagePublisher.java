@@ -1,12 +1,16 @@
 package ch.admin.bit.jeap.jme.processcontext.domain;
 
+import ch.admin.bit.jeap.jme.processcontext.event.race.carmaintenance.refuelling.completed.JmeRaceCarRefuellingCompletedEvent;
+import ch.admin.bit.jeap.jme.processcontext.event.race.started.JmeRaceStartedEvent;
+import ch.admin.bit.jeap.jme.processcontext.event.race.validated.JmeRaceValidatedEvent;
+
 import java.util.List;
 
 public interface MessagePublisher {
 
     void racePrepared(String processId, String raceId, String raceCarNumber);
 
-    void raceStarted(String processId, String raceId, String raceCarId, String weatherAlertSubject);
+    JmeRaceStartedEvent raceStarted(String processId, String raceId, String raceCarId, String weatherAlertSubject);
 
     void raceControlpointPassed(String processId, String controlPoint);
 
@@ -20,7 +24,7 @@ public interface MessagePublisher {
 
     void carMaintenanceRequired(String processId, String maintenanceId);
 
-    void carRefuellingCompleted(String processId);
+    JmeRaceCarRefuellingCompletedEvent carRefuellingCompleted(String processId);
 
     void carTirePressureChecked(String processId, String maintenanceId, String tireDescription);
 
@@ -32,7 +36,7 @@ public interface MessagePublisher {
 
     void raceCarPostChecksPlanned(String processId, List<String> postChecks);
 
-    void raceValidated(String id);
+    JmeRaceValidatedEvent raceValidated(String id);
 
     void cancelRace(String processId, String raceId);
 

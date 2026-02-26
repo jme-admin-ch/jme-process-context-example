@@ -6,7 +6,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
 
 @Configuration
 public class WebSecurityConfiguration {
@@ -14,7 +14,7 @@ public class WebSecurityConfiguration {
     @Bean
     @Order(100) // same as on the deprecated WebSecurityConfigurerAdapter
     public SecurityFilterChain apiSecurityFilterChain(HttpSecurity http) throws Exception {
-        http.securityMatcher(new AntPathRequestMatcher("/api/**"))
+        http.securityMatcher(PathPatternRequestMatcher.withDefaults().matcher("/api/**"))
                 .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
                         .anyRequest().permitAll());
         http.csrf(AbstractHttpConfigurer::disable);

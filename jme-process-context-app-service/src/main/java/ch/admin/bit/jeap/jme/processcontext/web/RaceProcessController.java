@@ -1,6 +1,5 @@
 package ch.admin.bit.jeap.jme.processcontext.web;
 
-import ch.admin.bit.jeap.jme.processcontext.db.StatisticService;
 import ch.admin.bit.jeap.jme.processcontext.domain.TestProcess;
 import ch.admin.bit.jeap.jme.processcontext.domain.TestProcessService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 class RaceProcessController {
 
     private final TestProcessService testProcessService;
-    private final StatisticService statisticService;
 
     @GetMapping("{processId}")
     @Operation(summary = "Get an existing test process", responses = @ApiResponse(responseCode = "200", description = "Found"))
@@ -131,10 +129,5 @@ class RaceProcessController {
     @Operation(summary = "Produce JmeRaceObjectsOnTheRoadSpottedEvent", responses = @ApiResponse(responseCode = "200", description = "Event produced successfully"))
     public void objectsOnTheRoadSpotted(@PathVariable("processId") String processId, @RequestParam(name = "triggerSafetyCar", defaultValue = "false") String triggerSafetyCar) {
         testProcessService.objectsOnTheRoadSpotted(processId, Boolean.parseBoolean(triggerSafetyCar));
-    }
-
-    @GetMapping("countInstances")
-    public StatisticDto countInstances() {
-        return statisticService.countRows();
     }
 }

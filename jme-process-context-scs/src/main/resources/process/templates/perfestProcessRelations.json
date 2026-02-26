@@ -1,0 +1,44 @@
+{
+  "name": "perfestProcessRelations",
+  "processRelationPatterns": [
+    {
+      "name": "processRelation",
+      "roleType": "target",
+      "originRole": "test origin",
+      "targetRole": "test target",
+      "visibility": "both",
+      "source": {
+        "messageName": "JmeCancelRaceCommand",
+        "messageDataKey": "relatedProcessId"
+      }
+    }
+  ],
+  "tasks": [
+    {
+      "name": "processCreated",
+      "lifecycle": "static",
+      "completedBy": {
+        "message": "JmeRaceCarRefuellingCompletedEvent"
+      }
+    },
+    {
+      "name": "raceCancelled",
+      "lifecycle": "static",
+      "completedBy": {
+        "message": "JmeCancelRaceCommand"
+      }
+    }
+  ],
+  "messages": [
+    {
+      "messageName": "JmeRaceCarRefuellingCompletedEvent",
+      "topicName": "jme-race-refuelling-completed",
+      "triggersProcessInstantiation": true
+    },
+    {
+      "messageName": "JmeCancelRaceCommand",
+      "topicName": "jme-race-cancelrace",
+      "referenceExtractor": "ch.admin.bit.jeap.jme.processcontext.command.JmeCancelRaceCommandPerfTestReferenceExtractor"
+    }
+  ]
+}

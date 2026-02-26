@@ -240,6 +240,7 @@ Apache License Version 2.0
  * ASM based accessors helper used by json-smart - [net.minidev:accessors-smart](https://urielch.github.io/)
  * JSON Small and Fast Parser - [net.minidev:json-smart](https://urielch.github.io/)
  * UrlEncoder for Kotlin Multiplatform - [net.thauvin.erik.urlencoder:urlencoder-lib-jvm](https://github.com/ethauvin/urlencoder)
+* OGNL - Object Graph Navigation Library - [ognl:ognl](https://github.com/jkuhnert/ognl/)
  * Apache Avro - [org.apache.avro:avro](https://avro.apache.org)
  * Apache Commons Collections - [org.apache.commons:commons-collections4](https://commons.apache.org/proper/commons-collections/)
  * Apache Commons Compress - [org.apache.commons:commons-compress](https://commons.apache.org/proper/commons-compress/)
@@ -289,6 +290,7 @@ Apache License Version 2.0
  * flyway-database-postgresql - [org.flywaydb:flyway-database-postgresql](https://flywaydb.org/flyway-database-postgresql)
  * Hibernate Commons Annotations - [org.hibernate.common:hibernate-commons-annotations](http://hibernate.org)
  * Hibernate Validator Engine - [org.hibernate.validator:hibernate-validator](https://hibernate.org/validator)
+* Javassist - [org.javassist:javassist](http://www.javassist.org/)
  * Javassist - [org.javassist:javassist](http://www.javassist.org/)
  * JBoss Logging 3 - [org.jboss.logging:jboss-logging](http://www.jboss.org)
  * IntelliJ IDEA Annotations - [org.jetbrains:annotations](http://www.jetbrains.org)
@@ -552,6 +554,7 @@ LGPL 2.1
 -------------------------------
 
  * Javassist - [org.javassist:javassist](http://www.javassist.org/)
+* Javassist - [org.javassist:javassist](http://www.javassist.org/)
 
 MIT License
 -------------------------------
@@ -580,6 +583,7 @@ MIT License
 MPL 1.1
 -------------------------------
 
+* Javassist - [org.javassist:javassist](http://www.javassist.org/)
  * Javassist - [org.javassist:javassist](http://www.javassist.org/)
 
 Mozilla Public License, Version 2.0

@@ -26,11 +26,6 @@ public class JmeRaceControlpointPassedEventBuilder extends AbstractTestEventBuil
     }
 
     @Override
-    protected final String getEventVersion() {
-        return "1.1.0";
-    }
-
-    @Override
     public JmeRaceControlpointPassedEvent build() {
         if (controlPoint == null) {
             throw AvroMessageBuilderException.propertyNull("controlPoint");

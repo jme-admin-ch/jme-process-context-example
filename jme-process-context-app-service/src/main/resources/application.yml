@@ -20,9 +20,18 @@ spring:
       schema: ${spring.jpa.properties.hibernate.default_schema}
       maximum-pool-size: 5
       pool-name: "hikari-cp-${spring.application.name}"
+  main:
+    banner-mode: off
+  thymeleaf:
+    check-template-location: false
 server:
   servlet:
     context-path: /${spring.application.name}
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
 jeap:
   messaging:
     kafka:
@@ -33,7 +42,6 @@ example:
   topic:
     # Process Context Service
     process-completed: "jme-process-instance-completed"
-    create-process-instance: "jme-process-createprocessinstance"
     # Race process
     race-started: "jme-race-started"
     race-validated: "jme-race-validated"

@@ -31,6 +31,7 @@ import ch.admin.bit.jme.document.JmeDocumentVersionCreatedEvent;
 import ch.admin.bit.jme.document.JmeDocumentVersionReviewedEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Primary;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
@@ -44,12 +45,13 @@ import java.util.concurrent.ExecutionException;
  * Component to publish to event for the process context service, updating the according test process
  */
 @Component
+@Primary
 @Slf4j
 class KafkaMessagePublisher implements MessagePublisher {
 
-    private final KafkaTemplate<AvroMessageKey, AvroMessage> bitClusterTemplate;
+    protected final KafkaTemplate<AvroMessageKey, AvroMessage> bitClusterTemplate;
 
-    private final KafkaTemplate<AvroMessageKey, AvroMessage> otherClusterTemplate;
+    protected final KafkaTemplate<AvroMessageKey, AvroMessage> otherClusterTemplate;
 
     private final TopicConfiguration topicConfiguration;
 
@@ -69,12 +71,10 @@ class KafkaMessagePublisher implements MessagePublisher {
         send(command, topic, null);
     }
 
-    private void send(final AvroMessage message, String topic, String cluster) {
+    protected void send(final AvroMessage message, String topic, String cluster) {
         log.debug("sending message='{}' with null key", message);
         try {
-            if (cluster == null) {
-                bitClusterTemplate.send(topic, message).get();
-            } else if ("other".equalsIgnoreCase(cluster)){
+            if ("other".equalsIgnoreCase(cluster)) {
                 otherClusterTemplate.send(topic, message).get();
             } else {
                 bitClusterTemplate.send(topic, message).get();
@@ -98,7 +98,7 @@ class KafkaMessagePublisher implements MessagePublisher {
     }
 
     @Override
-    public void raceStarted(String processId, String raceId, String raceCarId, String weatherAlertSubject) {
+    public JmeRaceStartedEvent raceStarted(String processId, String raceId, String raceCarId, String weatherAlertSubject) {
         final AvroDomainEventUser eventUser = AvroDomainEventUser.newBuilder()
                 .setFamilyName("Starter")
                 .setGivenName("Max")
@@ -113,6 +113,7 @@ class KafkaMessagePublisher implements MessagePublisher {
                 .user(eventUser)
                 .build();
         send(event, topicConfiguration.getRaceStarted());
+        return event;
     }
 
     @Override
@@ -195,13 +196,14 @@ class KafkaMessagePublisher implements MessagePublisher {
     }
 
     @Override
-    public void carRefuellingCompleted(String processId) {
+    public JmeRaceCarRefuellingCompletedEvent carRefuellingCompleted(String processId) {
         JmeRaceCarRefuellingCompletedEvent event = JmeRaceCarRefuellingCompletedEventBuilder.create(processId)
                 .idempotenceId(UUID.randomUUID().toString())
                 .fuelType("gasoline")
                 .fuelAmount(65)
                 .build();
         send(event, topicConfiguration.getRaceCarRefuellingCompleted());
+        return event;
     }
 
     @Override
@@ -251,7 +253,7 @@ class KafkaMessagePublisher implements MessagePublisher {
     }
 
     @Override
-    public void raceValidated(String processId) {
+    public JmeRaceValidatedEvent raceValidated(String processId) {
         final AvroDomainEventUser eventUser = AvroDomainEventUser.newBuilder()
                 .setFamilyName("Validator")
                 .setGivenName("Joe")
@@ -263,6 +265,7 @@ class KafkaMessagePublisher implements MessagePublisher {
                 .user(eventUser)
                 .build();
         send(event, topicConfiguration.getRaceValidated());
+        return event;
     }
 
     @Override
