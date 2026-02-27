@@ -4,8 +4,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 
 import java.time.Duration;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -60,20 +61,34 @@ class LoadGeneratorTest {
     void generate_burst_stopsOnInterrupt() throws Exception {
         int count = 10_000;
         CountDownLatch started = new CountDownLatch(1);
+        CountDownLatch gate = new CountDownLatch(1);
         AtomicInteger invocations = new AtomicInteger(0);
 
-        Future<?> future = CompletableFuture.runAsync(() ->
-                loadGenerator.generateBurst(count, _ -> {
-                    started.countDown();
-                    invocations.incrementAndGet();
-                }));
+        ExecutorService runner = Executors.newSingleThreadExecutor();
+        try {
+            Future<?> future = runner.submit(() ->
+                    loadGenerator.generateBurst(count, i -> {
+                        invocations.incrementAndGet();
+                        if (i == 0) {
+                            started.countDown();
+                            try {
+                                gate.await();
+                            } catch (InterruptedException e) {
+                                Thread.currentThread().interrupt();
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    }));
 
-        started.await();
-        future.cancel(true);
+            started.await();
+            future.cancel(true);
 
-        assertThrows(Exception.class, future::get);
-        assertTrue(invocations.get() < count,
-                "Expected fewer than %d invocations but got %d".formatted(count, invocations.get()));
+            assertThrows(Exception.class, future::get);
+            assertTrue(invocations.get() < count,
+                    "Expected fewer than %d invocations but got %d".formatted(count, invocations.get()));
+        } finally {
+            runner.shutdownNow();
+        }
     }
 
     @Test
@@ -84,17 +99,22 @@ class LoadGeneratorTest {
         CountDownLatch started = new CountDownLatch(1);
         AtomicInteger invocations = new AtomicInteger(0);
 
-        Future<?> future = CompletableFuture.runAsync(() ->
-                loadGenerator.generateDistributedOverTime(count, duration, _ -> {
-                    started.countDown();
-                    invocations.incrementAndGet();
-                }));
+        ExecutorService runner = Executors.newSingleThreadExecutor();
+        try {
+            Future<?> future = runner.submit(() ->
+                    loadGenerator.generateDistributedOverTime(count, duration, _ -> {
+                        started.countDown();
+                        invocations.incrementAndGet();
+                    }));
 
-        started.await();
-        future.cancel(true);
+            started.await();
+            future.cancel(true);
 
-        assertThrows(Exception.class, future::get);
-        assertTrue(invocations.get() < count,
-                "Expected fewer than %d invocations but got %d".formatted(count, invocations.get()));
+            assertThrows(Exception.class, future::get);
+            assertTrue(invocations.get() < count,
+                    "Expected fewer than %d invocations but got %d".formatted(count, invocations.get()));
+        } finally {
+            runner.shutdownNow();
+        }
     }
 }

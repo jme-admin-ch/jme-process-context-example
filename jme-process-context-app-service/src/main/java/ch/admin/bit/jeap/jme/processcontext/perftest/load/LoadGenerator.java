@@ -33,6 +33,11 @@ public class LoadGenerator {
      * Executes all {@code count} items as fast as possible using up to {@code concurrency} threads.
      */
     public void generateBurst(int count, IntConsumer task) {
+        if (count == 0) {
+            log.info("No load to generate (count is zero)");
+            return;
+        }
+
         log.info("Generating load with concurrency: {}, count: {}", concurrency, count);
         int threads = Math.min(concurrency, count);
         AtomicInteger actualCount = new AtomicInteger(0);
@@ -46,6 +51,11 @@ public class LoadGenerator {
      * if the duration is zero or negative. Logs progress every 15 seconds.
      */
     public void generateDistributedOverTime(int count, Duration duration, IntConsumer task) {
+        if (count == 0) {
+            log.info("No load to generate (count is zero)");
+            return;
+        }
+
         if (duration.isZero() || duration.isNegative()) {
             generateBurst(count, task);
             return;

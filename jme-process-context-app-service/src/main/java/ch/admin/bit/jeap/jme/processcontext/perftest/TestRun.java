@@ -114,8 +114,9 @@ public class TestRun {
         return (int) Objects.requireNonNullElse(parameters.get(parameterName), defaultValue);
     }
 
-    public void assertRelationCount(int expectedRelationCount) {
+    public void assertRelationCountPerProcess(int expectedRelationCountPerProcess) {
         int totalRelationCount = testProcessInstanceRepository.getTotalRelationCount(processInstances);
+        int expectedRelationCount = expectedRelationCountPerProcess * processInstances.size();
         testReport.addMessage("Total relation count: %d, expected relation count: %d"
                 .formatted(totalRelationCount, expectedRelationCount));
         if (totalRelationCount != expectedRelationCount) {

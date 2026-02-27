@@ -3,6 +3,7 @@ package ch.admin.bit.jeap.jme.processcontext.perftest;
 import ch.admin.bit.jeap.jme.processcontext.perftest.report.HtmlTestReporter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +19,7 @@ public class PerfTestService {
 
     private final PerfTestHarness harness;
     private final TestProcessInstanceRepository testProcessInstanceRepository;
+    @Qualifier("applicationTaskExecutor")
     private final AsyncTaskExecutor taskExecutor;
     private final Map<UUID, TestRun> testRuns = new ConcurrentHashMap<>();
     private final Map<UUID, Future<?>> testRunFutures = new ConcurrentHashMap<>();

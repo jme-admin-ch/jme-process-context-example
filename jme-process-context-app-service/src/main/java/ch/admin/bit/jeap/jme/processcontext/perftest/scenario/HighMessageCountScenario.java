@@ -75,7 +75,7 @@ public class HighMessageCountScenario implements TestScenario {
         // process completion as a verification of message processing.
 
         // The perfestHighMessageCount template creates a relation for each control point passed message
-        testRun.assertRelationCount(messagePerProcessCount);
+        testRun.assertRelationCountPerProcess(messagePerProcessCount);
     }
 
     private String createProcessInstance(TestRun testRun) {
