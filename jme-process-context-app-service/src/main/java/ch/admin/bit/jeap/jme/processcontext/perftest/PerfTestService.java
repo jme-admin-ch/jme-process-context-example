@@ -29,12 +29,12 @@ public class PerfTestService {
      * The test run is stored in an in-memory map for later retrieval of its status and results.
      */
     public void startTestAsync(UUID id, TestScenarioType scenario, Map<String, Object> parameters, Duration timeout, boolean clearDatabase) {
+        evictOldestTestRuns(20);
         TestRun testRun = new TestRun(testProcessInstanceRepository, id, scenario, parameters, timeout, clearDatabase);
         testRuns.put(id, testRun);
         log.info("Created test run {} for scenario {} with parameters {}", testRun.getId(), scenario, parameters);
         Future<?> future = taskExecutor.submit(() -> {
             harness.execute(testRun);
-            testRun.reset(); // clear process instance and message data from run
         });
         testRunFutures.put(id, future);
     }
@@ -67,6 +67,21 @@ public class PerfTestService {
         return getTestRun(testRunId)
                 .map(TestRun::getTestReport)
                 .map(HtmlTestReporter::generateReport);
+    }
+
+    private void evictOldestTestRuns(int maxSize) {
+        if (testRuns.size() <= maxSize) {
+            return;
+        }
+        testRuns.entrySet().stream()
+                .sorted(Comparator.comparing(e -> e.getValue().getCreatedAt()))
+                .limit(testRuns.size() - maxSize)
+                .map(Map.Entry::getKey)
+                .toList()
+                .forEach(id -> {
+                    testRuns.remove(id);
+                    testRunFutures.remove(id);
+                });
     }
 
     public Optional<UUID> getLatestTestRunId() {
