@@ -127,7 +127,7 @@ class TestProcessInstanceRepository {
     @SuppressWarnings("DataFlowIssue")
     private int countRelations(List<String> originProcessIds) {
         return jdbcTemplate.query(
-                "select count(*) as counter from process_instance pi where pi.origin_process_id in (:ids)",
+                "select count(*) as counter from process_instance_relations r where r.process_instance_id in (select id from process_instance pi where pi.origin_process_id in (:ids))",
                 new MapSqlParameterSource("ids", originProcessIds),
                 (rs) -> {
                     rs.next();
