@@ -38,6 +38,7 @@ public class HtmlTestReporter {
         context.setVariable("completionTimeSeriesJson", formatCountTimeSeries(ts, Bucket::getCompleted));
         context.setVariable("creationDurationTimeSeriesJson", formatDurationTimeSeries(ts, Bucket::getCreationDuration));
         context.setVariable("completionDurationTimeSeriesJson", formatDurationTimeSeries(ts, Bucket::getCompletionDuration));
+        context.setVariable("failureMessage", testReport.getFailureMessage());
         context.setVariable("messages", testReport.getMessages());
         return TEMPLATE_ENGINE.process("report/perftests-report.template", context);
     }

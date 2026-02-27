@@ -35,6 +35,7 @@ public class TestReport {
     Stats completionStats;
     TimeSeries statsTimeSeries;
     int totalMessages;
+    String failureMessage;
     @Builder.Default
     List<String> messages = new ArrayList<>();
 
@@ -60,6 +61,7 @@ public class TestReport {
                 .completionStats(buildCompletionStats(processInstances, completionCount))
                 .statsTimeSeries(TimeSeries.of(testRun))
                 .totalMessages(testRun.getMessageCount())
+                .failureMessage(testRun.getErrorMessage())
                 .build();
     }
 

@@ -93,6 +93,7 @@
     <h2>Summary</h2>
     <table class="summary-table">
         <tr><th>Status</th><td><span class="badge" th:text="${status}">COMPLETED</span></td></tr>
+        <tr th:if="${failureMessage != null}"><th>Failure message</th><td th:text="${failureMessage}">Error details</td></tr>
         <tr><th>Warm-up started at</th><td th:text="${warmUpStartedAt}">2026-02-24 08:55:00</td></tr>
         <tr><th>Started at</th><td th:text="${startedAt}">2026-02-24 09:00:00</td></tr>
         <tr><th>Finished at</th><td th:text="${finishedAt}">2026-02-24 10:00:00</td></tr>
