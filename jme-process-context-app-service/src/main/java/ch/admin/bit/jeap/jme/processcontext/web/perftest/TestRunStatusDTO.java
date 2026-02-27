@@ -3,7 +3,6 @@ package ch.admin.bit.jeap.jme.processcontext.web.perftest;
 import ch.admin.bit.jeap.jme.processcontext.perftest.TestRun;
 import ch.admin.bit.jeap.jme.processcontext.perftest.TestRunStatus;
 import ch.admin.bit.jeap.jme.processcontext.perftest.TestScenarioType;
-import ch.admin.bit.jeap.jme.processcontext.perftest.report.TestReport;
 import lombok.Value;
 
 import java.time.Duration;
@@ -24,7 +23,6 @@ public class TestRunStatusDTO {
     Map<String, Object> parameters;
     Duration timeout;
     String errorMessage;
-    TestReport testReport;
 
     public static TestRunStatusDTO fromTestRun(TestRun testRun) {
         return new TestRunStatusDTO(
@@ -38,7 +36,6 @@ public class TestRunStatusDTO {
                 testRun.getProcessInstances().size(),
                 testRun.getParameters(),
                 testRun.getTimeout(),
-                testRun.getErrorMessage(),
-                testRun.getTestReport());
+                testRun.getErrorMessage());
     }
 }

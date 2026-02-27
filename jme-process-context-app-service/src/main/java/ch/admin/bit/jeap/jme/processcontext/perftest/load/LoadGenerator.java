@@ -62,38 +62,54 @@ public class LoadGenerator {
                 sleepUntilScheduled(startTime, j, intervalMs);
                 task.accept(j);
             }, actualCount);
+        } catch (RuntimeException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
         long elapsedMs = (System.nanoTime() - startTime) / 1_000_000;
         log.info("Rate-limited load generation completed, actual count: {}, elapsed: {}ms", actualCount.get(), elapsedMs);
     }
 
-    private static ScheduledExecutorService startProgressLogger(int count, AtomicInteger actualCount) {
+    private static AutoCloseable startProgressLogger(int count, AtomicInteger actualCount) {
         ScheduledExecutorService progressLogger = Executors.newSingleThreadScheduledExecutor();
         progressLogger.scheduleAtFixedRate(
                 () -> log.info("Load generation progress: {}/{} ({}%)", actualCount.get(), count, actualCount.get() * 100 / count),
                 15, 15, TimeUnit.SECONDS);
-        return progressLogger;
+        return progressLogger::shutdownNow;
     }
 
     private void distribute(int count, int threads, IntConsumer itemTask, AtomicInteger actualCount) {
-        try (ExecutorService executor = Executors.newFixedThreadPool(threads)) {
+        ExecutorService executor = Executors.newFixedThreadPool(threads);
+        try {
             var futures = IntStream.range(0, threads)
                     .mapToObj(threadIndex -> executor.submit(
                             () -> executePartition(threadIndex, count, threads, itemTask, actualCount)))
                     .toList();
             awaitAll(futures);
+        } catch (RuntimeException e) {
+            executor.shutdownNow();
+            throw e;
+        } finally {
+            executor.close();
         }
     }
 
     private static void executePartition(int threadIndex, int count, int threads,
                                          IntConsumer itemTask, AtomicInteger actualCount) {
         for (int j = threadIndex; j < count; j += threads) {
+            if (Thread.currentThread().isInterrupted()) {
+                throw new RuntimeException("Load generation interrupted");
+            }
             itemTask.accept(j);
             actualCount.incrementAndGet();
         }
     }
 
     private static void sleepUntilScheduled(long startNanos, int itemIndex, double intervalMs) {
+        if (Thread.currentThread().isInterrupted()) {
+            throw new RuntimeException("Rate-limited load generation interrupted");
+        }
         long scheduledNanos = startNanos + (long) (itemIndex * intervalMs * 1_000_000);
         long sleepNanos = scheduledNanos - System.nanoTime();
         if (sleepNanos > 0) {

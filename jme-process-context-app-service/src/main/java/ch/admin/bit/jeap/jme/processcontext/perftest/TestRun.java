@@ -63,6 +63,15 @@ public class TestRun {
         this.errorMessage = errorMessage;
     }
 
+    void cancel() {
+        this.finishedAt = LocalDateTime.now();
+        this.status = TestRunStatus.CANCELLED;
+    }
+
+    boolean isTerminal() {
+        return status == TestRunStatus.COMPLETED || status == TestRunStatus.FAILED || status == TestRunStatus.CANCELLED;
+    }
+
     public void recordCreatedProcess(TestProcessInstance processInstance) {
         processInstances.add(processInstance);
     }

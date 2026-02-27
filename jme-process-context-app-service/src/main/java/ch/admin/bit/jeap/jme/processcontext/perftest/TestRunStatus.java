@@ -5,5 +5,6 @@ public enum TestRunStatus {
     WARMING_UP,
     RUNNING,
     COMPLETED,
-    FAILED
+    FAILED,
+    CANCELLED
 }

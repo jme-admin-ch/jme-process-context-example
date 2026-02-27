@@ -1,12 +1,15 @@
 package ch.admin.bit.jeap.jme.processcontext.perftest.load;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
 import java.time.Duration;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class LoadGeneratorTest {
 
@@ -50,5 +53,48 @@ class LoadGeneratorTest {
         loadGenerator.generateBurst(count, _ -> invocations.incrementAndGet());
 
         assertEquals(count, invocations.get());
+    }
+
+    @Test
+    @Timeout(60)
+    void generate_burst_stopsOnInterrupt() throws Exception {
+        int count = 10_000;
+        CountDownLatch started = new CountDownLatch(1);
+        AtomicInteger invocations = new AtomicInteger(0);
+
+        Future<?> future = CompletableFuture.runAsync(() ->
+                loadGenerator.generateBurst(count, _ -> {
+                    started.countDown();
+                    invocations.incrementAndGet();
+                }));
+
+        started.await();
+        future.cancel(true);
+
+        assertThrows(Exception.class, future::get);
+        assertTrue(invocations.get() < count,
+                "Expected fewer than %d invocations but got %d".formatted(count, invocations.get()));
+    }
+
+    @Test
+    @Timeout(60)
+    void generate_rateLimited_stopsOnInterrupt() throws Exception {
+        int count = 10_000;
+        Duration duration = Duration.ofMinutes(10);
+        CountDownLatch started = new CountDownLatch(1);
+        AtomicInteger invocations = new AtomicInteger(0);
+
+        Future<?> future = CompletableFuture.runAsync(() ->
+                loadGenerator.generateDistributedOverTime(count, duration, _ -> {
+                    started.countDown();
+                    invocations.incrementAndGet();
+                }));
+
+        started.await();
+        future.cancel(true);
+
+        assertThrows(Exception.class, future::get);
+        assertTrue(invocations.get() < count,
+                "Expected fewer than %d invocations but got %d".formatted(count, invocations.get()));
     }
 }

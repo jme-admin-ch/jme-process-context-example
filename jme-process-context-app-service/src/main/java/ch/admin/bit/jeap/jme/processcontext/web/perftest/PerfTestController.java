@@ -15,12 +15,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 @Tag(name = "PerfTest", description = "Performance test driver for the Process Context Service")
 @RestController
-@RequestMapping("/api/perftests/")
+@RequestMapping("/api/perftests")
 @RequiredArgsConstructor
 @Slf4j
 class PerfTestController {
@@ -97,6 +98,26 @@ class PerfTestController {
         var dto = new TestRunDTO(testRunId, "/api/perftests/%s/report".formatted(testRunId), "/api/perftests/%s".formatted(testRunId));
         return ResponseEntity.status(HttpStatus.ACCEPTED)
                 .body(dto);
+    }
+
+    @GetMapping
+    @Operation(summary = "List all test runs with their status",
+            responses = @ApiResponse(responseCode = "200", description = "List of test runs"))
+    public List<TestRunStatusDTO> listTestRuns() {
+        return perfTestService.getAllTestRuns().stream()
+                .map(TestRunStatusDTO::fromTestRun)
+                .toList();
+    }
+
+    @DeleteMapping("{testRunId}")
+    @Operation(summary = "Cancel a running performance test",
+            responses = {
+                    @ApiResponse(responseCode = "204", description = "Test run cancelled"),
+                    @ApiResponse(responseCode = "404", description = "Test run not found or already finished")
+            })
+    public ResponseEntity<Void> cancelTestRun(@PathVariable("testRunId") UUID testRunId) {
+        boolean cancelled = perfTestService.cancelTestRun(testRunId);
+        return cancelled ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 
     @GetMapping("latest")
