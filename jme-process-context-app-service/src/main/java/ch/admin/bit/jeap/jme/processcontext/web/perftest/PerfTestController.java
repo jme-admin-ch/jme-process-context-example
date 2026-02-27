@@ -57,7 +57,7 @@ class PerfTestController {
                     @ApiResponse(responseCode = "202", description = "Test run accepted and started"),
                     @ApiResponse(responseCode = "400", description = "Invalid request")
             })
-    public ResponseEntity<TestRunDTO> startHighMessageCountTest(@RequestParam(value = "processCount", defaultValue = "100") int processCount,
+    public ResponseEntity<TestRunDTO> startSimpleProcessTest(@RequestParam(value = "processCount", defaultValue = "100") int processCount,
                                                                 @RequestParam(value = "warmUpProcessCount", defaultValue = "5") int warmUpProcessCount,
                                                                 @RequestParam(value = "durationMinutes", defaultValue = "0") int durationMinutes,
                                                                 @RequestParam(value = "timeoutMinutes", defaultValue = "10") int timeoutMinutes,
