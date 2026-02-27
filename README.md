@@ -9,36 +9,61 @@ This example shows how to use the process context service. It contains the follo
   application. Note: In a real life situation, an application will consist of several microservices.
   To simplify the example there is only one here.
 
+This example project show how to use the [jeap-process-context-service](https://github.com/jeap-admin-ch/jeap-process-context-service) library.
+The library contains all the necessary components to set up a process context service instance.
+
+## Changes
+
+This library is versioned using [Semantic Versioning](http://semver.org/) and all changes are documented in
+[CHANGELOG.md](./CHANGELOG.md) following the format defined in [Keep a Changelog](http://keepachangelog.com/).
+
+## Prerequisites
+
+To use this project, ensure you have the following installed:
+
+1. **Java Development Kit (JDK)**: Version 25.
+2. **Docker**: For running the required infrastructure.
+
+**Note:** Use the provided maven wrapper to build and run the project.
+
+**Optional:**
+If you want to start the frontend UI independent of the Spring Boot application, you will also need:
+- **Node.js and npm**: Required for running the frontend UI (if you want to start it detatched from the Spring Boot application).
+
 ## Getting started
+
+### Infrastructure
 
 Before the examples can be started the infrastructure has to be started using docker
 
-```
+```shell
 docker-compose -f docker/docker-compose.yml up
 ```
 
-The project itself can be build with a simple
+### Build
 
-```
+The project itself can be built with a simple
+
+```shell
 ./mvnw install
 ```
 
-Then the individual sub-projects can be started using
+### Start 
 
-```
+Then the individual subprojects can be started using
+
+```shell
 ./mvnw --projects jme-process-context-auth-scs spring-boot:run -Dspring-boot.run.profiles=local
 ./mvnw --projects jme-process-context-scs spring-boot:run -Dspring-boot.run.profiles=local
 ./mvnw --projects jme-process-context-app-service spring-boot:run -Dspring-boot.run.profiles=local
 ```
 
-The profile 'local-npm-ui' can be used in addition to the 'local' profile to run the SCS UI using 'npm start', which
-will run the UI on port 4200..
+### Independent UI
 
-The app provides a HTTP-Interface that allows you to trigger the various process changes. You can find its Swagger-UI
-at http://localhost:8082/jme-process-context-app-service/swagger-ui.html
+To run the frontend UI independent of the Spring Boot application, the profile 'local-npm-ui' can be used in addition to the 'local' profile.
+This allows to use hot reload for the UI without the need to restart the Spring Boot application after every change.
 
-After you have created a process, you can find this process in the process-context service at
-http://localhost:8080/process-context/process/{id}
+See the [jeap-process-context-service](https://github.com/jeap-admin-ch/jeap-process-context-service) library for details on the frontend.
 
 ## Process Examples
 
@@ -56,11 +81,6 @@ Default value is 2000.
 
 * **application-local:** Contains all configurations for running the application locally.
 * **application-local-npm-ui:** Contains the configurations for connecting to the frontend.
-
-## Changes
-
-This library is versioned using [Semantic Versioning](http://semver.org/) and all changes are documented in
-[CHANGELOG.md](./CHANGELOG.md) following the format defined in [Keep a Changelog](http://keepachangelog.com/).
 
 ## Note
 
