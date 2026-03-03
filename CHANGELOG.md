@@ -9,10 +9,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Dependencies
 - **ch.admin.bit.jeap:jeap-spring-boot-parent**: 30.16.0 → 30.18.0 (minor)
-- **ch.admin.bit.jeap:jeap-process-context-message**: 16.3.0.6-jeap-6415 → 16.4.0 (minor)
-- **ch.admin.bit.jeap:jeap-process-context-domain**: 16.3.0.6-jeap-6415 → 16.4.0 (minor)
-- **ch.admin.bit.jeap:jeap-process-context-scs**: 16.3.0.6-jeap-6415 → 16.4.0 (minor)
-- **ch.admin.bit.jeap:jeap-process-context-plugin-api**: 16.3.0.6-jeap-6415 → 16.4.0 (minor)
+- **ch.admin.bit.jeap:jeap-process-context-scs**: 16.3.0.6-jeap-6415 → 16.3.0.7-jeap-6415 (patch)
 - **ch.admin.bit.jeap:jeap-oauth-mock-server**: 3.35.0 → 3.36.0 (minor)
 
 ## [1.6.0] - 2026-02-26
@@ -36,11 +33,6 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [1.5.0] - 2026-02-16
 
 ### Dependencies
-- **ch.admin.bit.jeap:jeap-spring-boot-parent**: 30.16.0 → 30.18.0 (minor)
-- **ch.admin.bit.jeap:jeap-process-context-message**: 16.3.0.6-jeap-6415 → 16.4.0 (minor)
-- **ch.admin.bit.jeap:jeap-process-context-domain**: 16.3.0.6-jeap-6415 → 16.4.0 (minor)
-- **ch.admin.bit.jeap:jeap-process-context-scs**: 16.3.0.6-jeap-6415 → 16.4.0 (minor)
-- **ch.admin.bit.jeap:jeap-process-context-plugin-api**: 16.3.0.6-jeap-6415 → 16.4.0 (minor)
 
 - **ch.admin.bit.jeap:jeap-spring-boot-parent**: 30.15.0 → 30.16.0 (minor)
 
