@@ -3,6 +3,7 @@ package ch.admin.bit.jeap.jme.processcontext.web.perftest;
 import ch.admin.bit.jeap.jme.processcontext.perftest.PerfTestService;
 import ch.admin.bit.jeap.jme.processcontext.perftest.TestScenarioType;
 import ch.admin.bit.jeap.jme.processcontext.perftest.scenario.HighMessageCountScenario;
+import ch.admin.bit.jeap.jme.processcontext.perftest.scenario.ProcessContextQueriesScenario;
 import ch.admin.bit.jeap.jme.processcontext.perftest.scenario.ProcessRelationsScenario;
 import ch.admin.bit.jeap.jme.processcontext.perftest.scenario.SimpleProcessScenario;
 import io.swagger.v3.oas.annotations.Operation;
@@ -86,6 +87,27 @@ class PerfTestController {
                 ProcessRelationsScenario.PROCESS_COUNT, processCount,
                 ProcessRelationsScenario.WARM_UP_PROCESS_COUNT, warmUpProcessCount,
                 ProcessRelationsScenario.DURATION_MINUTES, durationMinutes);
+        return startTestRun(scenarioType, parameters, timeoutMinutes, clearDatabase);
+    }
+
+    @PostMapping("/scenarios/processContextQueries")
+    @Operation(summary = "Start a new ProcessContextQueriesScenario performance test run",
+            responses = {
+                    @ApiResponse(responseCode = "202", description = "Test run accepted and started"),
+                    @ApiResponse(responseCode = "400", description = "Invalid request")
+            })
+    public ResponseEntity<TestRunDTO> startProcessContextQueriesTest(@RequestParam(value = "processCount", defaultValue = "100") int processCount,
+                                                                     @RequestParam(value = "messagePerProcessCount", defaultValue = "10") int messagePerProcessCount,
+                                                                     @RequestParam(value = "warmUpProcessCount", defaultValue = "5") int warmUpProcessCount,
+                                                                     @RequestParam(value = "durationMinutes", defaultValue = "0") int durationMinutes,
+                                                                     @RequestParam(value = "timeoutMinutes", defaultValue = "10") int timeoutMinutes,
+                                                                     @RequestParam(value = "clearDatabase", defaultValue = "true") boolean clearDatabase) {
+        var scenarioType = TestScenarioType.PROCESS_CONTEXT_QUERIES;
+        Map<String, Object> parameters = Map.of(
+                ProcessContextQueriesScenario.PROCESS_COUNT, processCount,
+                ProcessContextQueriesScenario.MESSAGE_PER_PROCESS_COUNT, messagePerProcessCount,
+                ProcessContextQueriesScenario.WARM_UP_PROCESS_COUNT, warmUpProcessCount,
+                ProcessContextQueriesScenario.DURATION_MINUTES, durationMinutes);
         return startTestRun(scenarioType, parameters, timeoutMinutes, clearDatabase);
     }
 

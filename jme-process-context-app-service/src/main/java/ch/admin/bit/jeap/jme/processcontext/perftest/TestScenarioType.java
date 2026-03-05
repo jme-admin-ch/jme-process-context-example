@@ -10,7 +10,8 @@ public enum TestScenarioType {
 
     HIGH_MESSAGE_COUNT("High Message Count", "Simulates process instances with a large number of correlated messages and created relations"),
     SIMPLE_PROCESS("Simple Process", "Simulates a simple process instance observing ten messages and completing after the tenth message, creating a task per message, without relations"),
-    PROCESS_RELATIONS("Process Relations", "Simulates a process instance with a large number of process relations to other process instances");
+    PROCESS_RELATIONS("Process Relations", "Simulates a process instance with a large number of process relations to other process instances"),
+    PROCESS_CONTEXT_QUERIES("ProcessContext Queries", "Simulates process instances that exercise ProcessContext query methods in the completion condition");
 
     private final String label;
     private final String description;

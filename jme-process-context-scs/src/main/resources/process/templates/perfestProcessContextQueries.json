@@ -1,0 +1,26 @@
+{
+  "name": "perfestProcessContextQueries",
+  "tasks": [
+    {
+      "name": "documentReviewed",
+      "observes": {
+        "message": "JmeDocumentReviewedEvent"
+      }
+    }
+  ],
+  "messages": [
+    {
+      "messageName": "JmeDocumentReviewedEvent",
+      "topicName": "jme-document-reviewed",
+      "payloadExtractor": "ch.admin.bit.jeap.jme.processcontext.event.JmeDocumentReviewedPayloadExtractor",
+      "triggersProcessInstantiation": true
+    }
+  ],
+  "completions": [
+    {
+      "completedBy": {
+        "condition": "ch.admin.bit.jeap.jme.processcontext.condition.ProcessContextQueryPerftestCompletionCondition"
+      }
+    }
+  ]
+}
