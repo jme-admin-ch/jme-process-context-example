@@ -43,7 +43,7 @@
     </modules>
 
     <properties>
-        <jeap-process-context-service.version>16.3.0.7-jeap-6415</jeap-process-context-service.version>
+        <jeap-process-context-service.version>16.3.0.8-jeap-6415</jeap-process-context-service.version>
         <jeap-oauth-mock-server.version>3.36.0</jeap-oauth-mock-server.version>
         <java.version>25</java.version>
         <maven.compiler.release>25</maven.compiler.release>

@@ -28,11 +28,7 @@ jeap:
       filters:
         JmeRaceStartedEvent: ch.admin.bit.jeap.jme.processcontext.event.JmeRaceStartedEventMessageFilter
       topic:
-        process-instance-created: "jme-process-instance-created"
-        process-instance-completed: "jme-process-instance-completed"
         process-outdated-internal: "jme-process-event-received"
-        process-changed-internal: "jme-process-state-changed"
-        create-process-instance: "jme-process-createprocessinstance"
         process-snapshot-created: "jme-process-snapshotcreated"
     frontend:
       clientId: "process-context"
