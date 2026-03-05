@@ -1,8 +1,8 @@
 publiccodeYmlVersion: 0.5.0
 name: jme-process-context-example
 applicationSuite: JME
-softwareVersion: 1.7.0
-releaseDate: 2026-03-04
+softwareVersion: 1.8.0
+releaseDate: 2026-03-05
 url: "https://github.com/jme-admin-ch/jme-process-context-example.git"
 landingURL: "https://github.com/jme-admin-ch/jme"
 platforms:
