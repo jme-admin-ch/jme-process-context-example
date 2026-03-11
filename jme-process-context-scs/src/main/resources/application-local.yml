@@ -29,6 +29,13 @@ jeap:
         accessUrl: http://localhost:9000
         accessKey: local
         secretKey: localsecret
+    template:
+      migration:
+        lock-at-least: PT30S
+        lock-at-most: PT1M
+        batch-size: 100
+        max-created-at-age-days: 180
+        cron-expression: 0 */2 * * * *  # Run migration locally every 2 minutes to be able to test the migration of changed templates
 # Activate the housekeeping to test snapshots of completed process instances
 # housekeeping:
 #   cron-expression: "0 30 12 * * *"

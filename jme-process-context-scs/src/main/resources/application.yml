@@ -24,6 +24,8 @@ jeap:
       system-name: JME
       service-name: ${spring.application.name}
   processcontext:
+    release:
+      min-version: 17
     kafka:
       filters:
         JmeRaceStartedEvent: ch.admin.bit.jeap.jme.processcontext.event.JmeRaceStartedEventMessageFilter
@@ -53,10 +55,3 @@ logging:
     io:
       confluent:
         kafka: WARN
-    ch:
-      admin:
-        bit:
-          jeap:
-            processcontext:
-              domain:
-                processevent: DEBUG
