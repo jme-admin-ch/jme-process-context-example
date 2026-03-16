@@ -22,7 +22,7 @@
         <dependency>
             <groupId>ch.admin.bit.jeap.jme.messagetype.jme</groupId>
             <artifactId>jme-race-started-event</artifactId>
-            <version>3.0.0-SNAPSHOT</version>
+            <version>1.4.0</version>
         </dependency>
         <dependency>
             <groupId>ch.admin.bit.jeap.jme.messagetype.jme</groupId>
