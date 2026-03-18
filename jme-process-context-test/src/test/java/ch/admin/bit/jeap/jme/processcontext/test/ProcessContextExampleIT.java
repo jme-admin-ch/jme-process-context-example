@@ -159,6 +159,95 @@ public class ProcessContextExampleIT extends SpringBootServiceTestBase {
         await().until(() -> processSnapshotExists(processId));
     }
 
+    @Test
+    void runSimpleProcessPerfTest() {
+        // Start the simple process perf test with a single process instance
+        String testRunId = given()
+                .baseUri(APP_BASE_URL)
+                .queryParam("processCount", 1)
+                .queryParam("warmUpProcessCount", 1)
+                .when()
+                .post("/api/perftests/scenarios/simpleProcess")
+                .then()
+                .statusCode(HttpStatus.ACCEPTED.value())
+                .extract()
+                .jsonPath().getString("id");
+
+        log.info("Started simple process perf test with testRunId: {}", testRunId);
+
+        // Wait for the perf test to complete successfully
+        awaitPerfTestCompleted(testRunId);
+    }
+
+    @Test
+    void runHighMessageCountPerfTest() {
+        String testRunId = given()
+                .baseUri(APP_BASE_URL)
+                .queryParam("processCount", 1)
+                .queryParam("warmUpProcessCount", 1)
+                .queryParam("tasksPerProcessCount", 5)
+                .queryParam("messagePerProcessCount", 5)
+                .when()
+                .post("/api/perftests/scenarios/highMessageCount")
+                .then()
+                .statusCode(HttpStatus.ACCEPTED.value())
+                .extract()
+                .jsonPath().getString("id");
+
+        log.info("Started high message count perf test with testRunId: {}", testRunId);
+        awaitPerfTestCompleted(testRunId);
+    }
+
+    @Test
+    void runProcessRelationsPerfTest() {
+        String testRunId = given()
+                .baseUri(APP_BASE_URL)
+                .queryParam("processCount", 1)
+                .queryParam("warmUpProcessCount", 1)
+                .when()
+                .post("/api/perftests/scenarios/processRelations")
+                .then()
+                .statusCode(HttpStatus.ACCEPTED.value())
+                .extract()
+                .jsonPath().getString("id");
+
+        log.info("Started process relations perf test with testRunId: {}", testRunId);
+        awaitPerfTestCompleted(testRunId);
+    }
+
+    @Test
+    void runProcessContextQueriesPerfTest() {
+        String testRunId = given()
+                .baseUri(APP_BASE_URL)
+                .queryParam("processCount", 1)
+                .queryParam("warmUpProcessCount", 1)
+                .queryParam("messagePerProcessCount", 5)
+                .when()
+                .post("/api/perftests/scenarios/processContextQueries")
+                .then()
+                .statusCode(HttpStatus.ACCEPTED.value())
+                .extract()
+                .jsonPath().getString("id");
+
+        log.info("Started process context queries perf test with testRunId: {}", testRunId);
+        awaitPerfTestCompleted(testRunId);
+    }
+
+    private void awaitPerfTestCompleted(String testRunId) {
+        await().untilAsserted(() -> {
+            String status = given()
+                    .baseUri(APP_BASE_URL)
+                    .when()
+                    .get("/api/perftests/{testRunId}", testRunId)
+                    .then()
+                    .statusCode(HttpStatus.OK.value())
+                    .extract()
+                    .jsonPath().getString("status");
+            log.info("Perf test {} status: {}", testRunId, status);
+            assertThat(status).isEqualTo("COMPLETED");
+        });
+    }
+
     private boolean processSnapshotExists(String processId) {
         return given()
                 .baseUri(APP_BASE_URL)

@@ -74,6 +74,55 @@ To try out the application yourself and for detailed process examples with step-
 * **application-local:** Contains all configurations for running the application locally.
 * **application-local-npm-ui:** Contains the configurations for connecting to the frontend.
 
+## Integration Tests
+
+The `jme-process-context-test` module contains end-to-end integration tests that verify that the PCS and its example
+work: it covers docker compose infrastructure, the process context service and the example application service.
+
+### How it works
+
+The test uses Spring Boot Docker Compose support to automatically start and stop the Docker infrastructure
+(PostgreSQL, two Kafka clusters with schema registries, and MinIO) before and after the test run. It then starts
+the three Spring Boot services (auth, PCS, app service) as Maven subprocesses via `mvnw spring-boot:run` and
+polls their health endpoints until they are ready.
+
+The tests themselves use REST-Assured to interact with the services and Awaitility for polling asynchronous state:
+
+- **`createAndStartProcess`** — Exercises the full race process lifecycle: creates a process, publishes events
+  (race start, control points, validation, destination reached, refuelling), and verifies that the process
+  completes with the expected tasks, user references, and a snapshot in the archive.
+- **`runSimpleProcessPerfTest`** — Runs the simple process scenario with a single process instance and verifies
+  successful completion.
+- **`runHighMessageCountPerfTest`** — Runs the high message count scenario with a single process instance and a
+  low number of tasks and messages per process.
+- **`runProcessRelationsPerfTest`** — Runs the process relations scenario with a single process instance.
+- **`runProcessContextQueriesPerfTest`** — Runs the process context queries scenario with a single process
+  instance and a low number of messages per process.
+
+### Running locally
+
+```shell
+# Build and install all local modules
+./mvnw install -pl '!:jme-process-context-test'
+# Run integration tests
+./mvnw test -pl jme-process-context-test
+```
+
+This will:
+
+1. Start the Docker Compose infrastructure (containers are stopped after the test).
+2. Build and start the three Spring Boot services on ports 8080, 8081, and 8082.
+3. Run the integration tests.
+4. Stop all services and containers.
+
+Ensure Docker is running and ports 5432, 8080–8082, 9000, 10000–13000 are available.
+
+### Running on CI
+
+On CI the `CI` environment variable must be set. This activates the `ci` Spring profile which uses
+`docker-compose-ci.yml` as an overlay (removing host port bindings and using container-internal hostnames for
+Kafka advertised listeners). On CI, an isolated Docker network is used to allow for parallel builds.
+
 ## Performance Tests
 
 See [README-PERFTESTS.md](./README-PERFTESTS.md) for information about the built-in load and performance tests for the
