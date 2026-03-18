@@ -342,8 +342,7 @@ Apache License Version 2.0
  * spring-boot-actuator - [org.springframework.boot:spring-boot-actuator](https://spring.io/projects/spring-boot)
  * spring-boot-actuator-autoconfigure - [org.springframework.boot:spring-boot-actuator-autoconfigure](https://spring.io/projects/spring-boot)
  * spring-boot-autoconfigure - [org.springframework.boot:spring-boot-autoconfigure](https://spring.io/projects/spring-boot)
-*
-spring-boot-docker-compose - [org.springframework.boot:spring-boot-docker-compose](https://spring.io/projects/spring-boot)
+ * spring-boot-docker-compose - [org.springframework.boot:spring-boot-docker-compose](https://spring.io/projects/spring-boot)
  * spring-boot-loader - [org.springframework.boot:spring-boot-loader](https://spring.io/projects/spring-boot)
  * spring-boot-starter - [org.springframework.boot:spring-boot-starter](https://spring.io/projects/spring-boot)
  * spring-boot-starter-actuator - [org.springframework.boot:spring-boot-starter-actuator](https://spring.io/projects/spring-boot)
