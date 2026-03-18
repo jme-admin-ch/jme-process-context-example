@@ -33,7 +33,7 @@ spring:
           default-provider:
             issuer-uri: "http://localhost:8081/jme-process-context-auth-scs"
   datasource:
-    url: "jdbc:postgresql://localhost:5432/jme-process-context-service-db-local"
+    url: "jdbc:postgresql://localhost:5432/jme-pcs-db"
     username: "postgres"
     password: "secret"
     hikari:

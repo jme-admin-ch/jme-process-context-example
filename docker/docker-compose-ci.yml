@@ -1,0 +1,35 @@
+# CI overlay for docker-compose. This file is used to override the default docker-compose.yml file in CI
+
+services:
+
+  jme-pcs-db:
+    ports: !reset [ ]
+    labels:
+      org.springframework.boot.ignore: true
+
+  cluster1-broker:
+    ports: !reset [ ]
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://cluster1-broker:9092,SASL_PLAINTEXT://cluster1-broker:29092
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,SASL_PLAINTEXT://0.0.0.0:29092,CONTROLLER://0.0.0.0:29093
+
+  cluster1-schema-registry:
+    ports: !reset [ ]
+
+  cluster2-broker:
+    ports: !reset [ ]
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://cluster2-broker:9092,SASL_PLAINTEXT://cluster2-broker:29092
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,SASL_PLAINTEXT://0.0.0.0:29092,CONTROLLER://0.0.0.0:29093
+
+  cluster2-schema-registry:
+    ports: !reset [ ]
+
+  minio:
+    ports: !reset [ ]
+
+networks:
+  default:
+    external: true
+    # Network is created by the CI job and includes the test runner & the containers started by this compose file
+    name: ${COMPOSE_PROJECT_NAME}_default

@@ -4,6 +4,9 @@ import ch.admin.bit.jeap.processcontext.plugin.api.condition.ProcessCompletionCo
 import ch.admin.bit.jeap.processcontext.plugin.api.condition.ProcessCompletionConditionResult;
 import ch.admin.bit.jeap.processcontext.plugin.api.context.ProcessCompletionConclusion;
 import ch.admin.bit.jeap.processcontext.plugin.api.context.ProcessContext;
+import ch.admin.bit.jeap.processcontext.plugin.api.message.MessageData;
+
+import java.util.Optional;
 
 public class AllControlPointsPassedCompletionCondition implements ProcessCompletionCondition {
 
@@ -11,7 +14,7 @@ public class AllControlPointsPassedCompletionCondition implements ProcessComplet
     public ProcessCompletionConditionResult isProcessCompleted(ProcessContext processContext) {
         int expectedControlPointMessageCount = processContext.getMessageDataForMessageType("JmeRaceStartedEvent").stream()
                 .filter(md -> md.getKey().equals("controlPointCount")) // See JmeRaceStartedEventPerfTestReferenceExtractor
-                .map(md -> Integer.valueOf(md.getValue()))
+                .flatMap(md -> maybeParseInt(md).stream())
                 .findFirst().orElse(Integer.MAX_VALUE);
 
         long actualControlPointMessageCount = processContext.countMessagesByType("JmeRaceControlpointPassedEvent");
@@ -23,6 +26,14 @@ public class AllControlPointsPassedCompletionCondition implements ProcessComplet
                     .build();
         } else {
             return ProcessCompletionConditionResult.IN_PROGRESS;
+        }
+    }
+
+    private static Optional<Integer> maybeParseInt(MessageData md) {
+        try {
+            return Optional.of(Integer.valueOf(md.getValue()));
+        } catch (NumberFormatException e) {
+            return Optional.empty();
         }
     }
 }

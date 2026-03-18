@@ -1,0 +1,19 @@
+jeap:
+  messaging:
+    kafka:
+      cluster:
+        main:
+          bootstrapServers: "cluster1-broker:29092"
+          schemaRegistryUrl: "http://cluster1-schema-registry:8081"
+        other:
+          bootstrapServers: "cluster2-broker:29092"
+          schemaRegistryUrl: "http://cluster2-schema-registry:8081"
+  processcontext:
+    objectstorage:
+      connection:
+        accessUrl: http://minio:9000
+    kafka:
+      topic-check: false
+spring:
+  datasource:
+    url: "jdbc:postgresql://jme-pcs-db:5432/jme-pcs-db"
