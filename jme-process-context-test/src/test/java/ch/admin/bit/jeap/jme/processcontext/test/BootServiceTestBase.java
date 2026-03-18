@@ -5,8 +5,6 @@ import org.awaitility.Awaitility;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.TestInstance;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ActiveProfilesResolver;
 
 import java.io.BufferedReader;
@@ -24,13 +22,11 @@ import static org.awaitility.Awaitility.await;
 /**
  * Base class for integration tests that start Spring Boot services via Maven.
  * Provides common plumbing for profile resolution, service lifecycle management,
- * and health check polling.
+ * and health check polling. This test does not require a spring context for the test.
  */
-@SpringBootTest(classes = ProcessContextExampleIT.TestApp.class, webEnvironment = SpringBootTest.WebEnvironment.NONE)
-@ActiveProfiles(resolver = SpringBootServiceTestBase.TestProfileResolver.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @Slf4j
-public abstract class SpringBootServiceTestBase {
+public abstract class BootServiceTestBase {
 
     private static final Path PROJECT_ROOT = Path.of("").toAbsolutePath().getParent();
     private static final String MVN = PROJECT_ROOT.resolve("mvnw").toString();
@@ -47,7 +43,7 @@ public abstract class SpringBootServiceTestBase {
     @AfterAll
     static void stopServices() {
         log.info("Stopping services...");
-        startedServices.forEach(SpringBootServiceTestBase::stopProcessTree);
+        startedServices.forEach(BootServiceTestBase::stopProcessTree);
         startedServices.clear();
     }
 
@@ -108,14 +104,6 @@ public abstract class SpringBootServiceTestBase {
                 .pollDelay(Duration.ofSeconds(5))
                 .ignoreExceptions()
                 .until(() -> checkHealth(healthUrl, null, null));
-    }
-
-    protected static void waitForServiceWithBasicAuth(String healthUrl, String username, String password, Duration timeout) {
-        await().atMost(timeout)
-                .pollInterval(Duration.ofSeconds(2))
-                .pollDelay(Duration.ofSeconds(5))
-                .ignoreExceptions()
-                .until(() -> checkHealth(healthUrl, username, password));
     }
 
     private static boolean checkHealth(String healthUrl, String username, String password) throws IOException {

@@ -12,7 +12,6 @@ import org.apache.avro.io.DecoderFactory;
 import org.apache.avro.specific.SpecificDatumReader;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpStatus;
 
 import java.io.ByteArrayInputStream;
@@ -29,7 +28,7 @@ import static org.awaitility.Awaitility.await;
 
 @Slf4j
 @SuppressWarnings("unchecked")
-public class ProcessContextExampleIT extends SpringBootServiceTestBase {
+public class ProcessContextExampleIT extends BootServiceSpringTestBase {
 
     private static final String AUTH_BASE_URL = "http://localhost:8081/jme-process-context-auth-scs";
     private static final String SCS_BASE_URL = "http://localhost:8080/process-context";
@@ -44,7 +43,7 @@ public class ProcessContextExampleIT extends SpringBootServiceTestBase {
     }
 
     @Test
-    void createAndStartProcess() throws Exception {
+    void runRaceProcessTest() throws Exception {
         String accessToken = retrieveAccessToken();
 
         String processId = "ci_test_" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
@@ -326,7 +325,5 @@ public class ProcessContextExampleIT extends SpringBootServiceTestBase {
         return map.get("de").equals(name);
     }
 
-    @SpringBootApplication
-    public static class TestApp {
-    }
+
 }
