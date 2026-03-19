@@ -57,6 +57,7 @@ Apache License Version 2.0
  * jme-process-context-events - [ch.admin.bit.jeap:jme-process-context-events](https://github.com/jme-admin-ch/jme-process-context-example/tree/main/jme-process-context-events)
  * ch.admin.bit.jeap.archivetype.jeap:process-snapshot-v1 - [ch.admin.bit.jeap.archivetype.jeap:process-snapshot-v1](https://github.com/jeap-admin-ch/jeap-archive-type-registry/tree/main)
  * ch.admin.bit.jeap.archivetype.jeap:process-snapshot-v2 - [ch.admin.bit.jeap.archivetype.jeap:process-snapshot-v2](https://github.com/jeap-admin-ch/jeap-archive-type-registry/tree/main)
+ * ch.admin.bit.jeap.jme:jme-spring-boot-integration-test - [ch.admin.bit.jeap.jme:jme-spring-boot-integration-test](https://github.com/jme-admin-ch/jme-integration-test/tree/main/jme-spring-boot-integration-test)
  * ch.admin.bit.jeap.jme.messagetype.jme:jme-cancel-race-command - [ch.admin.bit.jeap.jme.messagetype.jme:jme-cancel-race-command](https://github.com/jme-admin-ch/jme-message-type-registry/tree/main)
  * ch.admin.bit.jeap.jme.messagetype.jme:jme-document-created-event - [ch.admin.bit.jeap.jme.messagetype.jme:jme-document-created-event](https://github.com/jme-admin-ch/jme-message-type-registry/tree/main)
  * ch.admin.bit.jeap.jme.messagetype.jme:jme-document-reviewed-event - [ch.admin.bit.jeap.jme.messagetype.jme:jme-document-reviewed-event](https://github.com/jme-admin-ch/jme-message-type-registry/tree/main)
