@@ -38,6 +38,18 @@
                 <configuration>
                     <mainClass>${main-class}</mainClass>
                 </configuration>
+                <executions>
+                    <execution>
+                        <!-- Skip repackaging to avoid building a fat jar -->
+                        <phase>none</phase>
+                    </execution>
+                    <execution>
+                        <id>spring-boot</id>
+                        <goals>
+                            <goal>build-info</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

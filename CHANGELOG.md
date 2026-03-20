@@ -10,6 +10,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Changed
 
 - Improve OSS build
+- Avoid publishing libraries as fat jars
 
 ## [3.2.0] - 2026-03-20
 
