@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres
 to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.6.1] - 2026-04-02
+
+### Dependencies
+- **ch.admin.bit.jeap:jeap-process-context-message**: 18.2.0 → 18.2.1 (patch)
+- **ch.admin.bit.jeap:jeap-process-context-domain**: 18.2.0 → 18.2.1 (patch)
+- **ch.admin.bit.jeap:jeap-process-context-scs**: 18.2.0 → 18.2.1 (patch)
+- **ch.admin.bit.jeap:jeap-process-context-plugin-api**: 18.2.0 → 18.2.1 (patch)
+
 ## [3.6.0] - 2026-03-31
 
 ### Changed
