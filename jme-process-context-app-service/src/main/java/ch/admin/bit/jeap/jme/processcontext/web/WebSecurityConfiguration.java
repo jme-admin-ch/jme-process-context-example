@@ -14,7 +14,8 @@ public class WebSecurityConfiguration {
     @Bean
     @Order(100) // same as on the deprecated WebSecurityConfigurerAdapter
     public SecurityFilterChain apiSecurityFilterChain(HttpSecurity http) throws Exception {
-        http.securityMatcher(PathPatternRequestMatcher.withDefaults().matcher("/api/**"))
+        PathPatternRequestMatcher.Builder matchers = PathPatternRequestMatcher.withDefaults();
+        http.securityMatchers(m -> m.requestMatchers(matchers.matcher("/api/**"), matchers.matcher("/vendor/**")))
                 .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
                         .anyRequest().permitAll());
         http.csrf(AbstractHttpConfigurer::disable);

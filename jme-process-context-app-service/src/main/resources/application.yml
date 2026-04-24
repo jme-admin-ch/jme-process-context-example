@@ -27,6 +27,9 @@ spring:
 server:
   servlet:
     context-path: /${spring.application.name}
+    session:
+      cookie:
+        same-site: strict
 springdoc:
   api-docs:
     enabled: true

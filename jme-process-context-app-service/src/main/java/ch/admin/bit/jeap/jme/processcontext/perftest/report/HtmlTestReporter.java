@@ -1,5 +1,7 @@
 package ch.admin.bit.jeap.jme.processcontext.perftest.report;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
@@ -12,12 +14,20 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+@Component
 public class HtmlTestReporter {
 
     private static final TemplateEngine TEMPLATE_ENGINE = createTemplateEngine();
 
-    public static String generateReport(TestReport testReport) {
+    private final String contextPath;
+
+    public HtmlTestReporter(@Value("${server.servlet.context-path:}") String contextPath) {
+        this.contextPath = contextPath;
+    }
+
+    public String generateReport(TestReport testReport) {
         Context context = new Context();
+        context.setVariable("contextPath", contextPath);
         context.setVariable("status", testReport.getStatus().name());
         context.setVariable("scenario", testReport.getScenario());
         context.setVariable("warmUpStartedAt", formatDateTime(testReport.getWarmUpStartedAt()));

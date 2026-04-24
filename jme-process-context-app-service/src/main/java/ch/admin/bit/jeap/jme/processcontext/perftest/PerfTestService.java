@@ -21,6 +21,7 @@ public class PerfTestService {
     private final TestProcessInstanceRepository testProcessInstanceRepository;
     @Qualifier("applicationTaskExecutor")
     private final AsyncTaskExecutor taskExecutor;
+    private final HtmlTestReporter htmlTestReporter;
     private final Map<UUID, TestRun> testRuns = new ConcurrentHashMap<>();
     private final Map<UUID, Future<?>> testRunFutures = new ConcurrentHashMap<>();
 
@@ -66,7 +67,7 @@ public class PerfTestService {
     public Optional<String> getTestReport(UUID testRunId) {
         return getTestRun(testRunId)
                 .map(TestRun::getTestReport)
-                .map(HtmlTestReporter::generateReport);
+                .map(htmlTestReporter::generateReport);
     }
 
     private void evictOldestTestRuns(int maxSize) {

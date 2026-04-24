@@ -19,7 +19,7 @@ class HtmlTestReporterTest {
     void generateReport_containsAllResolvedFields(TestRunStatus status) {
         TestReport report = buildTestReport(status);
 
-        String html = HtmlTestReporter.generateReport(report);
+        String html = new HtmlTestReporter("/jme-process-context-app-service").generateReport(report);
 
         // Status is resolved
         assertTrue(html.contains(status.name()),
