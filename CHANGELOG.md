@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres
 to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.4.1] - 2026-04-24
+
+### Security
+
+- Vendored Chart.js, Luxon and the Chart.js Luxon adapter under `static/vendor/perftest/` so the performance test report
+  loads them from the same origin instead of `cdn.jsdelivr.net` (addresses ZAP CWE-829 and CWE-345).
+- Configured `server.servlet.session.cookie.same-site: strict` so the `JSESSIONID` cookie carries `SameSite=Strict` (
+  addresses ZAP CWE-1275).
+
 ## [4.4.0] - 2026-04-20
 
 ### Dependencies

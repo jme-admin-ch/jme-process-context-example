@@ -10,13 +10,11 @@ Apache License Version 2.0
 
  * LZ4 Java Compression - [at.yawk.lz4:lz4-java](https://github.com/yawkat/lz4-java)
  * consumer - [au.com.dius.pact:consumer](https://github.com/pact-foundation/pact-jvm)
- * provider - [au.com.dius.pact:provider](https://github.com/pact-foundation/pact-jvm)
  * junit5 - [au.com.dius.pact.consumer:junit5](https://github.com/pact-foundation/pact-jvm)
  * matchers - [au.com.dius.pact.core:matchers](https://github.com/pact-foundation/pact-jvm)
  * model - [au.com.dius.pact.core:model](https://github.com/pact-foundation/pact-jvm)
  * pactbroker - [au.com.dius.pact.core:pactbroker](https://github.com/pact-foundation/pact-jvm)
  * support - [au.com.dius.pact.core:support](https://github.com/pact-foundation/pact-jvm)
- * junit5 - [au.com.dius.pact.provider:junit5](https://github.com/pact-foundation/pact-jvm)
  * ch.admin.bit.jeap:jeap-crypto-core - [ch.admin.bit.jeap:jeap-crypto-core](https://github.com/jeap-admin-ch/jeap-crypto/tree/main/jeap-crypto-core)
  * ch.admin.bit.jeap:jeap-messaging-api - [ch.admin.bit.jeap:jeap-messaging-api](https://github.com/jeap-admin-ch/jeap-messaging/tree/main/jeap-messaging-api)
  * ch.admin.bit.jeap:jeap-messaging-avro - [ch.admin.bit.jeap:jeap-messaging-avro](https://github.com/jeap-admin-ch/jeap-messaging/tree/main/jeap-messaging-avro)
@@ -30,18 +28,9 @@ Apache License Version 2.0
  * ch.admin.bit.jeap:jeap-messaging-infrastructure-kafka - [ch.admin.bit.jeap:jeap-messaging-infrastructure-kafka](https://github.com/jeap-admin-ch/jeap-messaging/tree/main/jeap-messaging-infrastructure-kafka)
  * ch.admin.bit.jeap:jeap-messaging-infrastructure-kafka-test - [ch.admin.bit.jeap:jeap-messaging-infrastructure-kafka-test](https://github.com/jeap-admin-ch/jeap-messaging/tree/main/jeap-messaging-infrastructure-kafka-test)
  * ch.admin.bit.jeap:jeap-messaging-model - [ch.admin.bit.jeap:jeap-messaging-model](https://github.com/jeap-admin-ch/jeap-messaging/tree/main/jeap-messaging-model)
- * ch.admin.bit.jeap:jeap-oauth-mock-server - [ch.admin.bit.jeap:jeap-oauth-mock-server](https://github.com/jeap-admin-ch/jeap-oauth-mock-server/tree/main/jeap-oauth-mock-server)
- * ch.admin.bit.jeap:jeap-process-context-adapter-kafka - [ch.admin.bit.jeap:jeap-process-context-adapter-kafka](https://github.com/jeap-admin-ch/jeap-process-context-service/tree/main/jeap-process-context-adapter-kafka)
- * ch.admin.bit.jeap:jeap-process-context-adapter-micrometer - [ch.admin.bit.jeap:jeap-process-context-adapter-micrometer](https://github.com/jeap-admin-ch/jeap-process-context-service/tree/main/jeap-process-context-adapter-micrometer)
- * ch.admin.bit.jeap:jeap-process-context-adapter-objectstorage - [ch.admin.bit.jeap:jeap-process-context-adapter-objectstorage](https://github.com/jeap-admin-ch/jeap-process-context-service/tree/main/jeap-process-context-adapter-objectstorage)
- * ch.admin.bit.jeap:jeap-process-context-adapter-rest-api - [ch.admin.bit.jeap:jeap-process-context-adapter-rest-api](https://github.com/jeap-admin-ch/jeap-process-context-service/tree/main/jeap-process-context-adapter-rest-api)
  * ch.admin.bit.jeap:jeap-process-context-domain - [ch.admin.bit.jeap:jeap-process-context-domain](https://github.com/jeap-admin-ch/jeap-process-context-service/tree/main/jeap-process-context-domain)
  * ch.admin.bit.jeap:jeap-process-context-message - [ch.admin.bit.jeap:jeap-process-context-message](https://github.com/jeap-admin-ch/jeap-process-context-service/tree/main/jeap-process-context-message)
  * ch.admin.bit.jeap:jeap-process-context-plugin-api - [ch.admin.bit.jeap:jeap-process-context-plugin-api](https://github.com/jeap-admin-ch/jeap-process-context-service/tree/main/jeap-process-context-plugin-api)
- * ch.admin.bit.jeap:jeap-process-context-repository-jpa - [ch.admin.bit.jeap:jeap-process-context-repository-jpa](https://github.com/jeap-admin-ch/jeap-process-context-service/tree/main/jeap-process-context-repository-jpa)
- * ch.admin.bit.jeap:jeap-process-context-repository-template-json - [ch.admin.bit.jeap:jeap-process-context-repository-template-json](https://github.com/jeap-admin-ch/jeap-process-context-service/tree/main/jeap-process-context-repository-template-json)
- * ch.admin.bit.jeap:jeap-process-context-scs - [ch.admin.bit.jeap:jeap-process-context-scs](https://github.com/jeap-admin-ch/jeap-process-context-service/tree/main/jeap-process-context-scs)
- * ch.admin.bit.jeap:jeap-process-context-ui - [ch.admin.bit.jeap:jeap-process-context-ui](https://github.com/jeap-admin-ch/jeap-process-context-service/tree/main/jeap-process-context-ui)
  * ch.admin.bit.jeap:jeap-spring-boot-application-starter - [ch.admin.bit.jeap:jeap-spring-boot-application-starter](https://github.com/jeap-admin-ch/jeap-spring-boot-starters/tree/main/jeap-spring-boot-application-starter)
  * ch.admin.bit.jeap:jeap-spring-boot-featureflag-starter - [ch.admin.bit.jeap:jeap-spring-boot-featureflag-starter](https://github.com/jeap-admin-ch/jeap-spring-boot-starters/tree/main/jeap-spring-boot-featureflag-starter)
  * ch.admin.bit.jeap:jeap-spring-boot-logging-starter - [ch.admin.bit.jeap:jeap-spring-boot-logging-starter](https://github.com/jeap-admin-ch/jeap-spring-boot-starters/tree/main/jeap-spring-boot-logging-starter)
@@ -53,11 +42,9 @@ Apache License Version 2.0
  * ch.admin.bit.jeap:jeap-spring-boot-security-starter-test - [ch.admin.bit.jeap:jeap-spring-boot-security-starter-test](https://github.com/jeap-admin-ch/jeap-spring-boot-starters/tree/main/jeap-spring-boot-security-starter-test)
  * ch.admin.bit.jeap:jeap-spring-boot-swagger - [ch.admin.bit.jeap:jeap-spring-boot-swagger](https://github.com/jeap-admin-ch/jeap-spring-boot-starters/tree/main/jeap-spring-boot-swagger)
  * ch.admin.bit.jeap:jeap-spring-boot-swagger-starter - [ch.admin.bit.jeap:jeap-spring-boot-swagger-starter](https://github.com/jeap-admin-ch/jeap-spring-boot-starters/tree/main/jeap-spring-boot-swagger-starter)
- * ch.admin.bit.jeap:jeap-spring-boot-tx - [ch.admin.bit.jeap:jeap-spring-boot-tx](https://github.com/jeap-admin-ch/jeap-spring-boot-starters/tree/main/jeap-spring-boot-tx)
  * jme-process-context-events - [ch.admin.bit.jeap:jme-process-context-events](https://github.com/jme-admin-ch/jme-process-context-example/tree/main/jme-process-context-events)
  * ch.admin.bit.jeap.archivetype.jeap:process-snapshot-v1 - [ch.admin.bit.jeap.archivetype.jeap:process-snapshot-v1](https://github.com/jeap-admin-ch/jeap-archive-type-registry/tree/main)
  * ch.admin.bit.jeap.archivetype.jeap:process-snapshot-v2 - [ch.admin.bit.jeap.archivetype.jeap:process-snapshot-v2](https://github.com/jeap-admin-ch/jeap-archive-type-registry/tree/main)
- * ch.admin.bit.jeap.jme:jme-spring-boot-integration-test - [ch.admin.bit.jeap.jme:jme-spring-boot-integration-test](https://github.com/jme-admin-ch/jme-integration-test/tree/main/jme-spring-boot-integration-test)
  * ch.admin.bit.jeap.jme.messagetype.jme:jme-cancel-race-command - [ch.admin.bit.jeap.jme.messagetype.jme:jme-cancel-race-command](https://github.com/jme-admin-ch/jme-message-type-registry/tree/main)
  * ch.admin.bit.jeap.jme.messagetype.jme:jme-document-created-event - [ch.admin.bit.jeap.jme.messagetype.jme:jme-document-created-event](https://github.com/jme-admin-ch/jme-message-type-registry/tree/main)
  * ch.admin.bit.jeap.jme.messagetype.jme:jme-document-reviewed-event - [ch.admin.bit.jeap.jme.messagetype.jme:jme-document-reviewed-event](https://github.com/jme-admin-ch/jme-message-type-registry/tree/main)
@@ -79,7 +66,6 @@ Apache License Version 2.0
  * ch.admin.bit.jeap.jme.messagetype.jme:jme-race-started-event - [ch.admin.bit.jeap.jme.messagetype.jme:jme-race-started-event](https://github.com/jme-admin-ch/jme-message-type-registry/tree/main)
  * ch.admin.bit.jeap.jme.messagetype.jme:jme-race-validated-event - [ch.admin.bit.jeap.jme.messagetype.jme:jme-race-validated-event](https://github.com/jme-admin-ch/jme-message-type-registry/tree/main)
  * ch.admin.bit.jeap.jme.messagetype.jme:jme-race-weather-alert-activated-event - [ch.admin.bit.jeap.jme.messagetype.jme:jme-race-weather-alert-activated-event](https://github.com/jme-admin-ch/jme-message-type-registry/tree/main)
- * ch.admin.bit.jeap.messagetype.jeap:process-context-outdated-event - [ch.admin.bit.jeap.messagetype.jeap:process-context-outdated-event](https://github.com/jeap-admin-ch/jeap-message-type-registry/tree/main)
  * process-snapshot-created-event - ch.admin.bit.jeap.messagetype.jeap:process-snapshot-created-event
  * AWS SDK for Java - Core - [com.amazonaws:aws-java-sdk-core](https://aws.amazon.com/sdkforjava)
  * AWS Java SDK for AWS STS - [com.amazonaws:aws-java-sdk-sts](https://aws.amazon.com/sdkforjava)
@@ -91,7 +77,6 @@ Apache License Version 2.0
  * jackson-databind - [com.fasterxml.jackson.core:jackson-databind](https://github.com/FasterXML/jackson)
  * Jackson dataformat: CBOR - [com.fasterxml.jackson.dataformat:jackson-dataformat-cbor](https://github.com/FasterXML/jackson-dataformats-binary)
  * Jackson-dataformat-CSV - [com.fasterxml.jackson.dataformat:jackson-dataformat-csv](https://github.com/FasterXML/jackson-dataformats-text)
- * Jackson-dataformat-TOML - [com.fasterxml.jackson.dataformat:jackson-dataformat-toml](https://github.com/FasterXML/jackson-dataformats-text)
  * Jackson-dataformat-YAML - [com.fasterxml.jackson.dataformat:jackson-dataformat-yaml](https://github.com/FasterXML/jackson-dataformats-text)
  * Jackson datatype: jdk8 - [com.fasterxml.jackson.datatype:jackson-datatype-jdk8](https://github.com/FasterXML/jackson-modules-java8/jackson-datatype-jdk8)
  * Jackson datatype: JSR310 - [com.fasterxml.jackson.datatype:jackson-datatype-jsr310](https://github.com/FasterXML/jackson-modules-java8/jackson-datatype-jsr310)
@@ -104,11 +89,9 @@ Apache License Version 2.0
  * Generex - [com.github.mifmif:generex](https://github.com/mifmif/Generex/tree/master)
  * JCIP Annotations under Apache License - [com.github.stephenc.jcip:jcip-annotations](http://stephenc.github.com/jcip-annotations)
  * Google Android Annotations Library - [com.google.android:annotations](http://source.android.com/)
- * proto-google-common-protos - [com.google.api.grpc:proto-google-common-protos](https://github.com/googleapis/sdk-platform-java)
  * proto-google-common-protos - [com.google.api.grpc:proto-google-common-protos](https://github.com/googleapis/java-iam/proto-google-common-protos)
  * FindBugs-jsr305 - [com.google.code.findbugs:jsr305](http://findbugs.sourceforge.net/)
  * Gson - [com.google.code.gson:gson](https://github.com/google/gson)
- * error-prone annotations - [com.google.errorprone:error_prone_annotations](https://errorprone.info/error_prone_annotations)
  * error-prone annotations - [com.google.errorprone:error_prone_annotations](https://errorprone.info/error_prone_annotations)
  * Guava InternalFutureFailureAccess and InternalFutures - [com.google.guava:failureaccess](https://github.com/google/guava/failureaccess)
  * Guava: Google Core Libraries for Java - [com.google.guava:guava](https://github.com/google/guava)
@@ -119,7 +102,6 @@ Apache License Version 2.0
  * json-path - [com.jayway.jsonpath:json-path](https://github.com/jayway/JsonPath)
  * Nimbus Content Type - [com.nimbusds:content-type](https://bitbucket.org/connect2id/nimbus-content-type)
  * Nimbus LangTag - [com.nimbusds:lang-tag](https://bitbucket.org/connect2id/nimbus-language-tags)
- * Nimbus JOSE+JWT - [com.nimbusds:nimbus-jose-jwt](https://bitbucket.org/connect2id/nimbus-jose-jwt)
  * Nimbus JOSE+JWT - [com.nimbusds:nimbus-jose-jwt](https://bitbucket.org/connect2id/nimbus-jose-jwt)
  * OAuth 2.0 SDK with OpenID Connect extensions - [com.nimbusds:oauth2-oidc-sdk](https://bitbucket.org/connect2id/oauth-2.0-sdk-with-openid-connect-extensions)
  * javapoet - [com.palantir.javapoet:javapoet](https://github.com/palantir/javapoet)
@@ -149,7 +131,6 @@ Apache License Version 2.0
  * Commons Digester - [commons-digester:commons-digester](http://commons.apache.org/digester/)
  * Apache Commons IO - [commons-io:commons-io](https://commons.apache.org/proper/commons-io/)
  * Apache Commons Logging - [commons-logging:commons-logging](http://commons.apache.org/proper/commons-logging/)
- * Apache Commons Logging - [commons-logging:commons-logging](https://commons.apache.org/proper/commons-logging/)
  * Apache Commons Validator - [commons-validator:commons-validator](https://commons.apache.org/proper/commons-validator/)
  * utils - [io.confluent:common-utils](https://confluent.io/common-utils)
  * kafka-avro-serializer - [io.confluent:kafka-avro-serializer](http://confluent.io/kafka-avro-serializer)
@@ -159,7 +140,6 @@ Apache License Version 2.0
  * Log Redactor Metrics - [io.confluent:logredactor-metrics](https://github.com/confluentinc/logredactor)
  * Metrics Core - [io.dropwizard.metrics:metrics-core](https://metrics.dropwizard.io/metrics-core)
  * compress4j - [io.github.compress4j:compress4j](https://github.com/compress4j/compress4j)
- * java-json-canonicalization - [io.github.erdtman:java-json-canonicalization](https://github.com/erdtman/java-json-canonicalization)
  * java-diff-utils - [io.github.java-diff-utils:java-diff-utils](https://github.com/java-diff-utils/java-diff-utils/java-diff-utils)
  * kotlin-logging - [io.github.oshai:kotlin-logging-jvm](https://github.com/oshai/kotlin-logging)
  * io.grpc:grpc-api - [io.grpc:grpc-api](https://github.com/grpc/grpc-java)
@@ -287,11 +267,8 @@ Apache License Version 2.0
  * Awaitility - [org.awaitility:awaitility](http://awaitility.org)
  * jose4j - [org.bitbucket.b_c:jose4j](https://bitbucket.org/b_c/jose4j/)
  * TagSoup - [org.ccil.cowan.tagsoup:tagsoup](http://home.ccil.org/~cowan/XML/tagsoup/)
- * flyway-core - [org.flywaydb:flyway-core](https://flywaydb.org/flyway-core)
- * flyway-database-postgresql - [org.flywaydb:flyway-database-postgresql](https://flywaydb.org/flyway-database-postgresql)
  * Hibernate Commons Annotations - [org.hibernate.common:hibernate-commons-annotations](http://hibernate.org)
  * Hibernate Validator Engine - [org.hibernate.validator:hibernate-validator](https://hibernate.org/validator)
- * Javassist - [org.javassist:javassist](http://www.javassist.org/)
  * Javassist - [org.javassist:javassist](http://www.javassist.org/)
  * JBoss Logging 3 - [org.jboss.logging:jboss-logging](https://www.jboss.org)
  * IntelliJ IDEA Annotations - [org.jetbrains:annotations](http://www.jetbrains.org)
@@ -328,7 +305,6 @@ Apache License Version 2.0
  * Spring Aspects - [org.springframework:spring-aspects](https://github.com/spring-projects/spring-framework)
  * Spring Beans - [org.springframework:spring-beans](https://github.com/spring-projects/spring-framework)
  * Spring Context - [org.springframework:spring-context](https://github.com/spring-projects/spring-framework)
- * Spring Context Support - [org.springframework:spring-context-support](https://github.com/spring-projects/spring-framework)
  * Spring Core - [org.springframework:spring-core](https://github.com/spring-projects/spring-framework)
  * Spring Expression Language (SpEL) - [org.springframework:spring-expression](https://github.com/spring-projects/spring-framework)
  * Spring Commons Logging Bridge - [org.springframework:spring-jcl](https://github.com/spring-projects/spring-framework)
@@ -343,11 +319,9 @@ Apache License Version 2.0
  * spring-boot-actuator - [org.springframework.boot:spring-boot-actuator](https://spring.io/projects/spring-boot)
  * spring-boot-actuator-autoconfigure - [org.springframework.boot:spring-boot-actuator-autoconfigure](https://spring.io/projects/spring-boot)
  * spring-boot-autoconfigure - [org.springframework.boot:spring-boot-autoconfigure](https://spring.io/projects/spring-boot)
- * spring-boot-docker-compose - [org.springframework.boot:spring-boot-docker-compose](https://spring.io/projects/spring-boot)
  * spring-boot-loader - [org.springframework.boot:spring-boot-loader](https://spring.io/projects/spring-boot)
  * spring-boot-starter - [org.springframework.boot:spring-boot-starter](https://spring.io/projects/spring-boot)
  * spring-boot-starter-actuator - [org.springframework.boot:spring-boot-starter-actuator](https://spring.io/projects/spring-boot)
- * spring-boot-starter-cache - [org.springframework.boot:spring-boot-starter-cache](https://spring.io/projects/spring-boot)
  * spring-boot-starter-data-jpa - [org.springframework.boot:spring-boot-starter-data-jpa](https://spring.io/projects/spring-boot)
  * spring-boot-starter-jdbc - [org.springframework.boot:spring-boot-starter-jdbc](https://spring.io/projects/spring-boot)
  * spring-boot-starter-json - [org.springframework.boot:spring-boot-starter-json](https://spring.io/projects/spring-boot)
@@ -371,12 +345,10 @@ Apache License Version 2.0
  * spring-security-config - [org.springframework.security:spring-security-config](https://spring.io/projects/spring-security)
  * spring-security-core - [org.springframework.security:spring-security-core](https://spring.io/projects/spring-security)
  * spring-security-crypto - [org.springframework.security:spring-security-crypto](https://spring.io/projects/spring-security)
- * spring-security-oauth2-authorization-server - [org.springframework.security:spring-security-oauth2-authorization-server](https://spring.io/projects/spring-authorization-server)
  * spring-security-oauth2-client - [org.springframework.security:spring-security-oauth2-client](https://spring.io/projects/spring-security)
  * spring-security-oauth2-core - [org.springframework.security:spring-security-oauth2-core](https://spring.io/projects/spring-security)
  * spring-security-oauth2-jose - [org.springframework.security:spring-security-oauth2-jose](https://spring.io/projects/spring-security)
  * spring-security-oauth2-resource-server - [org.springframework.security:spring-security-oauth2-resource-server](https://spring.io/projects/spring-security)
- * spring-security-rsa - [org.springframework.security:spring-security-rsa](http://github.com/spring-projects/spring-security-oauth)
  * spring-security-test - [org.springframework.security:spring-security-test](https://spring.io/projects/spring-security)
  * spring-security-web - [org.springframework.security:spring-security-web](https://spring.io/projects/spring-security)
  * thymeleaf - [org.thymeleaf:thymeleaf](http://www.thymeleaf.org/thymeleaf-lib/thymeleaf)
@@ -397,10 +369,8 @@ Apache License Version 2.0
  * AWS Java SDK :: AWS Core - [software.amazon.awssdk:aws-core](https://aws.amazon.com/sdkforjava)
  * AWS Java SDK :: Core :: Protocols :: AWS Json Protocol - [software.amazon.awssdk:aws-json-protocol](https://aws.amazon.com/sdkforjava)
  * AWS Java SDK :: Core :: Protocols :: AWS Query Protocol - [software.amazon.awssdk:aws-query-protocol](https://aws.amazon.com/sdkforjava)
- * AWS Java SDK :: Core :: Protocols :: AWS Xml Protocol - [software.amazon.awssdk:aws-xml-protocol](https://aws.amazon.com/sdkforjava)
  * AWS Java SDK :: Checksums - [software.amazon.awssdk:checksums](https://aws.amazon.com/sdkforjava)
  * AWS Java SDK :: Checksums SPI - [software.amazon.awssdk:checksums-spi](https://aws.amazon.com/sdkforjava)
- * AWS Java SDK :: AWS CRT Core - [software.amazon.awssdk:crt-core](https://aws.amazon.com/sdkforjava)
  * AWS Java SDK :: Endpoints SPI - [software.amazon.awssdk:endpoints-spi](https://aws.amazon.com/sdkforjava/core/endpoints-spi)
  * AWS Java SDK :: Services :: AWS Glue - [software.amazon.awssdk:glue](https://aws.amazon.com/sdkforjava)
  * AWS Java SDK :: HTTP Auth - [software.amazon.awssdk:http-auth](https://aws.amazon.com/sdkforjava)
@@ -417,7 +387,6 @@ Apache License Version 2.0
  * AWS Java SDK :: Retries - [software.amazon.awssdk:retries](https://aws.amazon.com/sdkforjava/core/retries)
  * AWS Java SDK :: Retries API - [software.amazon.awssdk:retries-spi](https://aws.amazon.com/sdkforjava/core/retries-spi)
  * AWS Java SDK :: Services :: Roles Anywhere - [software.amazon.awssdk:rolesanywhere](https://aws.amazon.com/sdkforjava)
- * AWS Java SDK :: Services :: Amazon S3 - [software.amazon.awssdk:s3](https://aws.amazon.com/sdkforjava)
  * AWS Java SDK :: SDK Core - [software.amazon.awssdk:sdk-core](https://aws.amazon.com/sdkforjava)
  * AWS Java SDK :: Services :: SSO - [software.amazon.awssdk:sso](https://aws.amazon.com/sdkforjava)
  * AWS Java SDK :: Services :: SSO OIDC - [software.amazon.awssdk:ssooidc](https://aws.amazon.com/sdkforjava)
@@ -443,20 +412,6 @@ BSD 2-Clause License
 -------------------------------
 
  * zstd-jni - [com.github.luben:zstd-jni](https://github.com/luben/zstd-jni)
- * flexmark-java core - [com.vladsch.flexmark:flexmark](https://github.com/vsch/flexmark-java/flexmark)
- * flexmark-java extension for tables - [com.vladsch.flexmark:flexmark-ext-tables](https://github.com/vsch/flexmark-java/flexmark-ext-tables)
- * flexmark-java utilities - [com.vladsch.flexmark:flexmark-util](https://github.com/vsch/flexmark-java/flexmark-util)
- * flexmark-java ast utilities - [com.vladsch.flexmark:flexmark-util-ast](https://github.com/vsch/flexmark-java/flexmark-util-ast)
- * flexmark-java builder utilities - [com.vladsch.flexmark:flexmark-util-builder](https://github.com/vsch/flexmark-java/flexmark-util-builder)
- * flexmark-java collection utilities - [com.vladsch.flexmark:flexmark-util-collection](https://github.com/vsch/flexmark-java/flexmark-util-collection)
- * flexmark-java data utilities - [com.vladsch.flexmark:flexmark-util-data](https://github.com/vsch/flexmark-java/flexmark-util-data)
- * flexmark-java dependency utilities - [com.vladsch.flexmark:flexmark-util-dependency](https://github.com/vsch/flexmark-java/flexmark-util-dependency)
- * flexmark-java format utilities - [com.vladsch.flexmark:flexmark-util-format](https://github.com/vsch/flexmark-java/flexmark-util-format)
- * flexmark-java html utilities - [com.vladsch.flexmark:flexmark-util-html](https://github.com/vsch/flexmark-java/flexmark-util-html)
- * flexmark-java misc utilities - [com.vladsch.flexmark:flexmark-util-misc](https://github.com/vsch/flexmark-java/flexmark-util-misc)
- * flexmark-java options utilities - [com.vladsch.flexmark:flexmark-util-options](https://github.com/vsch/flexmark-java/flexmark-util-options)
- * flexmark-java sequence utilities - [com.vladsch.flexmark:flexmark-util-sequence](https://github.com/vsch/flexmark-java/flexmark-util-sequence)
- * flexmark-java visitor utilities - [com.vladsch.flexmark:flexmark-util-visitor](https://github.com/vsch/flexmark-java/flexmark-util-visitor)
  * HdrHistogram - [org.hdrhistogram:HdrHistogram](http://hdrhistogram.github.io/HdrHistogram/)
  * PostgreSQL JDBC Driver - [org.postgresql:postgresql](https://jdbc.postgresql.org)
 
@@ -471,9 +426,7 @@ BSD License 3
 Bouncy Castle Licence
 -------------------------------
 
- * Bouncy Castle PKIX, CMS, EAC, TSP, PKCS, OCSP, CMP, and CRMF APIs - [org.bouncycastle:bcpkix-jdk18on](https://www.bouncycastle.org/download/bouncy-castle-java/)
  * Bouncy Castle Provider - [org.bouncycastle:bcprov-jdk18on](https://www.bouncycastle.org/download/bouncy-castle-java/)
- * Bouncy Castle ASN.1 Extension and Utility APIs - [org.bouncycastle:bcutil-jdk18on](https://www.bouncycastle.org/download/bouncy-castle-java/)
 
 CDDL
 -------------------------------
@@ -546,15 +499,9 @@ Go License
 
  * RE2/J - [com.google.re2j:re2j](http://github.com/google/re2j)
 
-ISC License
--------------------------------
-
- * kotlin-result - [com.michael-bull.kotlin-result:kotlin-result-jvm](https://github.com/michaelbull/kotlin-result)
-
 LGPL 2.1
 -------------------------------
 
- * Javassist - [org.javassist:javassist](http://www.javassist.org/)
  * Javassist - [org.javassist:javassist](http://www.javassist.org/)
 
 MIT License
@@ -563,7 +510,6 @@ MIT License
  * minimal-json - [com.eclipsesource.minimal-json:minimal-json](https://github.com/ralfstx/minimal-json)
  * Java SemVer - [com.github.zafarkhaja:java-semver](https://github.com/zafarkhaja/jsemver)
  * semver4j - [com.vdurmont:semver4j](https://github.com/vdurmont/semver4j)
- * ClassGraph - [io.github.classgraph:classgraph](https://github.com/classgraph/classgraph)
  * ClassGraph - [io.github.classgraph:classgraph](https://github.com/classgraph/classgraph)
  * toml4j - [io.hotmoka:toml4j](http://moandjiezana.com/toml/toml4j)
  * core - [io.pact.plugin.driver:core](https://github.com/pact-foundation/pact-plugins)
@@ -584,7 +530,6 @@ MIT License
 MPL 1.1
 -------------------------------
 
- * Javassist - [org.javassist:javassist](http://www.javassist.org/)
  * Javassist - [org.javassist:javassist](http://www.javassist.org/)
 
 Mozilla Public License, Version 2.0
