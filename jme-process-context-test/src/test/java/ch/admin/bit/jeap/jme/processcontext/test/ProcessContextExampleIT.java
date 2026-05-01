@@ -29,7 +29,7 @@ import static org.awaitility.Awaitility.await;
 
 @Slf4j
 @SuppressWarnings("unchecked")
-public class ProcessContextExampleIT extends BootServiceSpringIntegrationTestBase {
+class ProcessContextExampleIT extends BootServiceSpringIntegrationTestBase {
 
     private static final String AUTH_BASE_URL = "http://localhost:8081/jme-process-context-auth-scs";
     private static final String SCS_BASE_URL = "http://localhost:8080/process-context";
