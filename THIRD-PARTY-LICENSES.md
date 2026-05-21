@@ -547,6 +547,7 @@ Eclipse Public License v2.0
  * Logback Core Module - [ch.qos.logback:logback-core](http://logback.qos.ch/logback-core)
  * Jakarta Annotations API - [jakarta.annotation:jakarta.annotation-api](https://projects.eclipse.org/projects/ee4j.ca)
  * Jakarta Persistence API - [jakarta.persistence:jakarta.persistence-api](https://github.com/jakartaee/persistence)
+ * Jakarta Servlet - [jakarta.servlet:jakarta.servlet-api](https://projects.eclipse.org/projects/ee4j.servlet)
  * jakarta.transaction API - [jakarta.transaction:jakarta.transaction-api](https://projects.eclipse.org/projects/ee4j.jta)
  * AspectJ Weaver - [org.aspectj:aspectjweaver](https://www.eclipse.org/aspectj/)
  * JUnit Jupiter (Aggregator) - [org.junit.jupiter:junit-jupiter](https://junit.org/)
@@ -566,6 +567,7 @@ GNU General Public License, version 2 (GPL2), with the classpath exception
 -------------------------------
 
  * Jakarta Annotations API - [jakarta.annotation:jakarta.annotation-api](https://projects.eclipse.org/projects/ee4j.ca)
+ * Jakarta Servlet - [jakarta.servlet:jakarta.servlet-api](https://projects.eclipse.org/projects/ee4j.servlet)
  * jakarta.transaction API - [jakarta.transaction:jakarta.transaction-api](https://projects.eclipse.org/projects/ee4j.jta)
 
 GNU Lesser General Public License
