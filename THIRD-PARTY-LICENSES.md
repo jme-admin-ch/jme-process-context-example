@@ -98,7 +98,6 @@ Apache License Version 2.0
  * colormath - [com.github.ajalt:colormath](https://github.com/ajalt/colormath)
  * mordant - [com.github.ajalt:mordant](https://github.com/ajalt/mordant)
  * Caffeine cache - [com.github.ben-manes.caffeine:caffeine](https://github.com/ben-manes/caffeine)
- * Generex - [com.github.mifmif:generex](https://github.com/mifmif/Generex/tree/master)
  * JCIP Annotations under Apache License - [com.github.stephenc.jcip:jcip-annotations](http://stephenc.github.com/jcip-annotations)
  * Google Android Annotations Library - [com.google.android:annotations](http://source.android.com/)
  * proto-google-common-protos - [com.google.api.grpc:proto-google-common-protos](https://github.com/googleapis/sdk-platform-java)
@@ -108,6 +107,7 @@ Apache License Version 2.0
  * error-prone annotations - [com.google.errorprone:error_prone_annotations](https://errorprone.info/error_prone_annotations)
  * error-prone annotations - [com.google.errorprone:error_prone_annotations](https://errorprone.info/error_prone_annotations)
  * Guava InternalFutureFailureAccess and InternalFutures - [com.google.guava:failureaccess](https://github.com/google/guava/failureaccess)
+ * Guava: Google Core Libraries for Java - [com.google.guava:guava](https://github.com/google/guava)
  * Guava: Google Core Libraries for Java - [com.google.guava:guava](https://github.com/google/guava)
  * Guava ListenableFuture only - [com.google.guava:listenablefuture](https://github.com/google/guava/listenablefuture)
  * J2ObjC Annotations - [com.google.j2objc:j2objc-annotations](https://github.com/google/j2objc/)
@@ -135,6 +135,7 @@ Apache License Version 2.0
  * Commons Digester - [commons-digester:commons-digester](http://commons.apache.org/digester/)
  * Apache Commons IO - [commons-io:commons-io](https://commons.apache.org/proper/commons-io/)
  * Apache Commons IO - [commons-io:commons-io](https://commons.apache.org/proper/commons-io/)
+ * Apache Commons IO - [commons-io:commons-io](https://commons.apache.org/proper/commons-io/)
  * Apache Commons Logging - [commons-logging:commons-logging](https://commons.apache.org/proper/commons-logging/)
  * Apache Commons Validator - [commons-validator:commons-validator](https://commons.apache.org/proper/commons-validator/)
  * utils - [io.confluent:common-utils](https://confluent.io/common-utils)
@@ -157,6 +158,7 @@ Apache License Version 2.0
  * io.grpc:grpc-util - [io.grpc:grpc-util](https://github.com/grpc/grpc-java)
  * ktor-events - [io.ktor:ktor-events](https://github.com/ktorio/ktor)
  * ktor-http - [io.ktor:ktor-http](https://github.com/ktorio/ktor)
+ * ktor-http-cio - [io.ktor:ktor-http-cio](https://github.com/ktorio/ktor)
  * ktor-http - [io.ktor:ktor-http-jvm](https://github.com/ktorio/ktor)
  * ktor-io - [io.ktor:ktor-io](https://github.com/ktorio/ktor)
  * ktor-io - [io.ktor:ktor-io-jvm](https://github.com/ktorio/ktor)
@@ -297,14 +299,17 @@ Apache License Version 2.0
  * Kotlin Scripting Jvm - [org.jetbrains.kotlin:kotlin-scripting-jvm](https://kotlinlang.org/)
  * Kotlin Stdlib - [org.jetbrains.kotlin:kotlin-stdlib](https://kotlinlang.org/)
  * Kotlin Stdlib Common - [org.jetbrains.kotlin:kotlin-stdlib-common](https://kotlinlang.org/)
+ * Kotlin Stdlib Common - [org.jetbrains.kotlin:kotlin-stdlib-common](https://kotlinlang.org/)
  * Kotlin Stdlib Jdk7 - [org.jetbrains.kotlin:kotlin-stdlib-jdk7](https://kotlinlang.org/)
  * Kotlin Stdlib Jdk8 - [org.jetbrains.kotlin:kotlin-stdlib-jdk8](https://kotlinlang.org/)
- * atomicfu - [org.jetbrains.kotlinx:atomicfu](https://github.com/Kotlin/kotlinx.atomicfu)
- * atomicfu - [org.jetbrains.kotlinx:atomicfu-jvm](https://github.com/Kotlin/kotlinx.atomicfu)
  * kotlinx-coroutines-core - [org.jetbrains.kotlinx:kotlinx-coroutines-core](https://github.com/Kotlin/kotlinx.coroutines)
  * kotlinx-coroutines-core - [org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm](https://github.com/Kotlin/kotlinx.coroutines)
- * kotlinx-coroutines-jdk8 - [org.jetbrains.kotlinx:kotlinx-coroutines-jdk8](https://github.com/Kotlin/kotlinx.coroutines)
  * kotlinx-datetime - [org.jetbrains.kotlinx:kotlinx-datetime-jvm](https://github.com/Kotlin/kotlinx-datetime)
+ * kotlinx-io-bytestring - [org.jetbrains.kotlinx:kotlinx-io-bytestring](https://github.com/Kotlin/kotlinx-io)
+ * kotlinx-io-bytestring - [org.jetbrains.kotlinx:kotlinx-io-bytestring-jvm](https://github.com/Kotlin/kotlinx-io)
+ * kotlinx-io-core - [org.jetbrains.kotlinx:kotlinx-io-core](https://github.com/Kotlin/kotlinx-io)
+ * kotlinx-io-core - [org.jetbrains.kotlinx:kotlinx-io-core-jvm](https://github.com/Kotlin/kotlinx-io)
+ * kotlinx-serialization-core - [org.jetbrains.kotlinx:kotlinx-serialization-core](https://github.com/Kotlin/kotlinx.serialization)
  * kotlinx-serialization-core - [org.jetbrains.kotlinx:kotlinx-serialization-core-jvm](https://github.com/Kotlin/kotlinx.serialization)
  * JSpecify annotations - [org.jspecify:jspecify](http://jspecify.org/)
  * Objenesis - [org.objenesis:objenesis](http://objenesis.org/objenesis)
@@ -419,6 +424,7 @@ Apache License Version 2.0
  * org.xmlunit:xmlunit-core - [org.xmlunit:xmlunit-core](https://www.xmlunit.org/)
  * SnakeYAML - [org.yaml:snakeyaml](https://bitbucket.org/snakeyaml/snakeyaml)
  * AWS Java SDK :: Annotations - [software.amazon.awssdk:annotations](https://aws.amazon.com/sdkforjava/core/annotations)
+ * AWS Java SDK :: HTTP Clients :: Apache5 - [software.amazon.awssdk:apache5-client](https://aws.amazon.com/sdkforjava/http-clients/apache5-client)
  * AWS Java SDK :: Arns - [software.amazon.awssdk:arns](https://aws.amazon.com/sdkforjava)
  * AWS Java SDK :: Auth - [software.amazon.awssdk:auth](https://aws.amazon.com/sdkforjava)
  * AWS Java SDK :: AWS Core - [software.amazon.awssdk:aws-core](https://aws.amazon.com/sdkforjava)
@@ -461,11 +467,6 @@ Apache License Version 2.0
  * Amazon MSK Library for AWS Identity and Access Management - [software.amazon.msk:aws-msk-iam-auth](https://docs.aws.amazon.com/msk/latest/developerguide/iam-access-control.html)
  * Jackson-core - [tools.jackson.core:jackson-core](https://github.com/FasterXML/jackson-core)
  * jackson-databind - [tools.jackson.core:jackson-databind](https://github.com/FasterXML/jackson)
-
-BSD
--------------------------------
-
- * Automaton - [dk.brics.automaton:automaton](http://www.brics.dk/automaton/)
 
 BSD 2-Clause License
 -------------------------------
@@ -570,11 +571,6 @@ Go License
 -------------------------------
 
  * RE2/J - [com.google.re2j:re2j](http://github.com/google/re2j)
-
-ISC License
--------------------------------
-
- * kotlin-result - [com.michael-bull.kotlin-result:kotlin-result-jvm](https://github.com/michaelbull/kotlin-result)
 
 LGPL 2.1
 -------------------------------
