@@ -40,11 +40,18 @@ services:
       # Temporary storage settings
       KAFKA_LOG_DIRS: /tmp/kafka-logs
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    healthcheck:
+      test: [ "CMD", "kafka-broker-api-versions", "--bootstrap-server", "localhost:9092" ]
+      interval: 5s
+      timeout: 10s
+      retries: 15
+      start_period: 10s
 
   cluster1-broker_init:
     image: confluentinc/cp-kafka:8.2.0
     depends_on:
-      - cluster1-broker
+      cluster1-broker:
+        condition: service_healthy
     entrypoint:
       - /bin/bash
       - -exc
@@ -53,8 +60,10 @@ services:
   cluster1-schema-registry:
     image: confluentinc/cp-schema-registry:8.1.1
     depends_on:
-      - cluster1-broker
-      - cluster1-broker_init
+      cluster1-broker:
+        condition: service_healthy
+      cluster1-broker_init:
+        condition: service_completed_successfully
     ports:
       - "11000:8081"
     environment:
@@ -90,11 +99,18 @@ services:
       # Temporary storage settings
       KAFKA_LOG_DIRS: /tmp/kafka-logs
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    healthcheck:
+      test: [ "CMD", "kafka-broker-api-versions", "--bootstrap-server", "localhost:9092" ]
+      interval: 5s
+      timeout: 10s
+      retries: 15
+      start_period: 10s
 
   cluster2-broker_init:
     image: confluentinc/cp-kafka:8.2.0
     depends_on:
-      - cluster2-broker
+      cluster2-broker:
+        condition: service_healthy
     entrypoint:
       - /bin/bash
       - -exc
@@ -103,8 +119,10 @@ services:
   cluster2-schema-registry:
     image: confluentinc/cp-schema-registry:8.1.1
     depends_on:
-      - cluster2-broker
-      - cluster2-broker_init
+      cluster2-broker:
+        condition: service_healthy
+      cluster2-broker_init:
+        condition: service_completed_successfully
     ports:
       - "13000:8081"
     environment:
