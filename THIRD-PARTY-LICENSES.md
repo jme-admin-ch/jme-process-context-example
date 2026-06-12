@@ -54,6 +54,7 @@ Apache License Version 2.0
  * ch.admin.bit.jeap:jeap-spring-boot-swagger - [ch.admin.bit.jeap:jeap-spring-boot-swagger](https://github.com/jeap-admin-ch/jeap-spring-boot-starters/tree/main/jeap-spring-boot-swagger)
  * ch.admin.bit.jeap:jeap-spring-boot-swagger-starter - [ch.admin.bit.jeap:jeap-spring-boot-swagger-starter](https://github.com/jeap-admin-ch/jeap-spring-boot-starters/tree/main/jeap-spring-boot-swagger-starter)
  * ch.admin.bit.jeap:jeap-spring-boot-tx - [ch.admin.bit.jeap:jeap-spring-boot-tx](https://github.com/jeap-admin-ch/jeap-spring-boot-starters/tree/main/jeap-spring-boot-tx)
+ * ch.admin.bit.jeap:jeap-spring-boot-web-config-starter - [ch.admin.bit.jeap:jeap-spring-boot-web-config-starter](https://github.com/jeap-admin-ch/jeap-spring-boot-starters/tree/main/jeap-spring-boot-web-config-starter)
  * jme-process-context-events - [ch.admin.bit.jeap:jme-process-context-events](https://github.com/jme-admin-ch/jme-process-context-example/tree/main/jme-process-context-events)
  * ch.admin.bit.jeap.archivetype.jeap:process-snapshot-v1 - [ch.admin.bit.jeap.archivetype.jeap:process-snapshot-v1](https://github.com/jeap-admin-ch/jeap-archive-type-registry/tree/main)
  * ch.admin.bit.jeap.archivetype.jeap:process-snapshot-v2 - [ch.admin.bit.jeap.archivetype.jeap:process-snapshot-v2](https://github.com/jeap-admin-ch/jeap-archive-type-registry/tree/main)
