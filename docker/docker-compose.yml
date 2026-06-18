@@ -58,7 +58,7 @@ services:
       - kafka-configs --bootstrap-server cluster1-broker:9092 --alter --add-config 'SCRAM-SHA-512=[password=user-secret]' --entity-type users --entity-name user
 
   cluster1-schema-registry:
-    image: confluentinc/cp-schema-registry:8.1.1
+    image: confluentinc/cp-schema-registry:8.3.0
     depends_on:
       cluster1-broker:
         condition: service_healthy
@@ -117,7 +117,7 @@ services:
       - kafka-configs --bootstrap-server cluster2-broker:9092 --alter --add-config 'SCRAM-SHA-512=[password=cluster2-secret]' --entity-type users --entity-name cluster2-user
 
   cluster2-schema-registry:
-    image: confluentinc/cp-schema-registry:8.1.1
+    image: confluentinc/cp-schema-registry:8.3.0
     depends_on:
       cluster2-broker:
         condition: service_healthy
