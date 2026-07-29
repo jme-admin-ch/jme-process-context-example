@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres
 to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [12.0.0] - 2026-07-29
+
+### Dependencies
+- **ch.admin.bit.jeap:jeap-spring-boot-parent**: 37.7.0 → 38.0.0 (major)
+- **ch.admin.bit.jeap:jeap-process-context-message**: 23.2.0 → 24.0.0 (major)
+- **ch.admin.bit.jeap:jeap-process-context-domain**: 23.2.0 → 24.0.0 (major)
+- **ch.admin.bit.jeap:jeap-process-context-scs**: 23.2.0 → 24.0.0 (major)
+- **ch.admin.bit.jeap:jeap-process-context-plugin-api**: 23.2.0 → 24.0.0 (major)
+- **ch.admin.bit.jeap:jeap-oauth-mock-server**: 7.3.0 → 8.0.0 (major)
+- **ch.admin.bit.jeap.jme:jme-spring-boot-integration-test**: 5.7.4 → 5.7.5 (patch)
+
 ## [11.5.0] - 2026-07-28
 
 ### Dependencies
