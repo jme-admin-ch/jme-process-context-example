@@ -15,7 +15,7 @@ services:
   ############################################
 
   cluster1-broker:
-    image: confluentinc/cp-kafka:8.3.0
+    image: confluentinc/cp-kafka:8.3.1
     hostname: cluster1-broker
     ports:
       - "10000:10000"
@@ -48,7 +48,7 @@ services:
       start_period: 10s
 
   cluster1-broker_init:
-    image: confluentinc/cp-kafka:8.3.0
+    image: confluentinc/cp-kafka:8.3.1
     depends_on:
       cluster1-broker:
         condition: service_healthy
@@ -58,7 +58,7 @@ services:
       - kafka-configs --bootstrap-server cluster1-broker:9092 --alter --add-config 'SCRAM-SHA-512=[password=user-secret]' --entity-type users --entity-name user
 
   cluster1-schema-registry:
-    image: confluentinc/cp-schema-registry:8.3.0
+    image: confluentinc/cp-schema-registry:8.3.1
     depends_on:
       cluster1-broker:
         condition: service_healthy
@@ -75,7 +75,7 @@ services:
   ############################################
 
   cluster2-broker:
-    image: confluentinc/cp-kafka:8.3.0
+    image: confluentinc/cp-kafka:8.3.1
     ports:
       - "12000:12000"
     volumes:
@@ -107,7 +107,7 @@ services:
       start_period: 10s
 
   cluster2-broker_init:
-    image: confluentinc/cp-kafka:8.3.0
+    image: confluentinc/cp-kafka:8.3.1
     depends_on:
       cluster2-broker:
         condition: service_healthy
@@ -117,7 +117,7 @@ services:
       - kafka-configs --bootstrap-server cluster2-broker:9092 --alter --add-config 'SCRAM-SHA-512=[password=cluster2-secret]' --entity-type users --entity-name cluster2-user
 
   cluster2-schema-registry:
-    image: confluentinc/cp-schema-registry:8.3.0
+    image: confluentinc/cp-schema-registry:8.3.1
     depends_on:
       cluster2-broker:
         condition: service_healthy
