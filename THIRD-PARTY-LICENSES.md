@@ -85,6 +85,8 @@ Apache License Version 2.0
  * AWS SDK for Java - Core - [com.amazonaws:aws-java-sdk-core](https://aws.amazon.com/sdkforjava)
  * AWS Java SDK for AWS STS - [com.amazonaws:aws-java-sdk-sts](https://aws.amazon.com/sdkforjava)
  * JMES Path Query library - [com.amazonaws:jmespath-java](https://aws.amazon.com/sdkforjava)
+ * libGDX jnigen library - [com.badlogicgames.jnigen:jnigen-commons](https://github.com/libgdx/gdx-jnigen)
+ * libGDX jnigen library - [com.badlogicgames.jnigen:jnigen-loader](https://github.com/libgdx/gdx-jnigen)
  * com.dynatrace.hash4j:hash4j - [com.dynatrace.hash4j:hash4j](https://github.com/dynatrace-oss/hash4j)
  * ClassMate - [com.fasterxml:classmate](https://github.com/FasterXML/java-classmate)
  * Jackson-annotations - [com.fasterxml.jackson.core:jackson-annotations](https://github.com/FasterXML/jackson)
@@ -135,8 +137,10 @@ Apache License Version 2.0
  * Apache Commons Validator - [commons-validator:commons-validator](https://commons.apache.org/proper/commons-validator/)
  * utils - [io.confluent:common-utils](https://confluent.io/common-utils)
  * kafka-avro-serializer - [io.confluent:kafka-avro-serializer](http://confluent.io/kafka-avro-serializer)
+ * kafka-avro-types - [io.confluent:kafka-avro-types](http://confluent.io/kafka-avro-types)
  * kafka-schema-registry-client - [io.confluent:kafka-schema-registry-client](http://confluent.io/kafka-schema-registry-client)
  * kafka-schema-serializer - [io.confluent:kafka-schema-serializer](http://confluent.io/kafka-schema-serializer)
+ * kafka-schema-types - [io.confluent:kafka-schema-types](http://confluent.io/kafka-schema-types)
  * Log Redactor - [io.confluent:logredactor](https://github.com/confluentinc/logredactor)
  * Log Redactor Metrics - [io.confluent:logredactor-metrics](https://github.com/confluentinc/logredactor)
  * compress4j - [io.github.compress4j:compress4j](https://github.com/compress4j/compress4j)
@@ -234,6 +238,7 @@ Apache License Version 2.0
  * Apache Commons Compress - [org.apache.commons:commons-compress](https://commons.apache.org/proper/commons-compress/)
  * Apache Commons Compress - [org.apache.commons:commons-compress](https://commons.apache.org/proper/commons-compress/)
  * Apache Commons Lang - [org.apache.commons:commons-lang3](https://commons.apache.org/proper/commons-lang/)
+ * Apache Commons Text - [org.apache.commons:commons-text](https://commons.apache.org/proper/commons-text)
  * Apache Commons Text - [org.apache.commons:commons-text](https://commons.apache.org/proper/commons-text)
  * Apache Groovy - [org.apache.groovy:groovy](https://groovy-lang.org)
  * Apache Groovy - [org.apache.groovy:groovy-json](https://groovy-lang.org)
@@ -598,6 +603,9 @@ MIT License
  * JUL to SLF4J bridge - [org.slf4j:jul-to-slf4j](http://www.slf4j.org)
  * SLF4J API Module - [org.slf4j:slf4j-api](http://www.slf4j.org)
  * webjars-locator-lite - [org.webjars:webjars-locator-lite](https://webjars.org)
+ * Lua 5.4 - [party.iroiro.luajava:lua54](https://github.com/gudzpoz/luajava)
+ * Lua 5.4 - [party.iroiro.luajava:lua54-platform](https://github.com/gudzpoz/luajava)
+ * LuaJava - [party.iroiro.luajava:luajava](https://github.com/gudzpoz/luajava)
 
 MPL 1.1
 -------------------------------
