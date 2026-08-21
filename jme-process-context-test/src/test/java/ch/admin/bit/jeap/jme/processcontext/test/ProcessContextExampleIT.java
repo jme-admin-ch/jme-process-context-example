@@ -1,6 +1,7 @@
 package ch.admin.bit.jeap.jme.processcontext.test;
 
 import ch.admin.bit.jeap.jme.test.BootServiceSpringIntegrationTestBase;
+import ch.admin.bit.jeap.messaging.avro.security.AvroClassSecurity;
 import ch.admin.bit.jeap.processcontext.archive.processsnapshot.v2.ProcessSnapshot;
 import io.restassured.RestAssured;
 import io.restassured.config.EncoderConfig;
@@ -35,6 +36,13 @@ class ProcessContextExampleIT extends BootServiceSpringIntegrationTestBase {
     private static final String SCS_BASE_URL = "http://localhost:8080/process-context";
     private static final String APP_BASE_URL = "http://localhost:8082/jme-process-context-app-service";
     private static final String AUTH_TOKEN_URL = AUTH_BASE_URL + "/oauth2/token";
+
+    @BeforeAll
+    static void installAvroClassSecurity() {
+        // This test deserializes an Avro generated type without a jEAP messaging Spring context installing the
+        // Avro class whitelist, so it has to install the whitelist itself.
+        AvroClassSecurity.installDefaultIfMissing();
+    }
 
     @BeforeAll
     static void startServices() throws Exception {

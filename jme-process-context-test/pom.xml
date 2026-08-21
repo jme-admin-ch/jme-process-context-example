@@ -43,6 +43,12 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <!-- Provides the Avro class whitelist required to deserialize Avro generated types -->
+            <groupId>ch.admin.bit.jeap</groupId>
+            <artifactId>jeap-messaging-avro</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
             <scope>test</scope>

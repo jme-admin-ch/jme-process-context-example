@@ -7,6 +7,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [17.0.0] - 2026-08-20
 
+### Changed
+- Install the Avro class whitelist in `ProcessContextExampleIT`, as Avro 1.12.2 only resolves classes from a schema
+  when they are trusted.
+
 ### Dependencies
 - **ch.admin.bit.jeap:jeap-spring-boot-parent**: 39.5.0 → 40.0.0 (major)
 - **ch.admin.bit.jeap:jeap-process-context-message**: 26.1.1 → 26.3.0 (minor)
