@@ -11,7 +11,8 @@ oauth-mock-data:
                                  "http://localhost:8080/process-context/assets/auth/silent-renew.html",
                                  "http://localhost:4200/",
                                  "http://localhost:4200/assets/auth/silent-renew.html" ]
-      userroles: [ "jme_@processinstance_#view", "jme_@processsnapshot_#view" ]
+      userroles: [ "jme_@processinstance_#view", "jme_@processsnapshot_#view",
+                   "jme_@processcontextjob_#write", "jme_@processcontextjob_#read" ]
 
     - client-id: "jme-process-context-app-service"
       client-secret: "{noop}secret"
@@ -21,4 +22,5 @@ oauth-mock-data:
     - client-id: "jme-process-context-it-client"
       client-secret: "{noop}secret"
       context: "SYS"
-      userroles: ["jme_@processinstance_#view", "jme_@processsnapshot_#view"]
+      userroles: [ "jme_@processinstance_#view", "jme_@processsnapshot_#view",
+                   "jme_@processcontextjob_#write", "jme_@processcontextjob_#read" ]

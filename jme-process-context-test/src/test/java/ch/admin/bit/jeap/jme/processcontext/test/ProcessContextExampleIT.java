@@ -17,12 +17,21 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 
 import java.io.ByteArrayInputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -36,6 +45,9 @@ class ProcessContextExampleIT extends BootServiceSpringIntegrationTestBase {
     private static final String SCS_BASE_URL = "http://localhost:8080/process-context";
     private static final String APP_BASE_URL = "http://localhost:8082/jme-process-context-app-service";
     private static final String AUTH_TOKEN_URL = AUTH_BASE_URL + "/oauth2/token";
+    private static final Duration MAINTENANCE_TIMEOUT = Duration.ofSeconds(90);
+    private static final String MAINTENANCE_PROCESS_ID_PLACEHOLDER = "maintenance-document-review";
+    private static final String RELATION_ID_PLACEHOLDER = "00000000-0000-0000-0000-000000000000";
 
     @BeforeAll
     static void installAvroClassSecurity() {
@@ -134,6 +146,176 @@ class ProcessContextExampleIT extends BootServiceSpringIntegrationTestBase {
         assertGetSnapshotFromArchiveDataRestInterface(accessToken, processId);
     }
 
+    @Test
+    void runMaintenanceJobs() throws Exception {
+        String accessToken = retrieveAccessToken();
+        String processId = "maintenance-" + UUID.randomUUID();
+        String versionId = "version-" + UUID.randomUUID();
+        String reviewId = "review-" + UUID.randomUUID();
+
+        given()
+                .baseUri(APP_BASE_URL)
+                .contentType(ContentType.JSON)
+                .body("""
+                        {"documentId":"%s","title":"Maintenance example","author":"jEAP"}
+                        """.formatted(processId))
+                .when()
+                .post("/api/documentprocess/{processId}/createProcess", processId)
+                .then()
+                .statusCode(HttpStatus.CREATED.value());
+
+        await().atMost(MAINTENANCE_TIMEOUT)
+                .until(() -> retrieveProcessData(accessToken, processId).get("state") != null);
+
+        given()
+                .baseUri(APP_BASE_URL)
+                .contentType(ContentType.JSON)
+                .body("""
+                        {"versionId":"%s","versionNumber":"1","changes":"initial version"}
+                        """.formatted(versionId))
+                .when()
+                .post("/api/documentprocess/{processId}/createDocumentVersion", processId)
+                .then()
+                .statusCode(HttpStatus.OK.value());
+
+        await().atMost(MAINTENANCE_TIMEOUT).untilAsserted(() -> assertThat(retrieveProcessDataItems(accessToken, processId))
+                .anySatisfy(item -> assertThat(item)
+                        .containsEntry("key", "versionId")
+                        .containsEntry("value", versionId)
+                        .containsEntry("role", "1")));
+
+        UUID reevaluationJobId = UUID.randomUUID();
+        submitMaintenanceJob(accessToken, "reevaluation-jobs", reevaluationJobId,
+                maintenanceFixture("reevaluation-job.yaml").replace(MAINTENANCE_PROCESS_ID_PLACEHOLDER, processId));
+        awaitSuccessfulMaintenanceJob(accessToken, "reevaluation-jobs", reevaluationJobId,
+                "origin-process-id: " + processId);
+        assertThat(countRelations(processId)).isZero();
+
+        UUID backfillJobId = UUID.randomUUID();
+        String backfillRequest = maintenanceFixture("backfill-job.yaml")
+                .replace(MAINTENANCE_PROCESS_ID_PLACEHOLDER, processId)
+                .replace("maintenance-review", reviewId);
+        submitMaintenanceJob(accessToken, "backfill-jobs", backfillJobId, backfillRequest);
+        awaitSuccessfulMaintenanceJob(accessToken, "backfill-jobs", backfillJobId,
+                "origin-process-id: " + processId);
+
+        await().atMost(MAINTENANCE_TIMEOUT).untilAsserted(() -> assertThat(retrieveProcessDataItems(accessToken, processId))
+                .anySatisfy(item -> assertThat(item)
+                        .containsEntry("key", "reviewId")
+                        .containsEntry("value", reviewId)
+                        .containsEntry("role", "1")));
+
+        PersistedRelation relation = await().atMost(MAINTENANCE_TIMEOUT)
+                .until(() -> findRelation(processId), Optional::isPresent)
+                .orElseThrow();
+        await().atMost(MAINTENANCE_TIMEOUT)
+                .untilAsserted(() -> assertThat(countRelationNotifications(accessToken, relation.idempotenceId()))
+                        .isEqualTo(1));
+
+        UUID publicationJobId = UUID.randomUUID();
+        submitMaintenanceJob(accessToken, "relation-publication-jobs", publicationJobId,
+                maintenanceFixture("relation-publication-job.yaml")
+                        .replace(RELATION_ID_PLACEHOLDER, relation.id().toString()));
+        awaitSuccessfulMaintenanceJob(accessToken, "relation-publication-jobs", publicationJobId,
+                "relation-id: " + relation.id());
+        await().atMost(MAINTENANCE_TIMEOUT)
+                .untilAsserted(() -> assertThat(countRelationNotifications(accessToken, relation.idempotenceId()))
+                        .isEqualTo(2));
+    }
+
+    private void submitMaintenanceJob(String accessToken, String jobEndpoint, UUID jobId, String request) {
+        given()
+                .config(RestAssured.config().encoderConfig(
+                        EncoderConfig.encoderConfig().encodeContentTypeAs("application/yaml", ContentType.TEXT)))
+                .baseUri(SCS_BASE_URL)
+                .auth().oauth2(accessToken)
+                .contentType("application/yaml")
+                .body(request)
+                .when()
+                .put("/api/{jobEndpoint}/{jobId}", jobEndpoint, jobId)
+                .then()
+                .statusCode(HttpStatus.CREATED.value());
+    }
+
+    private void awaitSuccessfulMaintenanceJob(String accessToken, String jobEndpoint, UUID jobId,
+                                               String expectedTaskTarget) {
+        await().atMost(MAINTENANCE_TIMEOUT).untilAsserted(() -> {
+            String report = given()
+                    .baseUri(SCS_BASE_URL)
+                    .auth().oauth2(accessToken)
+                    .accept("application/yaml")
+                    .when()
+                    .get("/api/{jobEndpoint}/{jobId}", jobEndpoint, jobId)
+                    .then()
+                    .statusCode(HttpStatus.OK.value())
+                    .extract().asString();
+            assertThat(report)
+                    .contains("job-state: completed")
+                    .contains("job-result: succeeded")
+                    .contains(expectedTaskTarget)
+                    .contains("state: succeeded");
+        });
+    }
+
+    private String maintenanceFixture(String fileName) throws Exception {
+        return Files.readString(Path.of("..", "maintenance", fileName));
+    }
+
+    private Optional<PersistedRelation> findRelation(String processId) throws SQLException {
+        try (Connection connection = openPcsDatabaseConnection();
+             PreparedStatement statement = connection.prepareStatement("""
+                     select relation.id, relation.idempotence_id
+                     from data.process_instance_relations relation
+                     join data.process_instance process on process.id = relation.process_instance_id
+                     where process.origin_process_id = ?
+                     """)) {
+            statement.setString(1, processId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                return resultSet.next() ? Optional.of(new PersistedRelation(
+                        resultSet.getObject(1, UUID.class), resultSet.getObject(2, UUID.class))) : Optional.empty();
+            }
+        }
+    }
+
+    private int countRelations(String processId) throws SQLException {
+        return queryCount("""
+                select count(*)
+                from data.process_instance_relations relation
+                join data.process_instance process on process.id = relation.process_instance_id
+                where process.origin_process_id = ?
+                """, processId);
+    }
+
+    private int countRelationNotifications(String accessToken, UUID idempotenceId) {
+        return given()
+                .baseUri(SCS_BASE_URL)
+                .auth().oauth2(accessToken)
+                .when()
+                .get("/api/example-relation-notifications/{idempotenceId}", idempotenceId)
+                .then()
+                .statusCode(HttpStatus.OK.value())
+                .extract().as(Integer.class);
+    }
+
+    private int queryCount(String sql, Object parameter) throws SQLException {
+        try (Connection connection = openPcsDatabaseConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setObject(1, parameter);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                resultSet.next();
+                return resultSet.getInt(1);
+            }
+        }
+    }
+
+    private Connection openPcsDatabaseConnection() throws SQLException {
+        String host = System.getenv("CI") == null ? "localhost" : "jme-pcs-db";
+        return DriverManager.getConnection("jdbc:postgresql://" + host + ":5432/jme-pcs-db", "postgres", "secret");
+    }
+
+    private record PersistedRelation(UUID id, UUID idempotenceId) {
+    }
+
     private String retrieveAccessToken() {
         return RestAssured.given()
                 .config(RestAssured.config().encoderConfig(
@@ -152,6 +334,15 @@ class ProcessContextExampleIT extends BootServiceSpringIntegrationTestBase {
                 .auth().oauth2(accessToken)
                 .when()
                 .get("/api/processes/" + processId).jsonPath();
+    }
+
+    private List<Map<String, String>> retrieveProcessDataItems(String accessToken, String processId) {
+        return given()
+                .baseUri(SCS_BASE_URL)
+                .auth().oauth2(accessToken)
+                .when()
+                .get("/api/processes/{processId}/process-data?size=100", processId)
+                .jsonPath().getList("content");
     }
 
     private byte[] retrieveSnapshotArchiveData(String accessToken, String processId) {

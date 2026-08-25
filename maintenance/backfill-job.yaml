@@ -1,0 +1,7 @@
+process-template-name: documentReviewProcess
+entries:
+  - origin-process-id: maintenance-document-review
+    process-data:
+      - key: reviewId
+        value: maintenance-review
+        role: "1"

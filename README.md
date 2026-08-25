@@ -69,6 +69,9 @@ See the [jeap-process-context-service](https://github.com/jeap-admin-ch/jeap-pro
 
 To try out the application yourself and for detailed process examples with step-by-step instructions, see [PROCESS-EXAMPLES.md](./PROCESS-EXAMPLES.md).
 
+The [PCS maintenance example](maintenance/README.md) creates realistic source state and submits asynchronous
+maintenance work with the jEAP CLI.
+
 ## Profiles 
 
 * **application-local:** Contains all configurations for running the application locally.
@@ -88,7 +91,7 @@ polls their health endpoints until they are ready.
 
 The tests themselves use REST-Assured to interact with the services and Awaitility for polling asynchronous state:
 
-- **`createAndStartProcess`** — Exercises the full race process lifecycle: creates a process, publishes events
+- **`runRaceProcessTest`** — Exercises the full race process lifecycle: creates a process, publishes events
   (race start, control points, validation, destination reached, refuelling), and verifies that the process
   completes with the expected tasks, user references, and a snapshot in the archive.
 - **`runSimpleProcessPerfTest`** — Runs the simple process scenario with a single process instance and verifies
@@ -98,6 +101,7 @@ The tests themselves use REST-Assured to interact with the services and Awaitili
 - **`runProcessRelationsPerfTest`** — Runs the process relations scenario with a single process instance.
 - **`runProcessContextQueriesPerfTest`** — Runs the process context queries scenario with a single process
   instance and a low number of messages per process.
+- **`runMaintenanceJobs`** — Exercises relation reevaluation, process-data backfill, and relation republication.
 
 ### Running locally
 

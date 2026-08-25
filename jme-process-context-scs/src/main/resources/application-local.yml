@@ -18,6 +18,11 @@ jeap:
           password: cluster2-secret
           securityProtocol: SASL_PLAINTEXT
   processcontext:
+    maintenance:
+      enabled: true
+    kafka:
+      topic:
+        add-process-data-command: "jme-add-process-data-command"
     frontend:
       application-url: http://localhost:8080/process-context/
       mockPams: true
