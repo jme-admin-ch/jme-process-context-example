@@ -49,7 +49,7 @@ Submit the complete [reevaluation-job.yaml](reevaluation-job.yaml):
 ```bash
 export REEVALUATION_JOB_ID=$(printf '%s' "$PCS_ACCESS_TOKEN" | java -jar "$JEAP_CLI_JAR" pcs reevaluate-relations \
   --file=maintenance/reevaluation-job.yaml \
-  --url="$PCS_URL")
+  --url="$PCS_URL" --allow-insecure-http=true)
 ```
 
 For CSV mode, [reevaluation-job-csv.yaml](reevaluation-job-csv.yaml) contains the job metadata and
@@ -59,7 +59,7 @@ For CSV mode, [reevaluation-job-csv.yaml](reevaluation-job-csv.yaml) contains th
 export REEVALUATION_CSV_JOB_ID=$(printf '%s' "$PCS_ACCESS_TOKEN" | java -jar "$JEAP_CLI_JAR" pcs reevaluate-relations \
   --file=maintenance/reevaluation-job-csv.yaml \
   --processes-csv=maintenance/processes.csv \
-  --url="$PCS_URL")
+  --url="$PCS_URL" --allow-insecure-http=true)
 ```
 
 Poll the asynchronous report until `job-state` is `completed`, `job-result` is `succeeded`, and the process task state
@@ -67,7 +67,7 @@ is `succeeded`:
 
 ```bash
 printf '%s' "$PCS_ACCESS_TOKEN" | java -jar "$JEAP_CLI_JAR" pcs report \
-  --job-type=reevaluation --job-id="$REEVALUATION_JOB_ID" --url="$PCS_URL"
+  --job-type=reevaluation --job-id="$REEVALUATION_JOB_ID" --url="$PCS_URL" --allow-insecure-http=true
 ```
 
 The job succeeds but creates no relation because `reviewId` is still missing.
@@ -80,7 +80,7 @@ relation pattern and creates the missing relation.
 ```bash
 export BACKFILL_JOB_ID=$(printf '%s' "$PCS_ACCESS_TOKEN" | java -jar "$JEAP_CLI_JAR" pcs backfill \
   --file=maintenance/backfill-job.yaml \
-  --url="$PCS_URL")
+  --url="$PCS_URL" --allow-insecure-http=true)
 ```
 
 The equivalent CSV submission combines [backfill-job-csv.yaml](backfill-job-csv.yaml) and
@@ -90,14 +90,14 @@ The equivalent CSV submission combines [backfill-job-csv.yaml](backfill-job-csv.
 export BACKFILL_CSV_JOB_ID=$(printf '%s' "$PCS_ACCESS_TOKEN" | java -jar "$JEAP_CLI_JAR" pcs backfill \
   --file=maintenance/backfill-job-csv.yaml \
   --process-data-csv=maintenance/process-data.csv \
-  --url="$PCS_URL")
+  --url="$PCS_URL" --allow-insecure-http=true)
 ```
 
 Poll the report:
 
 ```bash
 printf '%s' "$PCS_ACCESS_TOKEN" | java -jar "$JEAP_CLI_JAR" pcs report \
-  --job-type=backfill --job-id="$BACKFILL_JOB_ID" --url="$PCS_URL"
+  --job-type=backfill --job-id="$BACKFILL_JOB_ID" --url="$PCS_URL" --allow-insecure-http=true
 ```
 
 ## Republish The Relation
@@ -129,11 +129,11 @@ Submit either the complete YAML or CSV request:
 ```bash
 export PUBLICATION_JOB_ID=$(printf '%s' "$PCS_ACCESS_TOKEN" | java -jar "$JEAP_CLI_JAR" pcs notify-relations \
   --file=/tmp/relation-publication-job.yaml \
-  --url="$PCS_URL")
+  --url="$PCS_URL" --allow-insecure-http=true)
 
 export PUBLICATION_CSV_JOB_ID=$(printf '%s' "$PCS_ACCESS_TOKEN" | java -jar "$JEAP_CLI_JAR" pcs notify-relations \
   --relations-csv=/tmp/relations.csv \
-  --url="$PCS_URL")
+  --url="$PCS_URL" --allow-insecure-http=true)
 ```
 
 Poll the report and verify that the example listener handled the relation again. A count of at least `2` covers the
@@ -141,7 +141,7 @@ initial relation notification and republication; it can be higher if both exampl
 
 ```bash
 printf '%s' "$PCS_ACCESS_TOKEN" | java -jar "$JEAP_CLI_JAR" pcs report \
-  --job-type=relation-publication --job-id="$PUBLICATION_JOB_ID" --url="$PCS_URL"
+  --job-type=relation-publication --job-id="$PUBLICATION_JOB_ID" --url="$PCS_URL" --allow-insecure-http=true
 
 curl -fsS -H "Authorization: Bearer $PCS_ACCESS_TOKEN" \
   "$PCS_URL/api/example-relation-notifications/$RELATION_IDEMPOTENCE_ID"
