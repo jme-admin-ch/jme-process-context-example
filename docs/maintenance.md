@@ -6,7 +6,9 @@ starting the infrastructure and applications as described in the main [README](.
 
 ## Prerequisites
 
-Build the example and a released jEAP CLI containing the PCS maintenance commands:
+Install `jq`, then build the example and a
+[jEAP CLI](https://github.com/jeap-admin-ch/jeap-cli#non-native-build-for-java-hotspot) version 1.9.0 or newer. Run the
+CLI JAR directly so it shares the host network with the locally running applications:
 
 ```bash
 ./mvnw install -pl '!jme-process-context-test' -DskipTests
@@ -44,7 +46,7 @@ until curl -fsS -H "Authorization: Bearer $PCS_ACCESS_TOKEN" \
 
 ## Reevaluate Relations
 
-Submit the complete [reevaluation-job.yaml](reevaluation-job.yaml):
+Submit the complete [reevaluation-job.yaml](../maintenance/reevaluation-job.yaml):
 
 ```bash
 export REEVALUATION_JOB_ID=$(printf '%s' "$PCS_ACCESS_TOKEN" | java -jar "$JEAP_CLI_JAR" pcs reevaluate-relations \
@@ -52,11 +54,11 @@ export REEVALUATION_JOB_ID=$(printf '%s' "$PCS_ACCESS_TOKEN" | java -jar "$JEAP_
   --url="$PCS_URL" --allow-insecure-http=true)
 ```
 
-For CSV mode, [reevaluation-job-csv.yaml](reevaluation-job-csv.yaml) contains the job metadata and
-[processes.csv](processes.csv) contains the targets:
+For CSV mode, [reevaluation-job-csv.yaml](../maintenance/reevaluation-job-csv.yaml) contains the job metadata and
+[processes.csv](../maintenance/processes.csv) contains the targets:
 
 ```bash
-export REEVALUATION_CSV_JOB_ID=$(printf '%s' "$PCS_ACCESS_TOKEN" | java -jar "$JEAP_CLI_JAR" pcs reevaluate-relations \
+export REEVALUATION_JOB_ID=$(printf '%s' "$PCS_ACCESS_TOKEN" | java -jar "$JEAP_CLI_JAR" pcs reevaluate-relations \
   --file=maintenance/reevaluation-job-csv.yaml \
   --processes-csv=maintenance/processes.csv \
   --url="$PCS_URL" --allow-insecure-http=true)
@@ -74,8 +76,8 @@ The job succeeds but creates no relation because `reviewId` is still missing.
 
 ## Backfill Process Data
 
-Submit the complete [backfill-job.yaml](backfill-job.yaml). It adds `reviewId` with role `1`, then PCS reevaluates the
-relation pattern and creates the missing relation.
+Submit the complete [backfill-job.yaml](../maintenance/backfill-job.yaml). It adds `reviewId` with role `1`, then PCS
+reevaluates the relation pattern and creates the missing relation.
 
 ```bash
 export BACKFILL_JOB_ID=$(printf '%s' "$PCS_ACCESS_TOKEN" | java -jar "$JEAP_CLI_JAR" pcs backfill \
@@ -83,11 +85,11 @@ export BACKFILL_JOB_ID=$(printf '%s' "$PCS_ACCESS_TOKEN" | java -jar "$JEAP_CLI_
   --url="$PCS_URL" --allow-insecure-http=true)
 ```
 
-The equivalent CSV submission combines [backfill-job-csv.yaml](backfill-job-csv.yaml) and
-[process-data.csv](process-data.csv):
+The equivalent CSV submission combines [backfill-job-csv.yaml](../maintenance/backfill-job-csv.yaml) and
+[process-data.csv](../maintenance/process-data.csv):
 
 ```bash
-export BACKFILL_CSV_JOB_ID=$(printf '%s' "$PCS_ACCESS_TOKEN" | java -jar "$JEAP_CLI_JAR" pcs backfill \
+export BACKFILL_JOB_ID=$(printf '%s' "$PCS_ACCESS_TOKEN" | java -jar "$JEAP_CLI_JAR" pcs backfill \
   --file=maintenance/backfill-job-csv.yaml \
   --process-data-csv=maintenance/process-data.csv \
   --url="$PCS_URL" --allow-insecure-http=true)
@@ -114,7 +116,8 @@ test -n "$RELATION_ID"
 printf 'Persisted relation: %s\n' "$RELATION_ID"
 ```
 
-The checked-in [relation-publication-job.yaml](relation-publication-job.yaml) and [relations.csv](relations.csv) use the
+The checked-in [relation-publication-job.yaml](../maintenance/relation-publication-job.yaml) and
+[relations.csv](../maintenance/relations.csv) use the
 all-zero UUID as a visible placeholder. Produce copy-pasteable requests containing the queried UUID:
 
 ```bash
@@ -131,7 +134,7 @@ export PUBLICATION_JOB_ID=$(printf '%s' "$PCS_ACCESS_TOKEN" | java -jar "$JEAP_C
   --file=/tmp/relation-publication-job.yaml \
   --url="$PCS_URL" --allow-insecure-http=true)
 
-export PUBLICATION_CSV_JOB_ID=$(printf '%s' "$PCS_ACCESS_TOKEN" | java -jar "$JEAP_CLI_JAR" pcs notify-relations \
+export PUBLICATION_JOB_ID=$(printf '%s' "$PCS_ACCESS_TOKEN" | java -jar "$JEAP_CLI_JAR" pcs notify-relations \
   --relations-csv=/tmp/relations.csv \
   --url="$PCS_URL" --allow-insecure-http=true)
 ```

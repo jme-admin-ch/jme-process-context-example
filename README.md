@@ -69,7 +69,7 @@ See the [jeap-process-context-service](https://github.com/jeap-admin-ch/jeap-pro
 
 To try out the application yourself and for detailed process examples with step-by-step instructions, see [PROCESS-EXAMPLES.md](./PROCESS-EXAMPLES.md).
 
-The [PCS maintenance example](maintenance/README.md) creates realistic source state and submits asynchronous
+The [PCS maintenance example](docs/maintenance.md) creates realistic source state and submits asynchronous
 maintenance work with the jEAP CLI.
 
 ## Profiles 
