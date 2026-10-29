@@ -13,3 +13,6 @@ oauth-mock-data:
       preferred-username: "12345"
       userroles:
         - "jme_@processinstance_#view"
+
+mockserver:
+  introspection-endpoint-audience-check: "on"

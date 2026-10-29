@@ -13,14 +13,20 @@ oauth-mock-data:
                                  "http://localhost:4200/assets/auth/silent-renew.html" ]
       userroles: [ "jme_@processinstance_#view", "jme_@processsnapshot_#view",
                    "jme_@processcontextjob_#write", "jme_@processcontextjob_#read" ]
+      audience:
+        - "https://resources.jme.admin.ch/jme/jme-process-context-scs"
 
     - client-id: "jme-process-context-app-service"
       client-secret: "{noop}secret"
       context: "SYS"
       userroles: [ "jme_@processsnapshot_#view" ]
+      audience:
+        - "https://resources.jme.admin.ch/jme/jme-process-context-scs"
 
     - client-id: "jme-process-context-it-client"
       client-secret: "{noop}secret"
       context: "SYS"
       userroles: [ "jme_@processinstance_#view", "jme_@processsnapshot_#view",
                    "jme_@processcontextjob_#write", "jme_@processcontextjob_#read" ]
+      audience:
+        - "https://resources.jme.admin.ch/jme/jme-process-context-scs"
