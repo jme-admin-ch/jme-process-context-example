@@ -25,13 +25,13 @@
     </licenses>
 
     <artifactId>jme-process-context-example</artifactId>
-    <version>23.40.0-SNAPSHOT</version>
+    <version>23.41.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <parent>
         <groupId>ch.admin.bit.jeap</groupId>
         <artifactId>jeap-spring-boot-parent</artifactId>
-        <version>41.39.0</version>
+        <version>41.41.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -44,7 +44,7 @@
     </modules>
 
     <properties>
-        <jeap-process-context-service.version>28.24.0</jeap-process-context-service.version>
+        <jeap-process-context-service.version>28.25.0</jeap-process-context-service.version>
         <jeap-oauth-mock-server.version>11.19.0</jeap-oauth-mock-server.version>
         <jme-spring-boot-integration-test.version>8.11.0</jme-spring-boot-integration-test.version>
         <maven.javadoc.skip>false</maven.javadoc.skip>
