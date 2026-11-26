@@ -213,3 +213,38 @@ joinType clause? Let's see it in next step.
 Create a **new** process and perform the same REST requests as in previous steps. Once done, you will 
 notice two created relations in PCS UI. Since we removed the `joinType` configuration, PCS created the Relations with 
 the default behaviour (cartesian product), generating an additional entry that shouldn't be there as part of the use case.
+
+---
+
+## Declared relation types
+
+At startup, the process context service reports the relation types declared by the relation patterns of all process
+templates to the relation listener (`RelationListener.relationTypesDeclared`), before any message is consumed. A
+listener can use this to validate the relations an instance will create, e.g. against an external registry; an
+exception thrown by the listener aborts the startup. Relation types are reported regardless of the state of their
+feature flag.
+
+The `ExampleRelationListener` of this example logs the reported relation types (`Declared relation type: ...`) and
+returns them via its REST API:
+
+```bash
+export PCS_ACCESS_TOKEN=$(curl -fsS \
+  -u 'jme-process-context-it-client:secret' \
+  -d 'grant_type=client_credentials' \
+  http://localhost:8081/jme-process-context-auth-scs/oauth2/token \
+  | jq -r '.access_token')
+
+curl -fsS -H "Authorization: Bearer $PCS_ACCESS_TOKEN" \
+  http://localhost:8080/process-context/api/example-relation-notifications/declared-relation-types | jq
+```
+
+The example templates declare three relation types:
+
+| System ID           | Predicate                                 | Subject type            | Object type                        | Feature flag                |
+|---------------------|-------------------------------------------|-------------------------|------------------------------------|-----------------------------|
+| `ch.admin.jme.Race` | `ch.admin.race.PassedControlpoint`        | `ch.admin.race.RaceCarId` | `ch.admin.jeap.race.Controlpoint`  | `FEATURE_CONTROL_POINT`     |
+| `ch.admin.jme.Race` | `ch.admin.race.PostChecksResultProcessed` | `ch.admin.race.RaceId`  | `ch.admin.jeap.race.RaceCarNumber` | `FEATURE_POST_CHECK_RESULT` |
+| `ch.test.System`    | `ch.test.predicate.IsReviewOf`            | `ch.test.Review`        | `ch.test.Version`                  | none                        |
+
+`PassedControlpoint` is declared in both `raceProcess.json` and `perfestHighMessageCount.json`, with the same system ID
+and feature flag, and is therefore reported once. The system ID is the `relationSystemId` of the declaring template.

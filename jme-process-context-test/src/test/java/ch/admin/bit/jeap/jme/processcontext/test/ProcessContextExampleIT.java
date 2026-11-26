@@ -4,6 +4,7 @@ import ch.admin.bit.jeap.jme.test.BootServiceSpringIntegrationTestBase;
 import ch.admin.bit.jeap.messaging.avro.security.AvroClassSecurity;
 import ch.admin.bit.jeap.processcontext.archive.processsnapshot.v2.ProcessSnapshot;
 import io.restassured.RestAssured;
+import io.restassured.common.mapper.TypeRef;
 import io.restassured.config.EncoderConfig;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
@@ -35,6 +36,7 @@ import java.util.UUID;
 
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.tuple;
 import static org.awaitility.Awaitility.await;
 
 @Slf4j
@@ -50,17 +52,14 @@ class ProcessContextExampleIT extends BootServiceSpringIntegrationTestBase {
     private static final String RELATION_ID_PLACEHOLDER = "00000000-0000-0000-0000-000000000000";
 
     @BeforeAll
-    static void installAvroClassSecurity() {
-        // This test deserializes an Avro generated type without a jEAP messaging Spring context installing the
-        // Avro class whitelist, so it has to install the whitelist itself.
-        AvroClassSecurity.installDefaultIfMissing();
-    }
-
-    @BeforeAll
     static void startServices() throws Exception {
         startService("jme-process-context-auth-scs", AUTH_BASE_URL);
         startService("jme-process-context-scs", SCS_BASE_URL);
         startService("jme-process-context-app-service", APP_BASE_URL);
+
+        // This test deserializes an Avro generated type without a jEAP messaging Spring context installing the
+        // Avro class whitelist, so it has to install the whitelist itself.
+        AvroClassSecurity.installDefaultIfMissing();
     }
 
     @Test
@@ -525,5 +524,34 @@ class ProcessContextExampleIT extends BootServiceSpringIntegrationTestBase {
         return map.get("de").equals(name);
     }
 
+    /**
+     * The PCS reports the relation types declared in the process templates to the relation listener at startup,
+     * independent of the state of their feature flags. PassedControlpoint is declared in two templates
+     * (raceProcess.json, perfestHighMessageCount.json) with the same system ID and feature flag and is reported once.
+     */
+    @Test
+    void declaredRelationTypes() {
+        String accessToken = retrieveAccessToken();
+        // RelationType is a value class without JSON creator, compare the attributes of the returned JSON objects
+        List<Map<String, Object>> declaredRelationTypes = given()
+                .baseUri(SCS_BASE_URL)
+                .auth().oauth2(accessToken)
+                .when()
+                .get("/api/example-relation-notifications/declared-relation-types")
+                .then()
+                .statusCode(HttpStatus.OK.value())
+                .extract().as(new TypeRef<>() {
+                });
+
+        assertThat(declaredRelationTypes)
+                .extracting(type -> type.get("systemId"), type -> type.get("predicateType"), type -> type.get("subjectType"),
+                        type -> type.get("objectType"), type -> type.get("featureFlag"))
+                .containsExactlyInAnyOrder(
+                        tuple("ch.test.System", "ch.test.predicate.IsReviewOf", "ch.test.Review", "ch.test.Version", null),
+                        tuple("ch.admin.jme.Race", "ch.admin.race.PassedControlpoint", "ch.admin.race.RaceCarId",
+                                "ch.admin.jeap.race.Controlpoint", "FEATURE_CONTROL_POINT"),
+                        tuple("ch.admin.jme.Race", "ch.admin.race.PostChecksResultProcessed", "ch.admin.race.RaceId",
+                                "ch.admin.jeap.race.RaceCarNumber", "FEATURE_POST_CHECK_RESULT"));
+    }
 
 }

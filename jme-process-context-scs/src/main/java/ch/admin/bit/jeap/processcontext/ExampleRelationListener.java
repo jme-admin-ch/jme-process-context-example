@@ -2,6 +2,7 @@ package ch.admin.bit.jeap.processcontext;
 
 import ch.admin.bit.jeap.processcontext.plugin.api.relation.Relation;
 import ch.admin.bit.jeap.processcontext.plugin.api.relation.RelationListener;
+import ch.admin.bit.jeap.processcontext.plugin.api.relation.RelationType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -24,6 +26,8 @@ public class ExampleRelationListener implements RelationListener {
 
     private final Map<UUID, AtomicInteger> notificationCounts = new ConcurrentHashMap<>();
 
+    private final Set<RelationType> declaredRelationTypes = ConcurrentHashMap.newKeySet();
+
     @Override
     public void relationsAdded(Collection<Relation> relations) {
         relations.forEach(relation -> {
@@ -34,9 +38,23 @@ public class ExampleRelationListener implements RelationListener {
         });
     }
 
+    @Override
+    public void relationTypesDeclared(Set<RelationType> relationTypes) {
+        relationTypes.forEach(relationType -> {
+            declaredRelationTypes.add(relationType);
+            log.info("Declared relation type: {}", relationType);
+        });
+    }
+
     @GetMapping("/{idempotenceId}")
     @PreAuthorize("hasRole('processinstance', 'view')")
     public int notificationCount(@PathVariable UUID idempotenceId) {
         return notificationCounts.getOrDefault(idempotenceId, new AtomicInteger()).get();
+    }
+
+    @GetMapping("/declared-relation-types")
+    @PreAuthorize("hasRole('processinstance', 'view')")
+    public Set<RelationType> getDeclaredRelationTypes() {
+        return declaredRelationTypes;
     }
 }
